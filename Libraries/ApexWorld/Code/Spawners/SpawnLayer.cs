@@ -69,7 +69,7 @@ public class SpawnLayer
 			);
 
 			temp.Fill( 1f );
-
+			mask.Terrain = terrain;
 			mask.Apply( temp );
 
 			field = field.Multiply( temp );

@@ -21,16 +21,48 @@ public class HeightMask : MaskModifier
 
 	public override void Apply( MaskField field )
 	{
-		// Requires terrain height data injected via context — caller fills field before Apply
-		// This modifier remaps existing 0..1 height values in the field into a band mask
+		if ( Terrain?.Storage == null )
+			return;
+
+		var storage = Terrain.Storage;
+
+		int res = storage.Resolution;
+
+		float hScale = storage.TerrainHeight / (float)ushort.MaxValue;
+
 		float soft = Softness * (MaxHeight - MinHeight);
 
-		for ( int i = 0; i < field.Values.Length; i++ )
+		for ( int y = 0; y < field.Resolution; y++ )
 		{
-			float worldHeight = field.Values[i]; // caller normalized height -> world
-			float lo = SmoothStep( MinHeight - soft, MinHeight, worldHeight );
-			float hi = SmoothStep( MaxHeight + soft, MaxHeight, worldHeight );
-			field.Values[i] = Math.Clamp( lo * hi, 0f, 1f );
+			for ( int x = 0; x < field.Resolution; x++ )
+			{
+				int tx = (int)((float)x / field.Resolution * res);
+				int ty = (int)((float)y / field.Resolution * res);
+
+				tx = Math.Clamp( tx, 0, res - 1 );
+				ty = Math.Clamp( ty, 0, res - 1 );
+
+				float worldHeight =
+					storage.HeightMap[ty * res + tx] * hScale;
+
+				float lo = SmoothStep(
+					MinHeight - soft,
+					MinHeight,
+					worldHeight
+				);
+
+				float hi = SmoothStep(
+					MaxHeight + soft,
+					MaxHeight,
+					worldHeight
+				);
+
+				field.Set(
+					x,
+					y,
+					Math.Clamp( lo * hi, 0f, 1f )
+				);
+			}
 		}
 	}
 
@@ -55,8 +87,6 @@ public class SlopeMask : MaskModifier
 	[Property, Range(0f, 90f)] public float MinAngle  { get; set; } = 0f;
 	[Property, Range(0f, 90f)] public float MaxAngle  { get; set; } = 30f;
 	[Property, Range(0f, 1f)]  public float Softness  { get; set; } = 0.1f;
-
-	public Terrain Terrain { get; set; }
 
 	public override void Apply( MaskField field )
 	{
@@ -247,8 +277,6 @@ public class CurvatureMask : MaskModifier
 	[Property] public CurvatureMode Mode      { get; set; } = CurvatureMode.Concave;
 	[Property, Range(0f, 1f)] public float Strength { get; set; } = 1f;
 
-	public Terrain Terrain { get; set; }
-
 	public override void Apply( MaskField field )
 	{
 		if ( Terrain?.Storage == null ) return;
@@ -300,8 +328,6 @@ public class ErosionMask : MaskModifier
 {
 	[Property, Range(1, 8)] public int   Iterations { get; set; } = 3;
 	[Property, Range(0f, 1f)] public float Threshold { get; set; } = 0.3f;
-
-	public Terrain Terrain { get; set; }
 
 	public override void Apply( MaskField field )
 	{
@@ -355,8 +381,6 @@ public class FlowMask : MaskModifier
 {
 	[Property, Range(0f, 1f)] public float WetnessThreshold { get; set; } = 0.4f;
 	[Property, Range(0f, 1f)] public float Softness         { get; set; } = 0.2f;
-
-	public Terrain Terrain { get; set; }
 
 	public override void Apply( MaskField field )
 	{

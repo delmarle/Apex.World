@@ -18,6 +18,8 @@ public enum MaskCombineOp
 [Serializable]
 public abstract class MaskModifier
 {
+	public Terrain Terrain { get; set; }
+
 	public abstract void Apply( MaskField field );
 }
 /// <summary>

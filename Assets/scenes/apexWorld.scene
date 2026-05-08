@@ -94,7 +94,7 @@
               "Surface": null,
               "SurfaceVelocity": "0,0,0",
               "TerrainHeight": 10000,
-              "TerrainSize": 19968
+              "TerrainSize": 2500
             }
           ],
           "Children": []
@@ -104,7 +104,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "TextureSpawners",
-          "Position": "1965.87317,2472.19873,0",
+          "Position": "2096.35425,573.671814,13.9879456",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -120,21 +120,28 @@
               "__guid": "3d2d6ab1-6fbc-4016-b22e-c11c125712dc",
               "__enabled": true,
               "Flags": 0,
+              "BrushSize": 1,
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
               "OnComponentEnabled": null,
               "OnComponentFixedUpdate": null,
               "OnComponentStart": null,
               "OnComponentUpdate": null,
-              "Range": 4096,
-              "Resolution": 0,
+              "Range": 1096.1127,
+              "ResolutionLevel": 3,
               "SpawnerName": "local grass",
               "target": {
                 "_type": "gameobject",
                 "go": "3234a165-d350-4eeb-87c7-6c317e21761f"
               },
-              "TextureId": 1,
-              "TextureLayers": []
+              "TextureId": 0,
+              "TextureLayers": [
+                {
+                  "LayerName": null,
+                  "TextureId": 2,
+                  "Masks": []
+                }
+              ]
             }
           ],
           "Children": []
@@ -236,7 +243,7 @@
       "__version": 2,
       "Flags": 0,
       "Name": "Cube",
-      "Position": "2115.86816,2507.94312,-138.756958",
+      "Position": "1099.93335,819.911377,-141.967804",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
