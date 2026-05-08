@@ -1,0 +1,288 @@
+{
+  "__guid": "b29167d5-d07e-4d12-8307-674c0c04358f",
+  "GameObjects": [
+    {
+      "__guid": "fe1902df-1f59-4677-815f-6b0c3bb1588a",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "ApexWorld",
+      "Position": "149.994965,149.994995,-212.124985",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "ApexWorldManager",
+          "__guid": "f8d59c0e-c063-4b29-8ffe-bddc6df3c5b9",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Spawners": [
+            {
+              "_type": "component",
+              "component_id": "3d2d6ab1-6fbc-4016-b22e-c11c125712dc",
+              "go": "682d8251-be5a-4d93-8fc7-b4f95e30ff11",
+              "component_type": "TextureSpawner"
+            }
+          ],
+          "Terrain": {
+            "_type": "component",
+            "component_id": "37812253-64d5-4bd2-92d5-ebf1dc476464",
+            "go": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
+            "component_type": "Terrain"
+          }
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
+          "__version": 2,
+          "Flags": 0,
+          "Name": "Terrain",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkFlags": 0,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.Terrain",
+              "__guid": "37812253-64d5-4bd2-92d5-ebf1dc476464",
+              "__enabled": true,
+              "Flags": 0,
+              "__version": 1,
+              "ClipMapLodExtentTexels": 256,
+              "ClipMapLodLevels": 6,
+              "ColliderFlags": 0,
+              "Elasticity": null,
+              "EnableCollision": true,
+              "Friction": null,
+              "IsTrigger": false,
+              "MaterialOverride": null,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RenderType": "Off",
+              "RollingResistance": null,
+              "Static": true,
+              "Storage": "scenes/apexterrain.terrain",
+              "SubdivisionFactor": 1,
+              "SubdivisionLodCount": 3,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0",
+              "TerrainHeight": 10000,
+              "TerrainSize": 19968
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "682d8251-be5a-4d93-8fc7-b4f95e30ff11",
+          "__version": 2,
+          "Flags": 0,
+          "Name": "TextureSpawners",
+          "Position": "1965.87317,2472.19873,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkFlags": 0,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.Spawners.TextureSpawner",
+              "__guid": "3d2d6ab1-6fbc-4016-b22e-c11c125712dc",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "Range": 4096,
+              "SpawnerName": "local grass",
+              "TextureId": 1,
+              "TextureLayers": [
+                {
+                  "LayerName": "base layer",
+                  "TextureId": 0,
+                  "Masks": []
+                },
+                {
+                  "LayerName": null,
+                  "TextureId": 1,
+                  "Masks": [
+                    {
+                      "Modifier": {},
+                      "CombineOp": "Multiply",
+                      "Strength": 1,
+                      "Enabled": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Children": []
+        }
+      ]
+    },
+    {
+      "__guid": "ccd5506f-0e3c-457e-b570-094ac30cad83",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "149.994965,446.317963,-108.864471",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "fc0b2a67-2820-46f1-9e07-d0dcb8dd6a48",
+          "__enabled": true,
+          "Flags": 0,
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "EnablePostProcessing": true,
+          "FieldOfView": 60,
+          "FovAxis": "Horizontal",
+          "IsMainCamera": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "PostProcessAnchor": null,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "RenderTexture": null,
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "b7bf5ea2-cf78-472f-9dfd-fe7c9521a708",
+          "__version": 2,
+          "Flags": 0,
+          "Name": "Sun",
+          "Position": "0,0,0",
+          "Rotation": "0,0.221123248,0,0.975245893",
+          "Scale": "1,1,1",
+          "Tags": "light_directional,light",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkFlags": 0,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.DirectionalLight",
+              "__guid": "9b2db1b3-99dd-4cc0-85ea-3543953dda65",
+              "__enabled": true,
+              "Flags": 0,
+              "FogMode": "Enabled",
+              "FogStrength": 1,
+              "LightColor": "0.91373,0.98039,1,1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "ShadowBias": 0.0005,
+              "ShadowCascadeCount": 4,
+              "ShadowCascadeSplitRatio": 0.91,
+              "ShadowHardness": 0,
+              "Shadows": true,
+              "SkyColor": "0,0,0,0",
+              "Visualizer": {}
+            }
+          ],
+          "Children": []
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "NetworkInterpolation": true,
+    "TimeScale": 1,
+    "WantsSystemScene": true,
+    "Metadata": {},
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": false,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": "",
+      "DeferGeneration": false,
+      "CustomBounds": false
+    },
+    "GameObjectSystems": {
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
+        }
+      },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
+        }
+      }
+    }
+  },
+  "ResourceVersion": 3,
+  "Title": null,
+  "Description": null,
+  "__references": [],
+  "__version": 3
+}
