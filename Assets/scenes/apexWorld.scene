@@ -127,27 +127,14 @@
               "OnComponentStart": null,
               "OnComponentUpdate": null,
               "Range": 4096,
+              "Resolution": 0,
               "SpawnerName": "local grass",
+              "target": {
+                "_type": "gameobject",
+                "go": "3234a165-d350-4eeb-87c7-6c317e21761f"
+              },
               "TextureId": 1,
-              "TextureLayers": [
-                {
-                  "LayerName": "base layer",
-                  "TextureId": 0,
-                  "Masks": []
-                },
-                {
-                  "LayerName": null,
-                  "TextureId": 1,
-                  "Masks": [
-                    {
-                      "Modifier": {},
-                      "CombineOp": "Multiply",
-                      "Strength": 1,
-                      "Enabled": true
-                    }
-                  ]
-                }
-              ]
+              "TextureLayers": []
             }
           ],
           "Children": []
@@ -243,6 +230,52 @@
           "Children": []
         }
       ]
+    },
+    {
+      "__guid": "3234a165-d350-4eeb-87c7-6c317e21761f",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Cube",
+      "Position": "2115.86816,2507.94312,-138.756958",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "519fb0c1-c678-4c93-a024-50952b6a30c4",
+          "__enabled": true,
+          "Flags": 0,
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "LodOverride": null,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Materials": null,
+          "Model": "models/dev/box.vmdl",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
@@ -265,17 +298,17 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
         }
       },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
       },
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
         }
       }
     }

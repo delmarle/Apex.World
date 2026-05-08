@@ -6,16 +6,63 @@ namespace Sandbox.Spawners;
 
 public class TextureSpawner: BaseSpawner
 {
+	[Property] public int BrushSize { get; set; } = 2;
 	[Property, Range(0, 64)] public int TextureId { get; set; }
 	[Property] public SpawnLayer[]  TextureLayers { get; set; }
-	
+	[Property, Range( 1, 5 )]  public int ResolutionLevel { get; set; } = 3;
 	[Property] public GameObject target { get; set; }
+	private int GetResolutionFromLevel( int level )
+	{
+		level = level.Clamp( 1, 5 );
 
+		return level switch
+		{
+			1 => 128,
+			2 => 256,
+			3 => 512,
+			4 => 1024,
+			5 => 2048,
+			_ => 512
+		};
+	}
+	[Button]
+	public void UpdateResolution()
+	{
+		if ( Manager.Terrain?.Storage == null )
+			return;
 
+		var storage = Manager.Terrain.Storage;
+
+		
+		int resolution = GetResolutionFromLevel( ResolutionLevel );
+		
+		storage.Resolution = resolution;
+		
+		float metersPerPixel = storage.TerrainSize / storage.Resolution;
+		Log.Info( $"Resolution = {resolution}" );
+		Log.Info( $"TerrainSize = {storage.TerrainSize}" );
+		Log.Info( $"Meters per pixel = {metersPerPixel}" );
+	}
 	[Button]
 	public void Dooit()
 	{
 		PaintLayerAtWorldPosition(target.WorldPosition, TextureId);
+	}
+	
+	[Button]
+	public void DooitBounds()
+	{
+		float half = Range * 0.5f;
+
+		BBox bounds = new BBox(
+			target.WorldPosition - new Vector3( half, half, 0 ),
+			target.WorldPosition + new Vector3( half, half, 0 )
+		);
+
+		PaintLayerInArea(
+			bounds,
+			TextureId
+		);
 	}
 
 	[Button]
@@ -109,7 +156,7 @@ public void PaintLayerInArea()
 			{
 				int mx = x - x0;
 				int my = y - y0;
-				Log.Info( $"x0={x0} x1={x1} y0={y0} y1={y1} resolution={resolution}" );
+				//Log.Info( $"x0={x0} x1={x1} y0={y0} y1={y1} resolution={resolution}" );
 				float value = mask.Get( mx, my );
 
 				if ( value <= 0.01f )
@@ -128,6 +175,53 @@ public void PaintLayerInArea()
 	// Sync once after batch
 	terrain.SyncGPUTexture();
 }
+
+	private void PaintLayerInArea( BBox bounds, int textureId )
+	{
+		if ( Manager.Terrain?.Storage == null )
+			return;
+
+		var terrain = Manager.Terrain;
+		var storage = terrain.Storage;
+
+		float terrainSize = storage.TerrainSize;
+		int resolution = storage.Resolution;
+
+		Vector3 localMins = terrain.WorldTransform.PointToLocal( bounds.Mins );
+		Vector3 localMaxs = terrain.WorldTransform.PointToLocal( bounds.Maxs );
+
+		int minX = (int)((localMins.x / terrainSize) * resolution);
+		int minY = (int)((localMins.y / terrainSize) * resolution);
+
+		int maxX = (int)((localMaxs.x / terrainSize) * resolution);
+		int maxY = (int)((localMaxs.y / terrainSize) * resolution);
+
+		minX = minX.Clamp( 0, resolution - 1 );
+		minY = minY.Clamp( 0, resolution - 1 );
+
+		maxX = maxX.Clamp( 0, resolution - 1 );
+		maxY = maxY.Clamp( 0, resolution - 1 );
+
+		var material = new CompactTerrainMaterial
+		{
+			BaseTextureId = (byte)Math.Clamp( textureId, 0, 63 ),
+			OverlayTextureId = 0,
+			BlendFactor = 0,
+			IsHole = false
+		};
+
+		for ( int y = minY; y <= maxY; y++ )
+		{
+			for ( int x = minX; x <= maxX; x++ )
+			{
+				int index = y * resolution + x;
+
+				storage.ControlMap[index] = material.Packed;
+			}
+		}
+
+		terrain.SyncGPUTexture();
+	}
 		/// <summary>
 	/// Paint a single layer at a specific position
 	/// Uses CompactTerrainMaterial to encode texture ID + blend data
@@ -140,21 +234,16 @@ public void PaintLayerInArea()
 		var terrain = Manager.Terrain;
 		var storage = terrain.Storage;
 
-		// Proper terrain-local conversion
 		Vector3 local = terrain.WorldTransform.PointToLocal( worldPos );
 
-		// Convert local XY into normalized UVs
 		float u = local.x / storage.TerrainSize;
 		float v = local.y / storage.TerrainSize;
 
-		// Convert UV -> texture coords
-		int x = (int)(u * storage.Resolution);
-		int y = (int)(v * storage.Resolution);
+		int centerX = (int)(u * storage.Resolution);
+		int centerY = (int)(v * storage.Resolution);
 
-		x = x.Clamp( 0, storage.Resolution - 1 );
-		y = y.Clamp( 0, storage.Resolution - 1 );
-
-		int index = y * storage.Resolution + x;
+		centerX = centerX.Clamp( 0, storage.Resolution - 1 );
+		centerY = centerY.Clamp( 0, storage.Resolution - 1 );
 
 		var material = new CompactTerrainMaterial
 		{
@@ -164,11 +253,27 @@ public void PaintLayerInArea()
 			IsHole = false
 		};
 
-		storage.ControlMap[index] = material.Packed;
+		for ( int y = -BrushSize; y <= BrushSize; y++ )
+		{
+			for ( int x = -BrushSize; x <= BrushSize; x++ )
+			{
+				// circular brush
+				if ( x * x + y * y > BrushSize * BrushSize )
+					continue;
+
+				int px = centerX + x;
+				int py = centerY + y;
+
+				if ( px < 0 || py < 0 || px >= storage.Resolution || py >= storage.Resolution )
+					continue;
+
+				int index = py * storage.Resolution + px;
+
+				storage.ControlMap[index] = material.Packed;
+			}
+		}
 
 		terrain.SyncGPUTexture();
-
-		Log.Info( $"Painted at {x},{y}" );
 	}
 	/// <summary>
 	/// More advanced: blend between two layers based on a condition
