@@ -52,129 +52,11 @@ public class TextureSpawner: BaseSpawner
 	[Button]
 	public void DooitBounds()
 	{
-		float half = Range * 0.5f;
-
-		BBox bounds = new BBox(
-			target.WorldPosition - new Vector3( half, half, 0 ),
-			target.WorldPosition + new Vector3( half, half, 0 )
-		);
-
 		PaintLayerInArea(
-			bounds,
+			GenerateSpawnerBounds(),
 			TextureId
 		);
 	}
-
-	[Button]
-public void PaintLayerInArea()
-{
-	if ( Manager.Terrain?.Storage == null )
-		return;
-
-	var terrain = Manager.Terrain;
-	var storage = terrain.Storage;
-	int resolution = storage.Resolution;
-	float terrainSize = storage.TerrainSize;
-
-	// Interpret Range as the full side length (centered on the spawner origin)
-	float half = Range * 0.5f;
-
-	// Spawner transform
-	var spawnerTx = this.WorldTransform;
-
-	// Spawner-local corners (on the terrain plane)
-	var cornersLocal = new[]
-	{
-		new Vector3(-half, -half, 0f),
-		new Vector3( half, -half, 0f),
-		new Vector3(-half,  half, 0f),
-		new Vector3( half,  half, 0f)
-	};
-
-	// Transform corners -> world -> terrain-local, collect min/max
-	bool gotAny = false;
-	float minX = float.MaxValue, minY = float.MaxValue;
-	float maxX = float.MinValue, maxY = float.MinValue;
-
-	foreach ( var cLocal in cornersLocal )
-	{
-		// world point of the corner
-		var worldPt = spawnerTx.PointToWorld( cLocal );
-
-		Vector3 terrainLocalPt;
-		try
-		{
-			// preferred: uses terrain transform properly (rotation, translation)
-			terrainLocalPt = terrain.WorldTransform.PointToLocal( worldPt );
-		}
-		catch
-		{
-			// fallback: translation-only
-			terrainLocalPt = worldPt - terrain.WorldTransform.Position;
-		}
-
-		// track bounds (terrain-local XY)
-		minX = Math.Min( minX, terrainLocalPt.x );
-		minY = Math.Min( minY, terrainLocalPt.y );
-		maxX = Math.Max( maxX, terrainLocalPt.x );
-		maxY = Math.Max( maxY, terrainLocalPt.y );
-		gotAny = true;
-	}
-
-	if ( !gotAny )
-		return;
-
-	// Convert terrain-local XY to UV (0..1) and clamp
-	float halfTerrain = terrainSize * 0.5f;
-
-	float uMin = Math.Clamp( (minX + halfTerrain) / terrainSize, 0f, 1f );
-	float vMin = Math.Clamp( (minY + halfTerrain) / terrainSize, 0f, 1f );
-	float uMax = Math.Clamp( (maxX + halfTerrain) / terrainSize, 0f, 1f );
-	float vMax = Math.Clamp( (maxY + halfTerrain) / terrainSize, 0f, 1f );
-	// Convert to texel indices. Use Floor for min, Ceil-1 for max to include boundaries.
-	int x0 = Math.Clamp( (int)Math.Floor( uMin * resolution ), 0, resolution - 1 );
-	int x1 = Math.Clamp( (int)Math.Ceiling( uMax * resolution ) - 1, 0, resolution - 1 );
-	int y0 = Math.Clamp( (int)Math.Floor( vMin * resolution ), 0, resolution - 1 );
-	int y1 = Math.Clamp( (int)Math.Ceiling( vMax * resolution ) - 1, 0, resolution - 1 );
-
-	if ( x1 < x0 || y1 < y0 )
-		return;
-
-	// Enumerate texels inside bounds and call existing helper
-	int localResolution = x1 - x0 + 1;
-
-	foreach ( var layer in TextureLayers )
-	{
-		var mask = layer.GenerateMask(
-			terrain,
-			localResolution
-		);
-
-		for ( int y = y0; y <= y1; y++ )
-		{
-			for ( int x = x0; x <= x1; x++ )
-			{
-				int mx = x - x0;
-				int my = y - y0;
-				//Log.Info( $"x0={x0} x1={x1} y0={y0} y1={y1} resolution={resolution}" );
-				float value = mask.Get( mx, my );
-
-				if ( value <= 0.01f )
-					continue;
-/*
-				PaintLayerAtWorldPosition(
-					x,
-					y,
-					layer.TextureId
-				);
-				*/
-			}
-		}
-	}
-
-	// Sync once after batch
-	terrain.SyncGPUTexture();
-}
 
 	private void PaintLayerInArea( BBox bounds, int textureId )
 	{
@@ -187,21 +69,7 @@ public void PaintLayerInArea()
 		float terrainSize = storage.TerrainSize;
 		int resolution = storage.Resolution;
 
-		Vector3 localMins = terrain.WorldTransform.PointToLocal( bounds.Mins );
-		Vector3 localMaxs = terrain.WorldTransform.PointToLocal( bounds.Maxs );
-
-		int minX = (int)((localMins.x / terrainSize) * resolution);
-		int minY = (int)((localMins.y / terrainSize) * resolution);
-
-		int maxX = (int)((localMaxs.x / terrainSize) * resolution);
-		int maxY = (int)((localMaxs.y / terrainSize) * resolution);
-
-		minX = minX.Clamp( 0, resolution - 1 );
-		minY = minY.Clamp( 0, resolution - 1 );
-
-		maxX = maxX.Clamp( 0, resolution - 1 );
-		maxY = maxY.Clamp( 0, resolution - 1 );
-
+		Rect rect = ApexWorldUtils.GetTerrainRectFromBounds( bounds, terrain );
 		var material = new CompactTerrainMaterial
 		{
 			BaseTextureId = (byte)Math.Clamp( textureId, 0, 63 ),
@@ -210,9 +78,10 @@ public void PaintLayerInArea()
 			IsHole = false
 		};
 
-		for ( int y = minY; y <= maxY; y++ )
+		
+		for ( int y = (int)rect.Top; y <= (int)rect.Bottom; y++ )
 		{
-			for ( int x = minX; x <= maxX; x++ )
+			for ( int x = (int)rect.Left; x <= (int)rect.Right; x++ )
 			{
 				int index = y * resolution + x;
 
@@ -222,105 +91,6 @@ public void PaintLayerInArea()
 
 		terrain.SyncGPUTexture();
 	}
-		/// <summary>
-	/// Paint a single layer at a specific position
-	/// Uses CompactTerrainMaterial to encode texture ID + blend data
-	/// </summary>
-	private void PaintLayerAtWorldPosition( Vector3 worldPos, int textureId )
-	{
-		if ( Manager.Terrain?.Storage == null )
-			return;
-
-		var terrain = Manager.Terrain;
-		var storage = terrain.Storage;
-
-		Vector3 local = terrain.WorldTransform.PointToLocal( worldPos );
-
-		float u = local.x / storage.TerrainSize;
-		float v = local.y / storage.TerrainSize;
-
-		int centerX = (int)(u * storage.Resolution);
-		int centerY = (int)(v * storage.Resolution);
-
-		centerX = centerX.Clamp( 0, storage.Resolution - 1 );
-		centerY = centerY.Clamp( 0, storage.Resolution - 1 );
-
-		var material = new CompactTerrainMaterial
-		{
-			BaseTextureId = (byte)Math.Clamp( textureId, 0, 63 ),
-			OverlayTextureId = 0,
-			BlendFactor = 0,
-			IsHole = false
-		};
-
-		for ( int y = -BrushSize; y <= BrushSize; y++ )
-		{
-			for ( int x = -BrushSize; x <= BrushSize; x++ )
-			{
-				// circular brush
-				if ( x * x + y * y > BrushSize * BrushSize )
-					continue;
-
-				int px = centerX + x;
-				int py = centerY + y;
-
-				if ( px < 0 || py < 0 || px >= storage.Resolution || py >= storage.Resolution )
-					continue;
-
-				int index = py * storage.Resolution + px;
-
-				storage.ControlMap[index] = material.Packed;
-			}
-		}
-
-		terrain.SyncGPUTexture();
-	}
-	/// <summary>
-	/// More advanced: blend between two layers based on a condition
-	/// </summary>
-	public void BlendLayersAtSlope( float slopeThreshold, int baseLayerId, int slopeLayerId )
-	{
-		if ( Manager.Terrain?.Storage == null )
-			return;
-
-		var storage = Manager.Terrain.Storage;
-		int resolution = storage.Resolution;
-		float sizeScale = storage.TerrainSize / (float)resolution;
-		float heightScale = storage.TerrainHeight / (float)ushort.MaxValue;
-
-		for ( int y = 1; y < resolution - 1; y++ )
-		{
-			for ( int x = 1; x < resolution - 1; x++ )
-			{
-				float centerHeight = storage.HeightMap[y * resolution + x] * heightScale;
-				float rightHeight = storage.HeightMap[y * resolution + (x + 1)] * heightScale;
-				float forwardHeight = storage.HeightMap[(y + 1) * resolution + x] * heightScale;
-
-				float slopeX = Math.Abs( rightHeight - centerHeight ) / sizeScale;
-				float slopeY = Math.Abs( forwardHeight - centerHeight ) / sizeScale;
-				float slopeAngle = MathF.Atan( MathF.Max( slopeX, slopeY ) ) * (180f / MathF.PI);
-
-				int index = y * resolution + x;
-
-				// Blend factor: 0 = base layer, 255 = slope layer
-				float blendValue = ((slopeAngle - slopeThreshold) / 20f * 255f).Clamp( 0f, 255f );
-				byte blendFactor = (byte)blendValue;
-
-				var material = new CompactTerrainMaterial
-				{
-					BaseTextureId = (byte)baseLayerId,
-					OverlayTextureId = (byte)slopeLayerId,
-					BlendFactor = blendFactor,
-					IsHole = false
-				};
-
-				storage.ControlMap[index] = material.Packed;
-			}
-		}
-
-		Manager.Terrain.SyncGPUTexture();
-	}
-	
 	
 	[Button]
 	public void GenerateTextureLayers()
@@ -346,10 +116,17 @@ public void PaintLayerInArea()
 			generated.Add( (layer, mask) );
 		}
 
+		BBox bounds = GenerateSpawnerBounds();
+
+		Rect rect = ApexWorldUtils.GetTerrainRectFromBounds(
+			bounds,
+			terrain
+		);
+
 		// Sequential paint compositing
-		for ( int y = 0; y < resolution; y++ )
+		for ( int y = (int)rect.Top; y <= (int)rect.Bottom; y++ )
 		{
-			for ( int x = 0; x < resolution; x++ )
+			for ( int x = (int)rect.Left; x <= (int)rect.Right; x++ )
 			{
 				int index = y * resolution + x;
 
@@ -378,6 +155,10 @@ public void PaintLayerInArea()
 					}
 				}
 
+				// Skip untouched pixels
+				if ( !hasBase )
+					continue;
+
 				var material = new CompactTerrainMaterial
 				{
 					BaseTextureId = (byte)Math.Clamp( baseTex, 0, 63 ),
@@ -392,4 +173,62 @@ public void PaintLayerInArea()
 
 		terrain.SyncGPUTexture();
 	}
+	
+	///IGNORE THAT FOR NOW
+	/// <summary>
+	/// Paint a single layer at a specific position
+	/// Uses CompactTerrainMaterial to encode texture ID + blend data
+	/// </summary>
+	private void PaintLayerAtWorldPosition( Vector3 worldPos, int textureId )
+	{
+		if ( Manager.Terrain?.Storage == null )
+			return;
+
+		var terrain = Manager.Terrain;
+		var storage = terrain.Storage;
+
+		Vector3 local = terrain.WorldTransform.PointToLocal( worldPos );
+
+		float halfTerrain = storage.TerrainSize * 0.5f;
+
+		float u = (local.x + halfTerrain) / storage.TerrainSize;
+		float v = (local.y + halfTerrain) / storage.TerrainSize;
+
+		int centerX = (int)(u * storage.Resolution);
+		int centerY = (int)(v * storage.Resolution);
+
+		centerX = centerX.Clamp( 0, storage.Resolution - 1 );
+		centerY = centerY.Clamp( 0, storage.Resolution - 1 );
+
+		var material = new CompactTerrainMaterial
+		{
+			BaseTextureId = (byte)Math.Clamp( textureId, 0, 63 ),
+			OverlayTextureId = 0,
+			BlendFactor = 255,	//TODO this need to be passed in each layer
+			IsHole = false
+		};
+
+		for ( int y = -BrushSize; y <= BrushSize; y++ )
+		{
+			for ( int x = -BrushSize; x <= BrushSize; x++ )
+			{
+				// circular brush
+				if ( x * x + y * y > BrushSize * BrushSize )
+					continue;
+
+				int px = centerX + x;
+				int py = centerY + y;
+
+				if ( px < 0 || py < 0 || px >= storage.Resolution || py >= storage.Resolution )
+					continue;
+
+				int index = py * storage.Resolution + px;
+
+				storage.ControlMap[index] = material.Packed;
+			}
+		}
+
+		terrain.SyncGPUTexture();
+	}
+
 }

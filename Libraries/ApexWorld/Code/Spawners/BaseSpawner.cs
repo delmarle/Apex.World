@@ -5,7 +5,19 @@ public abstract class BaseSpawner: Component
 	#region FIELDS
 	[Property] public string SpawnerName { get; set; }
 	[Property, Range(0, 4096)] public float Range { get; set; }
-	
+
+
+	public BBox GenerateSpawnerBounds()
+	{
+		float half = Range * 0.5f;
+
+		BBox bounds = new BBox(
+			WorldPosition - new Vector3( half, half, 0 ),
+			WorldPosition + new Vector3( half, half, 0 )
+		);
+
+		return bounds;
+	}
 	
 	protected ApexWorldManager Manager
 	{
