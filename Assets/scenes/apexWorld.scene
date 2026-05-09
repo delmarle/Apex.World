@@ -92,19 +92,31 @@
                 {
                   "LayerName": null,
                   "TextureId": 0,
-                  "Masks": []
+                  "Masks": [
+                    {
+                      "$type": "noise",
+                      "Scale": 80,
+                      "Octaves": 4,
+                      "Persistence": 0.5,
+                      "Lacunarity": 2,
+                      "Seed": 0,
+                      "Offset": "0,0",
+                      "Threshold": 0.5,
+                      "Falloff": 0.1,
+                      "Terrain": null
+                    }
+                  ]
                 },
                 {
                   "LayerName": null,
                   "TextureId": 1,
                   "Masks": [
                     {
-                      "Terrain": {
-                        "_type": "component",
-                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
-                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
-                        "component_type": "Terrain"
-                      }
+                      "$type": "height",
+                      "MinHeight": 0,
+                      "MaxHeight": 500,
+                      "Softness": 0.1,
+                      "Terrain": null
                     }
                   ]
                 },
@@ -113,12 +125,23 @@
                   "TextureId": 2,
                   "Masks": [
                     {
-                      "Terrain": {
-                        "_type": "component",
-                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
-                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
-                        "component_type": "Terrain"
-                      }
+                      "$type": "slope",
+                      "MinAngle": 0,
+                      "MaxAngle": 30,
+                      "Softness": 0.1,
+                      "Terrain": null
+                    },
+                    {
+                      "$type": "noise",
+                      "Scale": 80,
+                      "Octaves": 4,
+                      "Persistence": 0.5,
+                      "Lacunarity": 2,
+                      "Seed": 0,
+                      "Offset": "0,0",
+                      "Threshold": 0.5,
+                      "Falloff": 0.1,
+                      "Terrain": null
                     }
                   ]
                 }
@@ -132,7 +155,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "TextureSpawners",
-          "Position": "4140.84668,2362.39648,603.347412",
+          "Position": "3483.44971,2362.39648,603.347412",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -163,12 +186,16 @@
                   "TextureId": 2,
                   "Masks": [
                     {
-                      "Terrain": {
-                        "_type": "component",
-                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
-                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
-                        "component_type": "Terrain"
-                      }
+                      "$type": "noise",
+                      "Scale": 80,
+                      "Octaves": 4,
+                      "Persistence": 0.5,
+                      "Lacunarity": 2,
+                      "Seed": 0,
+                      "Offset": "0,0",
+                      "Threshold": 0.5,
+                      "Falloff": 0.1,
+                      "Terrain": null
                     }
                   ]
                 }
@@ -424,17 +451,17 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
-        }
-      },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
       },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
+        }
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
         }
       }
     }

@@ -1,4 +1,6 @@
-﻿namespace Sandbox.Mask;
+﻿using System.Text.Json.Serialization;
+
+namespace Sandbox.Mask;
 
 using System;
 
@@ -15,6 +17,13 @@ public enum MaskCombineOp
 }
 
 
+[JsonDerivedType( typeof( SlopeMask ),     "slope"     )]
+[JsonDerivedType( typeof( HeightMask ),    "height"    )]
+[JsonDerivedType( typeof( NoiseMask ),     "noise"     )]
+[JsonDerivedType( typeof( DistanceMask ),  "distance"  )]
+[JsonDerivedType( typeof( CurvatureMask ), "curvature" )]
+[JsonDerivedType( typeof( ErosionMask ),   "erosion"   )]
+[JsonDerivedType( typeof( FlowMask ),      "flow"      )]
 [Serializable]
 public class MaskModifier
 {
