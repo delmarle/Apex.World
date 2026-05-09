@@ -183,7 +183,8 @@ public class ApexWorldEditorWindow : Widget
 			{
 				var scene = SceneEditorSession.Active?.Scene;
 				if ( scene == null ) return;
-				var go = new GameObject { Name = "ApexWorld" };
+				var go = scene.CreateObject();
+				go.Name = "ApexWorldManager";
 				go.Components.Create<ApexWorldManager>();
 				Log.Info( "[ApexWorld] Manager created" );
 				Refresh();
