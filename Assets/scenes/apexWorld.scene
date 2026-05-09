@@ -63,7 +63,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "TextureSpawners",
-          "Position": "4048.63989,4206.31445,417.753174",
+          "Position": "4346.896,4206.31445,417.753174",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -175,7 +175,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "TextureSpawners mini zone",
-          "Position": "3949.78979,2362.39648,603.347412",
+          "Position": "3981.03979,2362.39648,603.347412",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -481,13 +481,13 @@
           "SelectionSets": []
         }
       },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
         }
-      },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
       }
     }
   },

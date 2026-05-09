@@ -581,6 +581,7 @@ public class ApexWorldEditorWindow : Widget
 		{
 			_statusLabel.Text = $"Manager: {_manager.GameObject.Name}";
 			_statusLabel.SetStyles( "font-size: 11px; color: #70c080; letter-spacing: 1px;" );
+			_manager.RegisterSpawners();
 		}
 		else
 		{
