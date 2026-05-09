@@ -35,6 +35,12 @@
               "component_id": "3d2d6ab1-6fbc-4016-b22e-c11c125712dc",
               "go": "682d8251-be5a-4d93-8fc7-b4f95e30ff11",
               "component_type": "TextureSpawner"
+            },
+            {
+              "_type": "component",
+              "component_id": "54ff5994-df90-4785-8d20-a0c598f75e1e",
+              "go": "d0d18ebf-a727-4772-b9df-a43c6c7e6c77",
+              "component_type": "TextureSpawner"
             }
           ]
         },
@@ -57,7 +63,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "TextureSpawners",
-          "Position": "4747.17236,2920.80518,417.753174",
+          "Position": "4048.63989,4206.31445,417.753174",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -79,7 +85,7 @@
               "OnComponentFixedUpdate": null,
               "OnComponentStart": null,
               "OnComponentUpdate": null,
-              "Range": 572.8987,
+              "Range": 2923.2136,
               "Resolution": "R1024",
               "SpawnerName": "local grass",
               "TextureLayers": [
@@ -102,6 +108,56 @@
                     }
                   ]
                 },
+                {
+                  "LayerName": null,
+                  "TextureId": 2,
+                  "Masks": [
+                    {
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
+                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
+                        "component_type": "Terrain"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "d0d18ebf-a727-4772-b9df-a43c6c7e6c77",
+          "__version": 2,
+          "Flags": 0,
+          "Name": "TextureSpawners",
+          "Position": "4140.84668,2362.39648,603.347412",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkFlags": 0,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.Spawners.TextureSpawner",
+              "__guid": "54ff5994-df90-4785-8d20-a0c598f75e1e",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "Range": 752.6838,
+              "Resolution": "R1024",
+              "SpawnerName": "local grass",
+              "TextureLayers": [
                 {
                   "LayerName": null,
                   "TextureId": 2,
