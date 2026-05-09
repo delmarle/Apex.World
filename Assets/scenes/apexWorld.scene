@@ -6,7 +6,7 @@
       "__version": 2,
       "Flags": 0,
       "Name": "ApexWorld",
-      "Position": "149.994965,149.994995,-212.124985",
+      "Position": "149.990005,149.994995,-212.124985",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
@@ -32,14 +32,14 @@
           "Spawners": [
             {
               "_type": "component",
-              "component_id": "3d2d6ab1-6fbc-4016-b22e-c11c125712dc",
-              "go": "682d8251-be5a-4d93-8fc7-b4f95e30ff11",
+              "component_id": "54ff5994-df90-4785-8d20-a0c598f75e1e",
+              "go": "d0d18ebf-a727-4772-b9df-a43c6c7e6c77",
               "component_type": "TextureSpawner"
             },
             {
               "_type": "component",
-              "component_id": "54ff5994-df90-4785-8d20-a0c598f75e1e",
-              "go": "d0d18ebf-a727-4772-b9df-a43c6c7e6c77",
+              "component_id": "3d2d6ab1-6fbc-4016-b22e-c11c125712dc",
+              "go": "682d8251-be5a-4d93-8fc7-b4f95e30ff11",
               "component_type": "TextureSpawner"
             }
           ]
@@ -103,7 +103,12 @@
                       "Offset": "0,0",
                       "Threshold": 0.5,
                       "Falloff": 0.1,
-                      "Terrain": null
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
+                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
+                        "component_type": "Terrain"
+                      }
                     }
                   ]
                 },
@@ -116,7 +121,12 @@
                       "MinHeight": 0,
                       "MaxHeight": 500,
                       "Softness": 0.1,
-                      "Terrain": null
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
+                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
+                        "component_type": "Terrain"
+                      }
                     }
                   ]
                 },
@@ -129,7 +139,12 @@
                       "MinAngle": 0,
                       "MaxAngle": 30,
                       "Softness": 0.1,
-                      "Terrain": null
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
+                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
+                        "component_type": "Terrain"
+                      }
                     },
                     {
                       "$type": "noise",
@@ -141,7 +156,12 @@
                       "Offset": "0,0",
                       "Threshold": 0.5,
                       "Falloff": 0.1,
-                      "Terrain": null
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
+                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
+                        "component_type": "Terrain"
+                      }
                     }
                   ]
                 }
@@ -154,8 +174,8 @@
           "__guid": "d0d18ebf-a727-4772-b9df-a43c6c7e6c77",
           "__version": 2,
           "Flags": 0,
-          "Name": "TextureSpawners",
-          "Position": "3483.44971,2362.39648,603.347412",
+          "Name": "TextureSpawners mini zone",
+          "Position": "3949.78979,2362.39648,603.347412",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -179,7 +199,7 @@
               "OnComponentUpdate": null,
               "Range": 752.6838,
               "Resolution": "R1024",
-              "SpawnerName": "local grass",
+              "SpawnerName": "mini zone",
               "TextureLayers": [
                 {
                   "LayerName": null,
@@ -195,7 +215,12 @@
                       "Offset": "0,0",
                       "Threshold": 0.5,
                       "Falloff": 0.1,
-                      "Terrain": null
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
+                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
+                        "component_type": "Terrain"
+                      }
                     }
                   ]
                 }
@@ -451,9 +476,6 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
-      },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
@@ -463,6 +485,9 @@
         "Storage": {
           "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
         }
+      },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
       }
     }
   },

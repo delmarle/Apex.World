@@ -7,8 +7,11 @@ using Sandbox.Spawners;
 /// This need to be a root component of everything it manager, terrains, gameObjects ...
 /// </summary>
 [Title( "Apex World - Manager" )]
-public class ApexWorldManager : Component
+
+public class ApexWorldManager : Component, Component.ExecuteInEditor
 {
+	
+
 	#region  FIELDS
 	[Property] public bool SmartRebuild { get; set; }
 	[Property] public BaseSpawner[] Spawners { get; set; }
@@ -19,21 +22,11 @@ public class ApexWorldManager : Component
 	public ApexWorldCache GetWorldCache() => _worldCache;
 	#endregion
 
-	protected override Task OnLoad()
-	{
-		Log.Info( "ApexWorldManager loaded." );
-		return base.OnLoad();
-	}
 
-	protected override void DrawGizmos()
-	{
-		base.DrawGizmos();
-		
-	}
+	
 [Button]
-	void RegisterSpawners()
+	public void RegisterSpawners()
 	{
-		Log.Warning( "RegisterSpawners: "+Spawners.Length );
 		_worldCache.RegisterSpawners( Spawners );
 	}
 
@@ -43,7 +36,6 @@ public class ApexWorldManager : Component
 		{
 			_worldCache = Components.GetOrCreate<ApexWorldCache>();
 		}
-		
 	}
 	
 	[Button]

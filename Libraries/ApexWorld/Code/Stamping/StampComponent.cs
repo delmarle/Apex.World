@@ -19,7 +19,7 @@ public class StampComponent : Component
 	{
 		if ( Terrain?.Storage == null ) { Log.Warning( "No terrain" ); return; }
 		if ( HeightmapTexture == null ) { Log.Warning( "No texture" ); return; }
-
+		
 		var storage = Terrain.Storage;
 		int res = storage.Resolution;
 		var pixels = HeightmapTexture.GetPixels();

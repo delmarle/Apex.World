@@ -5,6 +5,7 @@ namespace Sandbox.Spawner;
 
 public class BaseSpawnerEditor: EditorTool<BaseSpawner>
 {
+
 	public override void OnUpdate()
 	{
 		var selected = GetSelectedComponent<BaseSpawner>();

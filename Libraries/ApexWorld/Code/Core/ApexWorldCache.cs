@@ -29,8 +29,7 @@ public class ApexWorldCache : Component, Component.ExecuteInEditor
 			if ( terrain.Storage == null ) continue;
 			_cachedTerrains.Add( terrain );
 		}
-
-		Log.Info( $"Cached {_cachedTerrains.Count} terrains in the scene." );
+		
 		_terrainCacheDirty = false;
 	}
 
