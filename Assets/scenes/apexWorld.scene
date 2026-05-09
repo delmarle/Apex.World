@@ -311,6 +311,80 @@
         }
       ],
       "Children": []
+    },
+    {
+      "__guid": "d79138b0-2c3f-4c22-af34-7e3d33ba80c3",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "stamper",
+      "Position": "1945.75891,1020.49304,-112.817932",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.Stamping.StampComponent",
+          "__guid": "23d7f2fa-509d-4560-a126-21c6f112e6fe",
+          "__enabled": true,
+          "Flags": 0,
+          "HeightmapTexture": {
+            "$compiler": "texture",
+            "$source": "imagefile",
+            "data": {
+              "FilePath": "art/heightmap_01_mountains.png",
+              "MaxSize": 4096,
+              "ConvertHeightToNormals": false,
+              "NormalScale": 1,
+              "Rotate": 0,
+              "FlipVertical": false,
+              "FlipHorizontal": false,
+              "Cropping": {
+                "Left": 0,
+                "Top": 0,
+                "Right": 0,
+                "Bottom": 0
+              },
+              "Padding": {
+                "Left": 0,
+                "Top": 0,
+                "Right": 0,
+                "Bottom": 0
+              },
+              "InvertColor": false,
+              "Tint": "1,1,1,1",
+              "Blur": 0,
+              "Sharpen": 0,
+              "Brightness": 1,
+              "Contrast": 1,
+              "Saturation": 1,
+              "Hue": 0,
+              "Colorize": false,
+              "TargetColor": "1,1,1,1",
+              "CacheToDisk": true
+            },
+            "compiled": null
+          },
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Terrain": {
+            "_type": "component",
+            "component_id": "37812253-64d5-4bd2-92d5-ebf1dc476464",
+            "go": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
+            "component_type": "Terrain"
+          }
+        }
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
@@ -338,13 +412,13 @@
           "SelectionSets": []
         }
       },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
-      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
         }
+      },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
       }
     }
   },
