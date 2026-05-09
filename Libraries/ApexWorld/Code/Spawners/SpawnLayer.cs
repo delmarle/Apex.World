@@ -30,6 +30,12 @@ public class SpawnLayer
 	{
 		Masks.Add( new HeightMask() );
 	}
+	
+	[Button]
+	public void AssignNoise()
+	{
+		Masks.Add( new NoiseMask() );
+	}
 
 	public MaskField GenerateMask( Terrain terrain, int resolution )
 	{

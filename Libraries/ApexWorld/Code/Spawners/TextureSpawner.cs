@@ -8,7 +8,7 @@ public class TextureSpawner: BaseSpawner
 {
 	[Property] public int BrushSize { get; set; } = 2;
 	[Property, Range(0, 64)] public int TextureId { get; set; }
-	[Property] public SpawnLayer[]  TextureLayers { get; set; }
+	[Property] public List<SpawnLayer> TextureLayers { get; set; } = new();
 	[Property, Range( 1, 5 )]  public int ResolutionLevel { get; set; } = 3;
 	[Property] public GameObject target { get; set; }
 	private int GetResolutionFromLevel( int level )
@@ -36,7 +36,7 @@ public class TextureSpawner: BaseSpawner
 		
 		int resolution = GetResolutionFromLevel( ResolutionLevel );
 		
-		storage.Resolution = resolution;
+		storage.SetResolution( resolution );
 		
 		float metersPerPixel = storage.TerrainSize / storage.Resolution;
 		Log.Info( $"Resolution = {resolution}" );

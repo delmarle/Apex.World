@@ -93,7 +93,7 @@
               "SubdivisionLodCount": 3,
               "Surface": null,
               "SurfaceVelocity": "0,0,0",
-              "TerrainHeight": 10000,
+              "TerrainHeight": 1000,
               "TerrainSize": 2500
             }
           ],
@@ -127,7 +127,7 @@
               "OnComponentFixedUpdate": null,
               "OnComponentStart": null,
               "OnComponentUpdate": null,
-              "Range": 1096.1127,
+              "Range": 1287.5612,
               "ResolutionLevel": 3,
               "SpawnerName": "local grass",
               "target": {
@@ -138,8 +138,36 @@
               "TextureLayers": [
                 {
                   "LayerName": null,
-                  "TextureId": 2,
+                  "TextureId": 0,
                   "Masks": []
+                },
+                {
+                  "LayerName": "grass",
+                  "TextureId": 1,
+                  "Masks": [
+                    {
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "37812253-64d5-4bd2-92d5-ebf1dc476464",
+                        "go": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
+                        "component_type": "Terrain"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "LayerName": "cliffs",
+                  "TextureId": 2,
+                  "Masks": [
+                    {
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "37812253-64d5-4bd2-92d5-ebf1dc476464",
+                        "go": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
+                        "component_type": "Terrain"
+                      }
+                    }
+                  ]
                 }
               ]
             }
@@ -305,17 +333,17 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
         }
       },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
       },
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
         }
       }
     }

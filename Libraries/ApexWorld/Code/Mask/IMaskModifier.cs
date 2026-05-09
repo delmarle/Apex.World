@@ -16,11 +16,11 @@ public enum MaskCombineOp
 
 
 [Serializable]
-public abstract class MaskModifier
+public class MaskModifier
 {
-	public Terrain Terrain { get; set; }
+	[Hide]public Terrain Terrain { get; set; }
 
-	public abstract void Apply( MaskField field );
+	public virtual void Apply( MaskField field ) { }
 }
 /// <summary>
 /// Combines a generated MaskField into an existing one using a blend operation.
@@ -34,18 +34,8 @@ public class MaskModifierEntry
 	[Property] public MaskCombineOp CombineOp   { get; set; } = MaskCombineOp.Multiply;
 	[Property, Range(0f, 1f)] public float Strength { get; set; } = 1f;
 	[Property] public bool           Enabled    { get; set; } = true;
-
-	[Button]
-	public void AddHeightMask()
-	{
-		Modifier = new HeightMask();
-	}
 	
-	[Button]
-	public void AddSlopeMask()
-	{
-		Modifier = new SlopeMask();
-	}
+	
 	/// <summary>
 	/// Applies the source field onto the target using this entry's CombineOp and Strength.
 	/// </summary>
