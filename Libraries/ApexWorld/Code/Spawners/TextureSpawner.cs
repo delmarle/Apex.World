@@ -6,25 +6,10 @@ namespace Sandbox.Spawners;
 
 public class TextureSpawner: BaseSpawner
 {
-	[Property] public int BrushSize { get; set; } = 2;
-	[Property, Range(0, 64)] public int TextureId { get; set; }
+	
 	[Property] public List<SpawnLayer> TextureLayers { get; set; } = new();
-	[Property, Range( 1, 5 )]  public int ResolutionLevel { get; set; } = 3;
-	[Property] public GameObject target { get; set; }
-	private int GetResolutionFromLevel( int level )
-	{
-		level = level.Clamp( 1, 5 );
-
-		return level switch
-		{
-			1 => 128,
-			2 => 256,
-			3 => 512,
-			4 => 1024,
-			5 => 2048,
-			_ => 512
-		};
-	}
+	[Property] public ApexWorldUtils.TerrainResolution Resolution { get; set; } = ApexWorldUtils.TerrainResolution.R512;
+	
 	[Button]
 	public void UpdateResolution()
 	{
@@ -32,9 +17,7 @@ public class TextureSpawner: BaseSpawner
 			return;
 
 		var storage = Manager.Terrain.Storage;
-
-		
-		int resolution = GetResolutionFromLevel( ResolutionLevel );
+		int resolution =(int)Resolution;
 		
 		storage.SetResolution( resolution );
 		
@@ -43,21 +26,8 @@ public class TextureSpawner: BaseSpawner
 		Log.Info( $"TerrainSize = {storage.TerrainSize}" );
 		Log.Info( $"Meters per pixel = {metersPerPixel}" );
 	}
-	[Button]
-	public void Dooit()
-	{
-		PaintLayerAtWorldPosition(target.WorldPosition, TextureId);
-	}
-	
-	[Button]
-	public void DooitBounds()
-	{
-		PaintLayerInArea(
-			GenerateSpawnerBounds(),
-			TextureId
-		);
-	}
 
+	
 	private void PaintLayerInArea( BBox bounds, int textureId )
 	{
 		if ( Manager.Terrain?.Storage == null )
@@ -173,62 +143,4 @@ public class TextureSpawner: BaseSpawner
 
 		terrain.SyncGPUTexture();
 	}
-	
-	///IGNORE THAT FOR NOW
-	/// <summary>
-	/// Paint a single layer at a specific position
-	/// Uses CompactTerrainMaterial to encode texture ID + blend data
-	/// </summary>
-	private void PaintLayerAtWorldPosition( Vector3 worldPos, int textureId )
-	{
-		if ( Manager.Terrain?.Storage == null )
-			return;
-
-		var terrain = Manager.Terrain;
-		var storage = terrain.Storage;
-
-		Vector3 local = terrain.WorldTransform.PointToLocal( worldPos );
-
-		float halfTerrain = storage.TerrainSize * 0.5f;
-
-		float u = (local.x + halfTerrain) / storage.TerrainSize;
-		float v = (local.y + halfTerrain) / storage.TerrainSize;
-
-		int centerX = (int)(u * storage.Resolution);
-		int centerY = (int)(v * storage.Resolution);
-
-		centerX = centerX.Clamp( 0, storage.Resolution - 1 );
-		centerY = centerY.Clamp( 0, storage.Resolution - 1 );
-
-		var material = new CompactTerrainMaterial
-		{
-			BaseTextureId = (byte)Math.Clamp( textureId, 0, 63 ),
-			OverlayTextureId = 0,
-			BlendFactor = 255,	//TODO this need to be passed in each layer
-			IsHole = false
-		};
-
-		for ( int y = -BrushSize; y <= BrushSize; y++ )
-		{
-			for ( int x = -BrushSize; x <= BrushSize; x++ )
-			{
-				// circular brush
-				if ( x * x + y * y > BrushSize * BrushSize )
-					continue;
-
-				int px = centerX + x;
-				int py = centerY + y;
-
-				if ( px < 0 || py < 0 || px >= storage.Resolution || py >= storage.Resolution )
-					continue;
-
-				int index = py * storage.Resolution + px;
-
-				storage.ControlMap[index] = material.Packed;
-			}
-		}
-
-		terrain.SyncGPUTexture();
-	}
-
 }
