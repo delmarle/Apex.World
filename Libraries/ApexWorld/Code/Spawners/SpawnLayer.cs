@@ -49,35 +49,14 @@ public class SpawnLayer
 
 		foreach ( var mask in Masks )
 		{
-			// inject terrain automatically
-			switch ( mask )
-			{
-				case SlopeMask slope:
-					slope.Terrain = terrain;
-					break;
-
-				case CurvatureMask curvature:
-					curvature.Terrain = terrain;
-					break;
-
-				case ErosionMask erosion:
-					erosion.Terrain = terrain;
-					break;
-
-				case FlowMask flow:
-					flow.Terrain = terrain;
-					break;
-			}
-
+			mask.Terrain = terrain;
 			var temp = new MaskField(
 				resolution,
 				terrain.Storage.TerrainSize
 			);
 
 			temp.Fill( 1f );
-			mask.Terrain = terrain;
 			mask.Apply( temp );
-
 			field = field.Multiply( temp );
 		}
 

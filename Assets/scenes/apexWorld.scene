@@ -19,7 +19,7 @@
       "Components": [
         {
           "__type": "ApexWorldManager",
-          "__guid": "f8d59c0e-c063-4b29-8ffe-bddc6df3c5b9",
+          "__guid": "6be11f0d-6c01-4526-a3ec-d53cf44e3495",
           "__enabled": true,
           "Flags": 0,
           "OnComponentDestroy": null,
@@ -28,6 +28,7 @@
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
+          "SmartRebuild": true,
           "Spawners": [
             {
               "_type": "component",
@@ -35,76 +36,28 @@
               "go": "682d8251-be5a-4d93-8fc7-b4f95e30ff11",
               "component_type": "TextureSpawner"
             }
-          ],
-          "Terrain": {
-            "_type": "component",
-            "component_id": "37812253-64d5-4bd2-92d5-ebf1dc476464",
-            "go": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
-            "component_type": "Terrain"
-          }
+          ]
+        },
+        {
+          "__type": "Sandbox.Core.ApexWorldCache",
+          "__guid": "6958b728-5f54-4e60-addf-a836288871c4",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
       ],
       "Children": [
-        {
-          "__guid": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
-          "__version": 2,
-          "Flags": 0,
-          "Name": "Terrain",
-          "Position": "0,0,0",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkFlags": 0,
-          "NetworkOrphaned": 0,
-          "NetworkTransmit": true,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "Sandbox.Terrain",
-              "__guid": "37812253-64d5-4bd2-92d5-ebf1dc476464",
-              "__enabled": true,
-              "Flags": 0,
-              "__version": 1,
-              "ClipMapLodExtentTexels": 256,
-              "ClipMapLodLevels": 6,
-              "ColliderFlags": 0,
-              "Elasticity": null,
-              "EnableCollision": true,
-              "Friction": null,
-              "IsTrigger": false,
-              "MaterialOverride": null,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RenderType": "Off",
-              "RollingResistance": null,
-              "Static": true,
-              "Storage": "scenes/apexterrain.terrain",
-              "SubdivisionFactor": 1,
-              "SubdivisionLodCount": 3,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0",
-              "TerrainHeight": 1000,
-              "TerrainSize": 2500
-            }
-          ],
-          "Children": []
-        },
         {
           "__guid": "682d8251-be5a-4d93-8fc7-b4f95e30ff11",
           "__version": 2,
           "Flags": 0,
           "Name": "TextureSpawners",
-          "Position": "2096.35425,573.671814,13.9879456",
+          "Position": "4747.17236,2920.80518,417.753174",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -126,38 +79,38 @@
               "OnComponentFixedUpdate": null,
               "OnComponentStart": null,
               "OnComponentUpdate": null,
-              "Range": 1287.5612,
-              "Resolution": "R512",
+              "Range": 572.8987,
+              "Resolution": "R1024",
               "SpawnerName": "local grass",
               "TextureLayers": [
                 {
-                  "LayerName": "base dirt layer",
+                  "LayerName": null,
                   "TextureId": 0,
                   "Masks": []
                 },
                 {
-                  "LayerName": "grass - use simple noise",
+                  "LayerName": null,
                   "TextureId": 1,
                   "Masks": [
                     {
                       "Terrain": {
                         "_type": "component",
-                        "component_id": "37812253-64d5-4bd2-92d5-ebf1dc476464",
-                        "go": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
+                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
+                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
                         "component_type": "Terrain"
                       }
                     }
                   ]
                 },
                 {
-                  "LayerName": "Cliff - if slope > 19 degres",
+                  "LayerName": null,
                   "TextureId": 2,
                   "Masks": [
                     {
                       "Terrain": {
                         "_type": "component",
-                        "component_id": "37812253-64d5-4bd2-92d5-ebf1dc476464",
-                        "go": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
+                        "component_id": "d55ad675-7539-488b-afe9-9187fe521f14",
+                        "go": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
                         "component_type": "Terrain"
                       }
                     }
@@ -214,6 +167,25 @@
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
           "ZNear": 10
+        },
+        {
+          "__type": "Sandbox.Bloom",
+          "__guid": "5e1550e1-2c5f-4585-bafb-e2059c9da693",
+          "__enabled": true,
+          "Flags": 0,
+          "__version": 1,
+          "Filter": "Bilinear",
+          "Gamma": 2.2,
+          "Mode": "Additive",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Strength": 0.37444934,
+          "Threshold": 1,
+          "Tint": "1,1,1,1"
         }
       ],
       "Children": [
@@ -225,7 +197,7 @@
           "Position": "0,0,0",
           "Rotation": "0,0.221123248,0,0.975245893",
           "Scale": "1,1,1",
-          "Tags": "light_directional,light",
+          "Tags": "light_directional,light,skybox",
           "Enabled": true,
           "NetworkMode": 2,
           "NetworkFlags": 0,
@@ -240,7 +212,7 @@
               "Flags": 0,
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.91373,0.98039,1,1",
+              "LightColor": "1.82746,1.96078,2,1",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
               "OnComponentEnabled": null,
@@ -254,6 +226,21 @@
               "Shadows": true,
               "SkyColor": "0,0,0,0",
               "Visualizer": {}
+            },
+            {
+              "__type": "Sandbox.SkyBox2D",
+              "__guid": "f5feaa44-fd6c-43ca-9a60-60f212df335b",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "SkyIndirectLighting": true,
+              "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
+              "Tint": "0.86047,0.86047,0.86047,1"
             }
           ],
           "Children": []
@@ -307,11 +294,11 @@
       "Children": []
     },
     {
-      "__guid": "d79138b0-2c3f-4c22-af34-7e3d33ba80c3",
+      "__guid": "56db1bdd-fd1f-4821-8659-a5103228f6b9",
       "__version": 2,
       "Flags": 0,
-      "Name": "stamper",
-      "Position": "1945.75891,1020.49304,-112.817932",
+      "Name": "Terrain",
+      "Position": "0,0,0",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
@@ -323,63 +310,39 @@
       "OwnerTransfer": 1,
       "Components": [
         {
-          "__type": "Sandbox.Stamping.StampComponent",
-          "__guid": "23d7f2fa-509d-4560-a126-21c6f112e6fe",
+          "__type": "Sandbox.Terrain",
+          "__guid": "d55ad675-7539-488b-afe9-9187fe521f14",
           "__enabled": true,
           "Flags": 0,
-          "HeightmapTexture": {
-            "$compiler": "texture",
-            "$source": "imagefile",
-            "data": {
-              "FilePath": "art/heightmap_01_mountains.png",
-              "MaxSize": 2048,
-              "ConvertHeightToNormals": false,
-              "NormalScale": 1,
-              "Rotate": 0,
-              "FlipVertical": false,
-              "FlipHorizontal": false,
-              "Cropping": {
-                "Left": 0,
-                "Top": 0,
-                "Right": 0,
-                "Bottom": 0
-              },
-              "Padding": {
-                "Left": 0,
-                "Top": 0,
-                "Right": 0,
-                "Bottom": 0
-              },
-              "InvertColor": false,
-              "Tint": "1,1,1,1",
-              "Blur": 0,
-              "Sharpen": 0,
-              "Brightness": 1,
-              "Contrast": 1,
-              "Saturation": 1,
-              "Hue": 0,
-              "Colorize": false,
-              "TargetColor": "1,1,1,1",
-              "CacheToDisk": true
-            },
-            "compiled": null
-          },
-          "HeightOffset": 0,
-          "HeightScale": 0.41694537,
+          "__version": 1,
+          "ClipMapLodExtentTexels": 256,
+          "ClipMapLodLevels": 6,
+          "ColliderFlags": 0,
+          "Elasticity": null,
+          "EnableCollision": true,
+          "Friction": null,
+          "IsTrigger": false,
+          "MaterialOverride": null,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
-          "SmoothIterations": 5,
-          "SmoothRadius": 1,
-          "Terrain": {
-            "_type": "component",
-            "component_id": "37812253-64d5-4bd2-92d5-ebf1dc476464",
-            "go": "288ce78f-2849-4cf3-96ba-c076ed25e0b9",
-            "component_type": "Terrain"
-          }
+          "OnObjectTriggerEnter": null,
+          "OnObjectTriggerExit": null,
+          "OnTriggerEnter": null,
+          "OnTriggerExit": null,
+          "RenderType": "Off",
+          "RollingResistance": null,
+          "Static": true,
+          "Storage": "scenes/apexterrain.terrain",
+          "SubdivisionFactor": 1,
+          "SubdivisionLodCount": 3,
+          "Surface": null,
+          "SurfaceVelocity": "0,0,0",
+          "TerrainHeight": 1000,
+          "TerrainSize": 10000
         }
       ],
       "Children": []
@@ -405,17 +368,17 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
         }
       },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
       },
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
         }
       }
     }

@@ -1,4 +1,6 @@
-﻿namespace Sandbox.Spawners;
+﻿using System.Collections.Generic;
+
+namespace Sandbox.Spawners;
 
 public abstract class BaseSpawner: Component
 {
@@ -6,6 +8,34 @@ public abstract class BaseSpawner: Component
 	[Property] public string SpawnerName { get; set; }
 	[Property, Range(0, 4096)] public float Range { get; set; }
 
+	
+	#endregion
+
+	public override string ToString()
+	{
+		return $"{GetType().Name} - {SpawnerName}";
+	}
+
+	#region VIRTUAL FUNCTIONS
+
+	/// <summary>
+	/// handle cleaning or init
+	/// </summary>
+	public virtual void OnBeforeGenerate() { }
+
+	public virtual void Generate() {}
+	
+	/// <summary>
+	/// will see
+	/// </summary>
+	public virtual void OnGenerationFinished() { }
+
+	public bool IsFinished() => _isFinished;
+
+	protected bool _isFinished = false;
+	#endregion
+
+	#region UTILS
 
 	public BBox GenerateSpawnerBounds()
 	{
@@ -33,28 +63,15 @@ public abstract class BaseSpawner: Component
 			return null;
 		}
 	}
-	#endregion
-
-	public override string ToString()
+	
+	
+	protected List<Terrain> GetTerrainsInBounds( BBox bounds )
 	{
-		return $"{GetType().Name} - {SpawnerName}";
+		var manager = Manager;
+		if ( manager == null ) return new List<Terrain>();
+
+		return manager.GetWorldCache().GetTerrainsInBounds( bounds );
 	}
-	
-	
-	#region VIRTUAL FUNCTIONS
-
-	/// <summary>
-	/// handle cleaning or init
-	/// </summary>
-	public virtual void OnBeforeGenerate() { }
-
-	public virtual void Generate() {}
-	
-	/// <summary>
-	/// will see
-	/// </summary>
-	public virtual void OnGenerationFinished() { }
-
 	#endregion
 	
 	

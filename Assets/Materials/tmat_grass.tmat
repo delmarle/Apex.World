@@ -4,7 +4,7 @@
   "NormalImage": "art/grass004_1k-png_normalgl.png",
   "HeightImage": "materials/default/default_ao.tga",
   "AOImage": "materials/default/default_ao.tga",
-  "UVScale": 1,
+  "UVScale": 3,
   "Metalness": 0,
   "NormalStrength": 1,
   "HeightBlendStrength": 1,
