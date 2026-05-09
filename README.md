@@ -1,12 +1,16 @@
 # Apex.World
- Non-Destructive world generator for S&amp;box engine
 
-Features:
--localized texture spawners with bounds
--layers stacks with different output
+Non-destructive world generator for the S&box engine.
+It is very early. started working on 05/08/2026 but stay tunned.
 
-TODO:
--support multiple terrain inside spawner bounds
--stamp spawner
--detail spawner
--road spawner
+## Features
+
+- Localized texture spawners with bounds
+- Layer stacks with different output per layer
+
+## TODO
+
+- Support multiple terrains inside spawner bounds
+- Stamp spawner
+- Detail spawner
+- Road spawner
