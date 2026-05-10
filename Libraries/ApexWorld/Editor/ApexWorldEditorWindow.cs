@@ -174,7 +174,7 @@ public class ApexWorldEditorWindow : Widget
 	{
 		_createManagerBtnContainer.DestroyChildren();
 
-		// Only show create manager button if no manager exists
+
 		if ( _manager == null )
 		{
 			var createManagerBtn = new Button( "Create Manager in Scene", "add_circle", _createManagerBtnContainer );
@@ -186,7 +186,6 @@ public class ApexWorldEditorWindow : Widget
 				var go = scene.CreateObject();
 				go.Name = "ApexWorldManager";
 				go.Components.Create<ApexWorldManager>();
-				Log.Info( "[ApexWorld] Manager created" );
 				Refresh();
 			};
 			_createManagerBtnContainer.Layout.Add( createManagerBtn );

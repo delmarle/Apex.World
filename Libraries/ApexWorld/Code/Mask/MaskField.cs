@@ -11,6 +11,8 @@ public class MaskField
 	public int    Resolution { get; }
 	public float  WorldSize  { get; }
 	public float[] Values    { get; }
+	
+	public Vector2 WorldOffset { get; set; } = Vector2.Zero; 
 
 	#endregion
 
@@ -229,7 +231,7 @@ public class MaskField
 	public Vector2 TexelToWorld( int x, int y )
 	{
 		float step = WorldSize / (Resolution - 1);
-		return new Vector2( x * step, y * step );
+		return WorldOffset + new Vector2( x * step, y * step );
 	}
 
 	public (int x, int y) WorldToTexel( Vector2 worldPos )

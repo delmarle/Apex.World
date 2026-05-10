@@ -1,0 +1,23 @@
+{
+  "ObjectType": "GameObject",
+  "Prefab": {
+    "_type": "gameobject",
+    "prefab": "scenes/tree.prefab"
+  },
+  "UseInstancing": true,
+  "MinYOffset": -4.030612,
+  "MaxYOffset": 0,
+  "SpawnScale": "FitnessRandom",
+  "WidthRandomPercent": 6.887755,
+  "WidthMinScale": 0.7397959,
+  "WidthMaxScale": 1.377551,
+  "HeightRandomPercent": 13.520408,
+  "HeightMinScale": 0.71428573,
+  "HeightMaxScale": 2.0663266,
+  "AlignToSlope": false,
+  "ForwardToSlope": false,
+  "MinRotationOffset": "0,0,0",
+  "MaxRotationOffset": "0,360,3",
+  "__references": [],
+  "__version": 0
+}

@@ -41,6 +41,12 @@
               "component_id": "3d2d6ab1-6fbc-4016-b22e-c11c125712dc",
               "go": "682d8251-be5a-4d93-8fc7-b4f95e30ff11",
               "component_type": "TextureSpawner"
+            },
+            {
+              "_type": "component",
+              "component_id": "c820a483-3e7a-4e7b-bccd-3691b8a47f72",
+              "go": "01e12210-ddaf-47b5-8b44-831a16a1291d",
+              "component_type": "DetailsSpawner"
             }
           ]
         },
@@ -175,7 +181,7 @@
           "__version": 2,
           "Flags": 0,
           "Name": "TextureSpawners mini zone",
-          "Position": "3981.03979,2362.39648,603.347412",
+          "Position": "4408.68848,2565.89404,603.347412",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -228,6 +234,485 @@
             }
           ],
           "Children": []
+        },
+        {
+          "__guid": "01e12210-ddaf-47b5-8b44-831a16a1291d",
+          "__version": 2,
+          "Flags": 0,
+          "Name": "DetailSpawner",
+          "Position": "3288.22803,1837.65369,425.65744",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkFlags": 0,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.Spawners.DetailsSpawner",
+              "__guid": "c820a483-3e7a-4e7b-bccd-3691b8a47f72",
+              "__enabled": true,
+              "Flags": 0,
+              "MaskResolution": 256,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "Range": 2014.2417,
+              "SpawnerMasks": [],
+              "SpawnerName": "rocks",
+              "SpawnRules": [
+                {
+                  "RuleName": "New Rule",
+                  "Enabled": true,
+                  "Definition": "scenes/new spawndefinition.sd",
+                  "Masks": [],
+                  "SpawnProbabilityRate": 33.898308,
+                  "LocationIncrement": 343.2517,
+                  "Jitter": 77.118645,
+                  "MinFitness": 0.2881356,
+                  "BoundRadius": 4,
+                  "SelfCollisionCheck": true
+                }
+              ]
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "84b5589f-2c2d-4048-823b-d644e9adf719",
+              "__version": 2,
+              "Flags": 0,
+              "Name": "SpawnRoot",
+              "Position": "0,0,0",
+              "Rotation": "0,0,0,1",
+              "Scale": "1,1,1",
+              "Tags": "",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "NetworkFlags": 0,
+              "NetworkOrphaned": 0,
+              "NetworkTransmit": true,
+              "OwnerTransfer": 1,
+              "Components": [],
+              "Children": [
+                {
+                  "__guid": "a82d0f7d-7add-4d46-8de7-d27abdc8608a",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "689.996338,-970.878174,101.523483"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.00517632253,0.00631580362,0.773400307,0.633865416"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.95809263,1.18763781,0.95809263"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "a82d0f7d-7add-4d46-8de7-d27abdc8608a",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "311deb33-ba72-49c1-8b4f-88e9dc8965f0",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "b04162ff-656c-4c34-bcce-7c21eb3b8858"
+                  }
+                },
+                {
+                  "__guid": "abb163bd-d407-4673-9986-a17326303718",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "-255.021973,-567.621704,67.0811005"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.0217446387,0.000770337647,0.035395965,-0.999136448"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.833324313,0.906715453,0.833324313"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "abb163bd-d407-4673-9986-a17326303718",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "8a05bf67-a3fa-49c4-a80a-ee6d04859ec5",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "f98dcba8-b543-4a46-9f05-d352798092b7"
+                  }
+                },
+                {
+                  "__guid": "2dccd1fa-60f0-4e8e-9343-a09afdeb4522",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "-478.48584,-146.481812,108.32048"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.000364665902,0.00148903718,0.971295595,-0.237870753"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.18882525,1.70714438,1.18882525"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "2dccd1fa-60f0-4e8e-9343-a09afdeb4522",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "90591ae1-1a80-4b82-a3fe-91632256ffee",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "4c82790b-576c-44be-b9da-1066a9bea357"
+                  }
+                },
+                {
+                  "__guid": "fb8622da-2ae6-409d-b265-542f95891dce",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "-852.268799,-78.8125,139.522598"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.00369106559,0.00652823783,0.870470226,-0.492163867"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.09662235,1.49954438,1.09662235"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "fb8622da-2ae6-409d-b265-542f95891dce",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "f8ee51f9-b3d0-4280-bc0d-e697867e333c",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "21abe671-84c2-4976-a9cc-ae78ad891736"
+                  }
+                },
+                {
+                  "__guid": "7571a11b-510c-43c5-a1db-8ba2939e0ddc",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "-259.243164,173.00415,61.0868073"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.01252867,0.000963990402,0.0767099485,0.99697423"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.02518797,1.33870637,1.02518797"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "7571a11b-510c-43c5-a1db-8ba2939e0ddc",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "3f0b3030-a825-43e7-b129-8c0ce4cfe1de",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "9a72833c-cf98-4150-b69d-1ac8df0769cb"
+                  }
+                },
+                {
+                  "__guid": "4c00f27e-80a2-46d9-ad90-cea28afce549",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "236.029785,-240.014648,78.0591278"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.0179940462,0.013819932,0.608954489,-0.792880595"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.26653659,1.88211513,1.26653659"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "4c00f27e-80a2-46d9-ad90-cea28afce549",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "e03d0594-b99d-4cd1-bcbb-af0e94e072b6",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "c7b2b4ac-ef2c-4693-93b8-6621ac94e3a2"
+                  }
+                },
+                {
+                  "__guid": "e8be4f52-ae79-48bb-aecb-a39d26970147",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "-497.911865,535.585693,69.1968231"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.00290678954,0.0251730271,0.99308008,-0.114673316"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.30847764,1.97654748,1.30847764"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "e8be4f52-ae79-48bb-aecb-a39d26970147",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "411bcb5c-75b4-4b64-9e45-a1ca3697361e",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "47df5a94-295d-450f-8961-f02af24aab56"
+                  }
+                },
+                {
+                  "__guid": "4c1ae5c0-9876-4a34-9aef-bb0899207edd",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "546.833252,621.044189,60.3560333"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.0155588342,0.0083415769,0.472433239,-0.881189585"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.01442826,1.31448042,1.01442826"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "4c1ae5c0-9876-4a34-9aef-bb0899207edd",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "85cc43f5-d30a-4f5f-8b52-74393a3fb213",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "40ea396f-3158-43b6-a8af-d154b96d322f"
+                  }
+                },
+                {
+                  "__guid": "36423114-7a6f-4438-8323-f03aa8e6f582",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "-193.093506,530.864502,49.5087433"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.0118744066,0.00530803762,0.408062667,0.912861288"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.32761812,2.01964355,1.32761812"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "36423114-7a6f-4438-8323-f03aa8e6f582",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "5d44fa68-e270-444c-8b8d-026497b7abde",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "17d79105-7118-434e-bf8b-84b5589c184c"
+                  }
+                },
+                {
+                  "__guid": "638bb2e0-b341-42ea-9100-aa18c8abb797",
+                  "__version": 2,
+                  "__Prefab": "scenes/tree.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Position",
+                        "Value": "545.478271,691.826172,87.6317902"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.00144254777,0.00658076396,0.976784587,-0.214117765"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "382e62db-97f1-4256-96a1-87588c2507a0"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.30577695,1.97046697,1.30577695"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "382e62db-97f1-4256-96a1-87588c2507a0": "638bb2e0-b341-42ea-9100-aa18c8abb797",
+                    "e9e4dce0-effb-439a-9821-70cafde37365": "4f053e24-c2a7-48f6-b702-21aca7a7ff55",
+                    "96094f4f-730b-491a-8c68-cfb0d8d425a0": "50309ce9-4495-4786-bef6-e7306473bf8e"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -476,17 +961,17 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
-        }
-      },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
       },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "cf04de0a-51b1-4ba4-979c-17748cfdd505"
+        }
+      },
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
         }
       }
     }
