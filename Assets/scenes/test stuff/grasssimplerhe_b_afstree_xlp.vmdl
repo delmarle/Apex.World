@@ -1,0 +1,65 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc30:version{8c2d7a91-9c42-4bf0-883a-5a3b1762d4f1} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "simplegrass_leafs.vmat"
+								to = "scenes/test stuff/grass.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = "materials/default.vmat"
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "scenes/test stuff/grasssimplerhe_b_afstree_xlp.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 100.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"Leaf_008_xw001_xw001_xt010_xlp01",
+								"Leaf_007_xw001_xw001_xt011_xlp01",
+								"Leaf_006_xw001_xw001_xt011_xlp02",
+								"Leaf_005_xw001_xw001_xt011_xlp02",
+								"Leaf_004_xw001_xw001_xt011_xlp01",
+								"Leaf_003_xw001_xw001_xt012_xlp03",
+								"Leaf_002_xw001_xw001_xt011_xlp03",
+								"Leaf_001_xw001_xw001_xt013_xlp02",
+								"Leaf_000_xw001_xw001_xt011_xlp03",
+							]
+						}
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}

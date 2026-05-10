@@ -23,6 +23,8 @@ public sealed class ApexClutterComponent : Component, Component.ExecuteInEditor
 
 	
 	private static RenderAttributes _attributes = new();
+	[Property]
+	private List<Transform> SerializedTransforms { get; set; } = new();
 	#endregion
 
 	#region Chunk Scene Object
@@ -82,25 +84,61 @@ public sealed class ApexClutterComponent : Component, Component.ExecuteInEditor
 	}
 
 	private readonly Dictionary<Vector2Int, ChunkData> _chunks = new();
-	private SceneWorld _cachedSceneWorld;
+
 
 	#endregion
-
-	#region Lifecycle
-
-	protected override void OnUpdate()
+	private void RebuildFromSerializedData()
 	{
-		if ( Scene == null ) return;
-
-		// SceneWorld changes when entering/exiting play mode — rebuild scene objects only
-		if ( Scene.SceneWorld != _cachedSceneWorld )
+		foreach ( var transform in SerializedTransforms )
 		{
-			_cachedSceneWorld = Scene.SceneWorld;
-			if ( _chunks.Count > 0 )
-				RebuildSceneObjects();
+			var coord = WorldToChunk( transform.Position );
+
+			if ( !_chunks.TryGetValue( coord, out var chunk ) )
+			{
+				chunk = new ChunkData
+				{
+					Bounds = GetChunkBounds( coord )
+				};
+
+				_chunks[coord] = chunk;
+			}
+
+			chunk.Transforms.Add( transform );
+		}
+
+		RebuildSceneObjects();
+	}
+	#region Lifecycle
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		if ( _chunks.Count == 0 && SerializedTransforms.Count > 0 )
+		{
+			RebuildFromSerializedData();
 		}
 	}
+	protected override void OnUpdate()
+	{
+		if ( Scene?.SceneWorld == null )
+			return;
 
+		bool rebuild = false;
+
+		foreach ( var chunk in _chunks.Values )
+		{
+			if ( chunk.SceneObject == null || !chunk.SceneObject.IsValid() )
+			{
+				rebuild = true;
+				break;
+			}
+		}
+
+		if ( rebuild )
+		{
+			RebuildSceneObjects();
+		}
+	}
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
@@ -110,7 +148,34 @@ public sealed class ApexClutterComponent : Component, Component.ExecuteInEditor
 	#endregion
 
 	#region Public API
+public void BuildFromTransforms( List<Transform> transforms )
+{
+	Clear();
+	SerializedTransforms.Clear();
+	SerializedTransforms.AddRange( transforms );
+	if ( Model == null )
+	{
+		Log.Warning( "[ApexClutter] No model assigned" );
+		return;
+	}
 
+	foreach ( var transform in transforms )
+	{
+		var coord = WorldToChunk( transform.Position );
+
+		if ( !_chunks.TryGetValue( coord, out var chunk ) )
+		{
+			chunk = new ChunkData
+			{
+				Bounds = GetChunkBounds( coord )
+			};
+
+			_chunks[coord] = chunk;
+		}
+
+		chunk.Transforms.Add( transform );
+	}
+}
 	[Button]
 	public void Spawn()
 	{
@@ -144,7 +209,7 @@ public sealed class ApexClutterComponent : Component, Component.ExecuteInEditor
 			}
 		}
 
-		_cachedSceneWorld = Scene.SceneWorld;
+
 		RebuildSceneObjects();
 
 		Log.Info( $"[ClutterTest] {_chunks.Count} chunks | {GridSize * GridSize} instances" );

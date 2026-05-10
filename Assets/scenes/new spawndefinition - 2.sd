@@ -1,11 +1,11 @@
 {
-  "ObjectType": "GameObject",
+  "ObjectType": "Clutter",
   "Prefab": {
     "_type": "gameobject",
     "prefab": "scenes/tree.prefab"
   },
-  "UseInstancing": true,
-  "MinYOffset": -50.125946,
+  "ClutterModel": "scenes/test stuff/grasssimplerhe_b_afstree_xlp.vmdl",
+  "MinYOffset": 0,
   "MaxYOffset": 0,
   "SpawnScale": "FitnessRandom",
   "WidthRandomPercent": 6.887755,

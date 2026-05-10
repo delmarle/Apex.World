@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ApexWorld;
 using Sandbox.Mask;
 using Sandbox.Spawns;
 
@@ -8,6 +9,7 @@ namespace Sandbox.Spawners;
 
 public class DetailsSpawner : BaseSpawner
 {
+	
 	// ── Settings ────────────────────────────────────────────────────────────
 
 	[Property, Group( "Settings" ), Range( 64, 1024 )]
@@ -122,7 +124,12 @@ public class DetailsSpawner : BaseSpawner
 
 		var rng       = new Random( HashCode.Combine( SpawnerName, rule.RuleName ) );
 		var placed    = new List<Vector3>(); // for self-collision
+		List<Transform> clutterTransforms = null;
 
+		if ( rule.Definition.ObjectType == SpawnObjectType.Clutter )
+		{
+			clutterTransforms = new List<Transform>();
+		}
 		float step      = rule.LocationIncrement;
 		float jitterAmt = step * (rule.Jitter / 100f);
 
@@ -161,18 +168,54 @@ public class DetailsSpawner : BaseSpawner
 				var scale = SpawnUtils.GetSpawnScale( rule.Definition, fit, rng );
 
 				// ── Spawn ─────────────────────────────────────────────────
-				var go           = rule.Definition.Prefab.Clone();
-				go.Parent        = SpawnRoot;
-				go.WorldPosition = spawnPos;
-				go.WorldRotation = rot;
-				go.WorldScale    = scale;
-				go.Enabled       = true;
+				var transform = new Transform(
+					spawnPos,
+					rot,
+					scale
+				);
+
+				if ( rule.Definition.ObjectType == SpawnObjectType.Clutter )
+				{
+					clutterTransforms.Add( transform );
+				}
+				else
+				{
+					var go           = rule.Definition.Prefab.Clone();
+					go.Parent        = SpawnRoot;
+					go.WorldPosition = spawnPos;
+					go.WorldRotation = rot;
+					go.WorldScale    = scale;
+					go.Enabled       = true;
+				}
 
 				placed.Add( pos );
 			}
 		}
 
 		Log.Info( $"{this} [{rule.RuleName}]: spawned {placed.Count} objects" );
+		
+		if ( rule.Definition.ObjectType == SpawnObjectType.Clutter
+		     && clutterTransforms != null
+		     && clutterTransforms.Count > 0 )
+		{
+			var clutterObject = Scene.CreateObject();
+			clutterObject.Name = $"Clutter_{rule.RuleName}";
+			clutterObject.Parent = SpawnRoot;
+
+			var clutter = clutterObject.Components.Create<ApexClutterComponent>();
+
+			var modelRenderer = rule.Definition.ClutterModel;
+
+			if ( modelRenderer == null )
+			{
+				Log.Warning( $"{rule.RuleName}: clutter prefab missing ModelRenderer" );
+				return;
+			}
+
+			clutter.Model = modelRenderer;
+
+			clutter.BuildFromTransforms( clutterTransforms );
+		}
 	}
 
 	// ── Helpers ─────────────────────────────────────────────────────────────

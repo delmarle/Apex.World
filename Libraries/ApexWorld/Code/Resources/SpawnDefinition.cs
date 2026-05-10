@@ -29,7 +29,7 @@ public class SpawnDefinition: GameResource
 	[Property] public GameObject Prefab { get; set; }
 	
 	[Property]
-	public bool UseInstancing { get; set; } = true;
+	public Model ClutterModel { get; set; }
 	
 	
 	[Property, Range( -100f, 0f )] public float MinYOffset { get; set; } = 0f;
