@@ -47,15 +47,41 @@ public static class SpawnUtils
 		float r = storage.HeightMap[ y      * storage.Resolution + x + 1 ] * hScale;
 		float f = storage.HeightMap[(y + 1) * storage.Resolution + x     ] * hScale;
 
-		var dx = new Vector3( sScale, 0, r - c );
-		var dy = new Vector3( 0, sScale, f - c );
-		return Vector3.Cross( dy, dx ).Normal;
+		// tangentX goes along +X, tangentY along +Y, Z is height
+		var tangentX = new Vector3( sScale, 0,      r - c ).Normal;
+		var tangentY = new Vector3( 0,      sScale, f - c ).Normal;
+
+		// Cross(X, Y) gives upward-facing normal
+		return Vector3.Cross( tangentX, tangentY ).Normal;
+	}
+
+	/// <summary>
+	/// Slope direction = direction water would flow (downhill), projected on XY plane.
+	/// </summary>
+	public static Vector3 GetTerrainSlopeDirectionAt( Terrain terrain, Vector3 worldPos )
+	{
+		if ( terrain?.Storage == null ) return Vector3.Forward;
+		var storage = terrain.Storage;
+		var local   = terrain.WorldTransform.PointToLocal( worldPos );
+
+		float hScale = storage.TerrainHeight / (float)ushort.MaxValue;
+
+		int x = Math.Clamp( (int)(local.x / storage.TerrainSize * storage.Resolution), 1, storage.Resolution - 2 );
+		int y = Math.Clamp( (int)(local.y / storage.TerrainSize * storage.Resolution), 1, storage.Resolution - 2 );
+
+		float c = storage.HeightMap[ y      * storage.Resolution + x     ] * hScale;
+		float r = storage.HeightMap[ y      * storage.Resolution + x + 1 ] * hScale;
+		float f = storage.HeightMap[(y + 1) * storage.Resolution + x     ] * hScale;
+
+		// Gradient points uphill, negate for downhill
+		var gradient = new Vector3( r - c, f - c, 0f );
+		return gradient.IsNearZeroLength ? Vector3.Forward : (-gradient).Normal;
 	}
 
 	/// <summary>Sample a MaskField at a world position, correctly accounting for WorldOffset.</summary>
 	public static float SampleMaskAt( MaskField mask, Terrain terrain, Vector3 worldPos )
 	{
-		var local    = terrain.WorldTransform.PointToLocal( worldPos );
+		var local     = terrain.WorldTransform.PointToLocal( worldPos );
 		var maskLocal = new Vector2( local.x, local.y ) - mask.WorldOffset;
 		return mask.Sample( maskLocal );
 	}
@@ -63,10 +89,27 @@ public static class SpawnUtils
 	/// <summary>Build a rotation for a spawned object based on SpawnDefinition alignment settings.</summary>
 	public static Rotation GetSpawnRotation( SpawnDefinition def, Terrain terrain, Vector3 worldPos, Random rng )
 	{
-		var rot = def.AlignToSlope
-			? Rotation.FromToRotation( Vector3.Up, GetTerrainNormalAt( terrain, worldPos ) )
-			: Rotation.Identity;
+		var rot = Rotation.Identity;
 
+		if ( def.AlignToSlope )
+		{
+			var normal = GetTerrainNormalAt( terrain, worldPos );
+			rot = Rotation.FromToRotation( Vector3.Up, normal );
+		}
+
+		if ( def.ForwardToSlope )
+		{
+			var slopeDir = GetTerrainSlopeDirectionAt( terrain, worldPos );
+			// Build a yaw-only rotation toward slope direction, preserving existing tilt
+			if ( !slopeDir.IsNearZeroLength )
+			{
+				float yaw      = MathF.Atan2( slopeDir.y, slopeDir.x ) * (180f / MathF.PI);
+				var   yawRot   = Rotation.FromYaw( yaw );
+				rot = rot * yawRot;
+			}
+		}
+
+		// Random offset on top
 		var offsets = new Angles(
 			MathX.Lerp( def.MinRotationOffset.pitch, def.MaxRotationOffset.pitch, (float)rng.NextDouble() ),
 			MathX.Lerp( def.MinRotationOffset.yaw,   def.MaxRotationOffset.yaw,   (float)rng.NextDouble() ),
