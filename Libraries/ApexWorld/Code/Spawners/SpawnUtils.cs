@@ -83,6 +83,7 @@ public static class SpawnUtils
 	{
 		var local     = terrain.WorldTransform.PointToLocal( worldPos );
 		var maskLocal = new Vector2( local.x, local.y ) - mask.WorldOffset;
+		
 		return mask.Sample( maskLocal );
 	}
 

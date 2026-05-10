@@ -112,7 +112,7 @@ public class MaskField
 
 	public MaskField Multiply( MaskField other )
 	{
-		var result = Clone();
+		var result = Clone(); // Clone needs to copy WorldOffset too
 		var resampled = other.ResampleTo( Resolution, WorldSize );
 		for ( int i = 0; i < Values.Length; i++ )
 			result.Values[i] = Values[i] * resampled.Values[i];
@@ -182,16 +182,14 @@ public class MaskField
 		if ( targetResolution == Resolution && MathF.Abs( targetWorldSize - WorldSize ) < 0.001f )
 			return this;
 
-		var result = new MaskField( targetResolution, targetWorldSize );
+		var result = new MaskField( targetResolution, targetWorldSize ) { WorldOffset = WorldOffset }; // preserve offset
 		float step = targetWorldSize / (targetResolution - 1);
 
 		for ( int y = 0; y < targetResolution; y++ )
+		for ( int x = 0; x < targetResolution; x++ )
 		{
-			for ( int x = 0; x < targetResolution; x++ )
-			{
-				var worldPos = new Vector2( x * step, y * step );
-				result.Values[y * targetResolution + x] = Sample( worldPos );
-			}
+			var worldPos = new Vector2( x * step, y * step );
+			result.Values[y * targetResolution + x] = Sample( worldPos );
 		}
 
 		return result;
@@ -205,7 +203,7 @@ public class MaskField
 	{
 		var copy = new float[Values.Length];
 		Array.Copy( Values, copy, Values.Length );
-		return new MaskField( Resolution, WorldSize, copy );
+		return new MaskField( Resolution, WorldSize, copy ) { WorldOffset = WorldOffset }; // ADD WorldOffset
 	}
 
 	public void Fill( float value )

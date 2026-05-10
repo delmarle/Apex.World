@@ -1,10 +1,88 @@
 ﻿
 
+using System.Collections.Generic;
+
 namespace Sandbox.Mask;
 using System.Linq;
 using System;
 
+#region SplineMask
 
+/// <summary>
+/// Outputs 1 inside the spline boundary, 0 outside.
+/// Uses signed distance to polygon for soft edge support.
+/// </summary>
+[Serializable]
+public class SplineMask : MaskModifier
+{
+    [Property] public ApexWorld.Spline.SplineComponent Spline { get; set; }
+    [Property, Range( 0f, 500f )] public float EdgeSoftness { get; set; } = 0f;
+
+    public override void Apply( MaskField field )
+    {
+        if ( Spline == null ) { Log.Warning( "SplineMask: no spline" ); return; }
+
+        var polyLocal = new List<Vector3>();
+        Spline.Spline.ConvertToPolyline( ref polyLocal );
+        if ( polyLocal.Count < 3 ) return;
+
+        var poly2D = new Vector2[polyLocal.Count];
+        for ( int i = 0; i < polyLocal.Count; i++ )
+        {
+            var worldPos = Spline.WorldTransform.PointToWorld( polyLocal[i] );
+            var local    = Terrain != null
+                ? Terrain.WorldTransform.PointToLocal( worldPos )
+                : worldPos;
+            poly2D[i] = new Vector2( local.x, local.y );
+        }
+
+        for ( int y = 0; y < field.Resolution; y++ )
+        {
+            for ( int x = 0; x < field.Resolution; x++ )
+            {
+                var   texelPos   = field.TexelToWorld( x, y );
+                float signedDist = SignedDistToPolygon( texelPos, poly2D );
+                float value      = signedDist < 0f ? 1f : 0f;
+
+                if ( EdgeSoftness > 0.001f )
+                    value = Math.Clamp( -signedDist / EdgeSoftness, 0f, 1f );
+
+                field.Set( x, y, value );
+            }
+        }
+    }
+
+    private static float SignedDistToPolygon( Vector2 p, Vector2[] poly )
+    {
+	    float minDist = float.MaxValue;
+	    bool  inside  = false;
+	    int   n       = poly.Length;
+
+	    for ( int i = 0, j = n - 1; i < n; j = i++ )
+	    {
+		    var a = poly[i];
+		    var b = poly[j];
+
+		    if ( (a.y > p.y) != (b.y > p.y) &&
+		         p.x < (b.x - a.x) * (p.y - a.y) / (b.y - a.y) + a.x )
+			    inside = !inside;
+
+		    var   ab    = b - a;
+		    float lenSq = Vector2.Dot( ab, ab );
+		    if ( lenSq < 0.0001f ) continue;
+
+		    var   ap      = p - a;
+		    float t       = Math.Clamp( Vector2.Dot( ap, ab ) / lenSq, 0f, 1f );
+		    var   closest = a + ab * t;
+		    minDist = MathF.Min( minDist, (p - closest).Length );
+	    }
+	    
+
+	    return inside ? -minDist : minDist;
+    }
+}
+
+#endregion
 
 #region HeightMask
 

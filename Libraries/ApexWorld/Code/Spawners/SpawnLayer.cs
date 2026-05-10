@@ -24,6 +24,11 @@ public class SpawnLayer
 		Masks.Add( new SlopeMask() );
 	}
 	
+	[Button]
+	public void AssignSpline()
+	{
+		Masks.Add( new SplineMask() );
+	}
 	
 	[Button]
 	public void AssignHeight()

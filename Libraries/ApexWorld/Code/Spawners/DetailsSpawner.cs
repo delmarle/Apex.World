@@ -121,7 +121,7 @@ public class DetailsSpawner : BaseSpawner
 		// Combined fitness = spawner mask * rule mask
 		var ruleMask = rule.GenerateMask( terrain, MaskResolution, worldOffset, worldSize );
 		var fitness  = spawnerMask.Multiply( ruleMask );
-
+		
 		var rng       = new Random( HashCode.Combine( SpawnerName, rule.RuleName ) );
 		var placed    = new List<Vector3>(); // for self-collision
 		List<Transform> clutterTransforms = null;
@@ -191,8 +191,7 @@ public class DetailsSpawner : BaseSpawner
 				placed.Add( pos );
 			}
 		}
-
-		Log.Info( $"{this} [{rule.RuleName}]: spawned {placed.Count} objects" );
+		
 		
 		if ( rule.Definition.ObjectType == SpawnObjectType.Clutter
 		     && clutterTransforms != null
@@ -215,7 +214,23 @@ public class DetailsSpawner : BaseSpawner
 			clutter.Model = modelRenderer;
 
 			clutter.BuildFromTransforms( clutterTransforms );
+			
 		}
+		
+		int sampledAboveThreshold = 0;
+		int totalSampled = 0;
+
+		for ( float wy = bounds.Mins.y; wy <= bounds.Maxs.y; wy += step )
+		{
+			for ( float wx = bounds.Mins.x; wx <= bounds.Maxs.x; wx += step )
+			{
+				var pos = new Vector3( wx, wy, 0f );
+				float fit = SpawnUtils.SampleMaskAt( fitness, terrain, pos );
+				totalSampled++;
+				if ( fit >= rule.MinFitness ) sampledAboveThreshold++;
+			}
+		}
+		
 	}
 
 	// ── Helpers ─────────────────────────────────────────────────────────────

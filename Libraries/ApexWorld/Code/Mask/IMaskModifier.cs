@@ -16,7 +16,7 @@ public enum MaskCombineOp
 	Override
 }
 
-
+[JsonDerivedType( typeof( SplineMask ), "spline" )]
 [JsonDerivedType( typeof( SlopeMask ),     "slope"     )]
 [JsonDerivedType( typeof( HeightMask ),    "height"    )]
 [JsonDerivedType( typeof( NoiseMask ),     "noise"     )]
