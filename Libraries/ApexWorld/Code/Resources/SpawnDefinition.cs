@@ -10,12 +10,7 @@ public enum ScaleMode
 public enum SpawnObjectType
 {
 	GameObject,
-	Foliage,
-	Tree,
-	Rock,
-	Grass,
-	Detail,
-	Prop
+	Clutter
 }
 
 [AssetType( Name = "SpawnDefinition", Extension = "sd", Category = "Apex World" )]
