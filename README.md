@@ -1,3 +1,5 @@
+![Banner](https://i.ibb.co/hx6CpvcW/Screenshot-2026-05-10-182631.png)
+
 # Apex.World
 
 Non-destructive world generator for the S&box engine.
@@ -46,4 +48,4 @@ Very early WIP project started on 05/08/2026.
 - Layer inspection tools
 
 
-![Banner](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGk1eGxoY3F2MGNhZXMxNmgxOGpvcHE0NWg4YmE0dWE2NmdiYnU4OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6uylMt5FZtR1EQ8Yea/giphy.gif)
+
