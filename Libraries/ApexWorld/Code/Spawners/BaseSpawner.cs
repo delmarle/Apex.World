@@ -39,14 +39,10 @@ public abstract class BaseSpawner: Component
 
 	public BBox GenerateSpawnerBounds()
 	{
-		float half = Range * 0.5f;
-
-		BBox bounds = new BBox(
-			WorldPosition - new Vector3( half, half, 0 ),
-			WorldPosition + new Vector3( half, half, 0 )
+		return BBox.FromPositionAndSize(
+			WorldPosition,
+			new Vector3( Range, Range, 100f )
 		);
-
-		return bounds;
 	}
 	
 	protected ApexWorldManager Manager

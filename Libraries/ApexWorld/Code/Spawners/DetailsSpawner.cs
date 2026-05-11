@@ -265,4 +265,100 @@ public class DetailsSpawner : BaseSpawner
 		}
 		return false;
 	}
+
+	private const int GizmoDensityStep = 12;
+	private const float GizmoSphereSize = 13f;
+	private const float GizmoMinValue = 0.01f;
+	private MaskField _cachedmaskField;
+	private BBox bounds;
+	private Terrain cachedTerrain;
+
+	[Button]
+	public void Snapshot()
+	{
+		bounds = GenerateSpawnerBounds();
+
+		var terrains = GetTerrainsInBounds( bounds );
+		if ( terrains == null || terrains.Count == 0 )
+			return;
+		
+		
+
+		cachedTerrain = terrains[0];
+		
+		
+		// Terrain-local top-left corner of the spawner bounds = WorldOffset for masks
+		var terrainLocalMins = cachedTerrain.WorldTransform.PointToLocal( bounds.Mins );
+		var worldOffset      = new Vector2( terrainLocalMins.x, terrainLocalMins.y );
+		float worldSize      = Range;
+
+		// Build spawner-level fitness mask (1.0 everywhere if no masks set)
+		_cachedmaskField = BuildMask( SpawnerMasks, cachedTerrain, worldOffset, worldSize );
+
+	
+	}
+	protected override void DrawGizmos()
+	{
+		if ( !Game.IsEditor || cachedTerrain == null || _cachedmaskField == null )
+			return;
+
+		if ( SpawnerMasks == null || SpawnerMasks.Count == 0 )
+			return;
+
+		int resolution = MaskResolution;
+		
+
+		// Skip samples for performance
+		for ( int x = 0; x < resolution; x += GizmoDensityStep )
+		{
+			for ( int y = 0; y < resolution; y += GizmoDensityStep )
+			{
+				float value = _cachedmaskField.Get(
+					resolution - 1 - x,
+					y
+				);
+
+				// Ignore empty mask values
+				if ( value <= GizmoMinValue )
+					continue;
+
+				float u = ((resolution - 1 - x) + 0.5f) / resolution;
+				float v = (y + 0.5f) / resolution;
+
+				float worldX = _cachedmaskField.WorldOffset.x + (u * _cachedmaskField.WorldSize);
+				float worldY = _cachedmaskField.WorldOffset.y + (v * _cachedmaskField.WorldSize);
+
+				var worldPos = new Vector3(
+					worldX - WorldPosition.x,
+					worldY - WorldPosition.y,
+					0f
+				);
+
+				var heightSamplePos = new Vector3(
+					worldX,
+					worldY,
+					0f
+				);
+
+				worldPos.z = SpawnUtils.GetTerrainHeightAt(
+					cachedTerrain,
+					heightSamplePos
+				);
+				
+				worldPos.z -= 150;
+				// Black -> White based on mask value
+				Gizmo.Draw.Color = Color.Lerp(
+					Color.Black,
+					Color.White,
+					value
+				);
+
+				Gizmo.Draw.SolidSphere(
+					worldPos,
+					GizmoSphereSize
+				);
+			}
+		}
+	}
 }
+

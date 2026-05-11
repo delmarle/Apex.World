@@ -114,8 +114,10 @@ public class HeightMask : MaskModifier
 		{
 			for ( int x = 0; x < field.Resolution; x++ )
 			{
-				int tx = (int)((float)x / field.Resolution * res);
-				int ty = (int)((float)y / field.Resolution * res);
+				var local = field.TexelToWorld( x, y );
+
+				int tx = (int)(local.x / storage.TerrainSize * res);
+				int ty = (int)(local.y / storage.TerrainSize * res);
 
 				tx = Math.Clamp( tx, 0, res - 1 );
 				ty = Math.Clamp( ty, 0, res - 1 );
@@ -180,9 +182,10 @@ public class SlopeMask : MaskModifier
 		{
 			for ( int x = 0; x < field.Resolution; x++ )
 			{
-				// Map field texel -> terrain texel
-				int tx = (int)((float)x / field.Resolution * res);
-				int ty = (int)((float)y / field.Resolution * res);
+				var local = field.TexelToWorld( x, y );
+
+				int tx = (int)(local.x / storage.TerrainSize * res);
+				int ty = (int)(local.y / storage.TerrainSize * res);
 
 				tx = Math.Clamp( tx, 1, res - 2 );
 				ty = Math.Clamp( ty, 1, res - 2 );
@@ -193,7 +196,13 @@ public class SlopeMask : MaskModifier
 
 				float slopeX     = MathF.Abs( r - c ) / sScale;
 				float slopeY     = MathF.Abs( u - c ) / sScale;
-				float slopeAngle = MathF.Atan( MathF.Max( slopeX, slopeY ) ) * (180f / MathF.PI);
+				float slope = MathF.Sqrt(
+					slopeX * slopeX +
+					slopeY * slopeY
+				);
+
+				float slopeAngle =
+					MathF.Atan( slope ) * (180f / MathF.PI);
 
 				float lo = SmoothStep( MinAngle - soft, MinAngle, slopeAngle );
 				float hi = SmoothStep( MaxAngle + soft, MaxAngle, slopeAngle );
@@ -402,21 +411,41 @@ public class NoiseMask : MaskModifier
 [Serializable]
 public class DistanceMask : MaskModifier
 {
-	[Property] public Vector2 Center     { get; set; } = Vector2.Zero;
-	[Property] public float   Radius     { get; set; } = 500f;
-	[Property] public bool    Invert     { get; set; } = false;
+	[Property] public float InnerRadius { get; set; } = 200f;
+	[Property] public float OuterRadius { get; set; } = 1000f;
+	[Property] public bool Invert { get; set; }
 
 	public override void Apply( MaskField field )
 	{
+		var center = new Vector2(
+			field.WorldOffset.x + field.WorldSize * 0.5f,
+			field.WorldOffset.y + field.WorldSize * 0.5f
+		);
+
 		for ( int y = 0; y < field.Resolution; y++ )
 		{
 			for ( int x = 0; x < field.Resolution; x++ )
 			{
-				var world = field.TexelToWorld( x, y );
-				float dist = Vector2.Distance( world, Center );
-				float value = Math.Clamp( 1f - dist / Radius, 0f, 1f );
-				value = value * value * (3f - 2f * value); // smoothstep
-				field.Set( x, y, Invert ? 1f - value : value );
+				var pos = field.TexelToWorld( x, y );
+
+				float dist = Vector2.DistanceBetween(
+					pos,
+					center
+				);
+
+				float t = (dist - InnerRadius) /
+				          (OuterRadius - InnerRadius);
+
+				t = Math.Clamp( t, 0f, 1f );
+
+				float value = 1f - t;
+
+				value = Math.Clamp( value, 0f, 1f );
+
+				if ( Invert )
+					value = 1f - value;
+
+				field.Set( x, y, value );
 			}
 		}
 	}
@@ -431,48 +460,142 @@ public class DistanceMask : MaskModifier
 /// depending on Mode.
 /// </summary>
 [Serializable]
-public class CurvatureMask : MaskModifier
+public sealed class CurvatureMask : MaskModifier
 {
-	public enum CurvatureMode { Concave, Convex, Both }
+	[Property, Range(16f, 1024f)]
+	public float Radius { get; set; } = 256f;
 
-	[Property] public CurvatureMode Mode      { get; set; } = CurvatureMode.Concave;
-	[Property, Range(0f, 1f)] public float Strength { get; set; } = 1f;
+	[Property, Range(0f, 64f)]
+	public float Strength { get; set; } = 8f;
+
+	[Property] public bool RidgesOnly { get; set; }
+	[Property] public bool ValleysOnly { get; set; }
 
 	public override void Apply( MaskField field )
 	{
-		if ( Terrain?.Storage == null ) return;
+		var storage = Terrain.Storage;
+		int res = storage.Resolution;
 
-		var storage  = Terrain.Storage;
-		int res      = storage.Resolution;
-		float hScale = storage.TerrainHeight / (float)ushort.MaxValue;
+		float terrainSize = storage.TerrainSize;
+		float hScale = storage.TerrainHeight;
 
-		for ( int y = 1; y < field.Resolution - 1; y++ )
+		float texelWorldSize =
+			field.WorldSize / field.Resolution;
+
+		int sampleOffset = Math.Max(
+			1,
+			(int)(Radius / texelWorldSize)
+		);
+
+		for ( int y = 0; y < field.Resolution; y++ )
 		{
-			for ( int x = 1; x < field.Resolution - 1; x++ )
+			for ( int x = 0; x < field.Resolution; x++ )
 			{
-				int tx = Math.Clamp( (int)((float)x / field.Resolution * res), 1, res - 2 );
-				int ty = Math.Clamp( (int)((float)y / field.Resolution * res), 1, res - 2 );
+				float center = SampleHeight(
+					field,
+					storage,
+					x,
+					y,
+					res,
+					hScale
+				);
 
-				float c  = storage.HeightMap[ty * res + tx]           * hScale;
-				float l  = storage.HeightMap[ty * res + tx - 1]       * hScale;
-				float r  = storage.HeightMap[ty * res + tx + 1]       * hScale;
-				float d  = storage.HeightMap[(ty - 1) * res + tx]     * hScale;
-				float u  = storage.HeightMap[(ty + 1) * res + tx]     * hScale;
+				float left = SampleHeight(
+					field,
+					storage,
+					x - sampleOffset,
+					y,
+					res,
+					hScale
+				);
 
-				// Laplacian curvature
-				float curv = (l + r + d + u) * 0.25f - c;
+				float right = SampleHeight(
+					field,
+					storage,
+					x + sampleOffset,
+					y,
+					res,
+					hScale
+				);
 
-				float value = Mode switch
-				{
-					CurvatureMode.Concave => Math.Clamp( -curv * Strength * 10f, 0f, 1f ),
-					CurvatureMode.Convex  => Math.Clamp(  curv * Strength * 10f, 0f, 1f ),
-					CurvatureMode.Both    => Math.Clamp( MathF.Abs( curv ) * Strength * 10f, 0f, 1f ),
-					_                     => 0f
-				};
+				float down = SampleHeight(
+					field,
+					storage,
+					x,
+					y - sampleOffset,
+					res,
+					hScale
+				);
+
+				float up = SampleHeight(
+					field,
+					storage,
+					x,
+					y + sampleOffset,
+					res,
+					hScale
+				);
+
+				float average =
+					(left + right + up + down) * 0.25f;
+
+				float curvature =
+					(center - average) * Strength;
+
+				if ( RidgesOnly )
+					curvature = Math.Max( curvature, 0f );
+
+				if ( ValleysOnly )
+					curvature = Math.Max( -curvature, 0f );
+
+				float value = Math.Clamp(
+					(curvature * 0.5f) + 0.5f,
+					0f,
+					1f
+				);
 
 				field.Set( x, y, value );
 			}
 		}
+	}
+
+	private float SampleHeight(
+		MaskField field,
+		TerrainStorage storage,
+		int x,
+		int y,
+		int res,
+		float hScale
+	)
+	{
+		x = Math.Clamp(
+			x,
+			0,
+			field.Resolution - 1
+		);
+
+		y = Math.Clamp(
+			y,
+			0,
+			field.Resolution - 1
+		);
+
+		var local = field.TexelToWorld( x, y );
+
+		int tx = (int)(
+			local.x / storage.TerrainSize * res
+		);
+
+		int ty = (int)(
+			local.y / storage.TerrainSize * res
+		);
+
+		tx = Math.Clamp( tx, 0, res - 1 );
+		ty = Math.Clamp( ty, 0, res - 1 );
+
+		return storage.HeightMap[
+			ty * res + tx
+		] * hScale;
 	}
 }
 
@@ -487,48 +610,202 @@ public class CurvatureMask : MaskModifier
 [Serializable]
 public class ErosionMask : MaskModifier
 {
-	[Property, Range(1, 8)] public int   Iterations { get; set; } = 3;
-	[Property, Range(0f, 1f)] public float Threshold { get; set; } = 0.3f;
+	[Property, Range( 32f, 1024f )]
+	public float Radius { get; set; } = 256f;
+
+	[Property, Range( 0f, 32f )]
+	public float Strength { get; set; } = 8f;
+
+	[Property, Range( 0f, 90f )]
+	public float MinSlope { get; set; } = 5f;
+
+	[Property, Range( 0f, 90f )]
+	public float MaxSlope { get; set; } = 45f;
 
 	public override void Apply( MaskField field )
 	{
-		if ( Terrain?.Storage == null ) return;
+		if ( Terrain?.Storage == null )
+			return;
 
-		var storage  = Terrain.Storage;
-		int res      = storage.Resolution;
-		float hScale = storage.TerrainHeight / (float)ushort.MaxValue;
-		float[] flow = new float[field.Resolution * field.Resolution];
+		var storage = Terrain.Storage;
 
-		for ( int iter = 0; iter < Iterations; iter++ )
+		int res = storage.Resolution;
+
+		float terrainHeight = storage.TerrainHeight;
+
+		float texelWorldSize =
+			field.WorldSize / field.Resolution;
+
+		int sampleOffset = Math.Max(
+			1,
+			(int)(Radius / texelWorldSize)
+		);
+
+		for ( int y = 0; y < field.Resolution; y++ )
 		{
-			for ( int y = 1; y < field.Resolution - 1; y++ )
+			for ( int x = 0; x < field.Resolution; x++ )
 			{
-				for ( int x = 1; x < field.Resolution - 1; x++ )
-				{
-					int tx = Math.Clamp( (int)((float)x / field.Resolution * res), 1, res - 2 );
-					int ty = Math.Clamp( (int)((float)y / field.Resolution * res), 1, res - 2 );
+				float center =
+					SampleHeight(
+						field,
+						storage,
+						x,
+						y,
+						res,
+						terrainHeight
+					);
 
-					float c = storage.HeightMap[ty * res + tx] * hScale;
-					float l = storage.HeightMap[ty * res + tx - 1] * hScale;
-					float r = storage.HeightMap[ty * res + tx + 1] * hScale;
-					float d = storage.HeightMap[(ty - 1) * res + tx] * hScale;
-					float u = storage.HeightMap[(ty + 1) * res + tx] * hScale;
+				float left =
+					SampleHeight(
+						field,
+						storage,
+						x - sampleOffset,
+						y,
+						res,
+						terrainHeight
+					);
 
-					float minNeighbour = MathF.Min( MathF.Min( l, r ), MathF.Min( d, u ) );
-					float drop = Math.Clamp( c - minNeighbour, 0f, 1f );
-					flow[y * field.Resolution + x] += drop;
-				}
+				float right =
+					SampleHeight(
+						field,
+						storage,
+						x + sampleOffset,
+						y,
+						res,
+						terrainHeight
+					);
+
+				float down =
+					SampleHeight(
+						field,
+						storage,
+						x,
+						y - sampleOffset,
+						res,
+						terrainHeight
+					);
+
+				float up =
+					SampleHeight(
+						field,
+						storage,
+						x,
+						y + sampleOffset,
+						res,
+						terrainHeight
+					);
+
+				float dx =
+					(right - left) /
+					(sampleOffset * texelWorldSize * 2f);
+
+				float dy =
+					(up - down) /
+					(sampleOffset * texelWorldSize * 2f);
+
+				float slope =
+					MathF.Sqrt( dx * dx + dy * dy );
+
+				float slopeAngle =
+					MathF.Atan( slope ) *
+					(180f / MathF.PI);
+
+				float average =
+					(left + right + up + down) * 0.25f;
+
+				float curvature =
+					average - center;
+
+				curvature =
+					MathF.Max( curvature, 0f );
+
+				float slopeMask =
+					SmoothStep(
+						MinSlope,
+						MaxSlope,
+						slopeAngle
+					);
+
+				float erosion =
+					curvature *
+					slopeMask *
+					Strength;
+
+				field.Set(
+					x,
+					y,
+					Math.Clamp(
+						erosion,
+						0f,
+						1f
+					)
+				);
 			}
 		}
+	}
 
-		float maxFlow = flow.Max();
-		if ( maxFlow < 0.0001f ) return;
+	private float SampleHeight(
+		MaskField field,
+		TerrainStorage storage,
+		int x,
+		int y,
+		int res,
+		float terrainHeight
+	)
+	{
+		x = Math.Clamp(
+			x,
+			0,
+			field.Resolution - 1
+		);
 
-		for ( int i = 0; i < flow.Length; i++ )
-			field.Values[i] = Math.Clamp( flow[i] / maxFlow - Threshold, 0f, 1f );
+		y = Math.Clamp(
+			y,
+			0,
+			field.Resolution - 1
+		);
+
+		var local =
+			field.TexelToWorld( x, y );
+
+		int tx = (int)(
+			local.x /
+			storage.TerrainSize *
+			res
+		);
+
+		int ty = (int)(
+			local.y /
+			storage.TerrainSize *
+			res
+		);
+
+		tx = Math.Clamp( tx, 0, res - 1 );
+		ty = Math.Clamp( ty, 0, res - 1 );
+
+		return (
+			storage.HeightMap[
+				ty * res + tx
+			] / 65535f
+		) * terrainHeight;
+	}
+
+	private float SmoothStep(
+		float edge0,
+		float edge1,
+		float x
+	)
+	{
+		float t = Math.Clamp(
+			(x - edge0) /
+			(edge1 - edge0),
+			0f,
+			1f
+		);
+
+		return t * t * (3f - 2f * t);
 	}
 }
-
 #endregion
 
 #region FlowMask
@@ -540,31 +817,181 @@ public class ErosionMask : MaskModifier
 [Serializable]
 public class FlowMask : MaskModifier
 {
-	[Property, Range(0f, 1f)] public float WetnessThreshold { get; set; } = 0.4f;
-	[Property, Range(0f, 1f)] public float Softness         { get; set; } = 0.2f;
+	[Property, Range( 1, 128 )]
+	public int Iterations { get; set; } = 32;
+
+	[Property, Range( 0f, 32f )]
+	public float Strength { get; set; } = 8f;
 
 	public override void Apply( MaskField field )
 	{
-		if ( Terrain?.Storage == null ) return;
+		if ( Terrain?.Storage == null )
+			return;
 
-		var erosion   = new ErosionMask { Terrain = Terrain, Iterations = 4, Threshold = 0f };
-		var curvature = new CurvatureMask { Terrain = Terrain, Mode = CurvatureMask.CurvatureMode.Concave, Strength = 1f };
+		var storage = Terrain.Storage;
 
-		var erosionField   = new MaskField( field.Resolution, field.WorldSize );
-		var curvatureField = new MaskField( field.Resolution, field.WorldSize );
+		int res = field.Resolution;
 
-		erosion.Apply( erosionField );
-		curvature.Apply( curvatureField );
+		float[] heights = new float[res * res];
+		float[] flow = new float[res * res];
 
-		var combined = erosionField.Multiply( curvatureField );
-
-		float soft = Softness;
-		for ( int i = 0; i < field.Values.Length; i++ )
+		// Cache terrain heights
+		for ( int y = 0; y < res; y++ )
 		{
-			float v = combined.Values[i];
-			float t = Math.Clamp( (v - WetnessThreshold + soft) / (soft * 2f + 0.0001f), 0f, 1f );
-			field.Values[i] = t * t * (3f - 2f * t);
+			for ( int x = 0; x < res; x++ )
+			{
+				heights[y * res + x] =
+					SampleHeight(
+						field,
+						storage,
+						x,
+						y
+					);
+
+				flow[y * res + x] = 1f;
+			}
 		}
+
+		// Flow simulation
+		for ( int i = 0; i < Iterations; i++ )
+		{
+			for ( int y = 1; y < res - 1; y++ )
+			{
+				for ( int x = 1; x < res - 1; x++ )
+				{
+					int index = y * res + x;
+
+					float current =
+						heights[index];
+
+					int bestX = x;
+					int bestY = y;
+
+					float lowest = current;
+
+					// 8-neighbor downhill search
+					for ( int oy = -1; oy <= 1; oy++ )
+					{
+						for ( int ox = -1; ox <= 1; ox++ )
+						{
+							if ( ox == 0 && oy == 0 )
+								continue;
+
+							int nx = x + ox;
+							int ny = y + oy;
+
+							float neighbor =
+								heights[
+									ny * res + nx
+								];
+
+							if ( neighbor < lowest )
+							{
+								lowest = neighbor;
+								bestX = nx;
+								bestY = ny;
+							}
+						}
+					}
+
+					if ( bestX != x || bestY != y )
+					{
+						int dst =
+							bestY * res + bestX;
+
+						flow[dst] +=
+							flow[index] * 0.25f;
+					}
+				}
+			}
+		}
+
+		// Normalize
+		float maxFlow = 0f;
+
+		for ( int i = 0; i < flow.Length; i++ )
+			maxFlow = MathF.Max(
+				maxFlow,
+				flow[i]
+			);
+
+		if ( maxFlow <= 0f )
+			maxFlow = 1f;
+
+		for ( int y = 0; y < res; y++ )
+		{
+			for ( int x = 0; x < res; x++ )
+			{
+				float value =
+					flow[y * res + x] /
+					maxFlow;
+
+				value *= Strength;
+
+				field.Set(
+					x,
+					y,
+					Math.Clamp(
+						value,
+						0f,
+						1f
+					)
+				);
+			}
+		}
+	}
+
+	private float SampleHeight(
+		MaskField field,
+		TerrainStorage storage,
+		int x,
+		int y
+	)
+	{
+		x = Math.Clamp(
+			x,
+			0,
+			field.Resolution - 1
+		);
+
+		y = Math.Clamp(
+			y,
+			0,
+			field.Resolution - 1
+		);
+
+		var world =
+			field.TexelToWorld( x, y );
+
+		int tx = (int)(
+			world.x /
+			storage.TerrainSize *
+			storage.Resolution
+		);
+
+		int ty = (int)(
+			world.y /
+			storage.TerrainSize *
+			storage.Resolution
+		);
+
+		tx = Math.Clamp(
+			tx,
+			0,
+			storage.Resolution - 1
+		);
+
+		ty = Math.Clamp(
+			ty,
+			0,
+			storage.Resolution - 1
+		);
+
+		return (
+			storage.HeightMap[
+				ty * storage.Resolution + tx
+			] / 65535f
+		) * storage.TerrainHeight;
 	}
 }
 
