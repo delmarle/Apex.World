@@ -138,6 +138,11 @@ public class DetailsSpawner : BaseSpawner
 		{
 			for ( float wx = bounds.Mins.x; wx <= bounds.Maxs.x; wx += step )
 			{
+				
+				// Skip if outside terrain bounds
+				if ( wx < 0 || wx > terrain.Storage.TerrainSize ||
+				     wy < 0 || wy > terrain.Storage.TerrainSize )
+					continue;
 				// ── Jitter ────────────────────────────────────────────────
 				float jx  = ((float)rng.NextDouble() * 2f - 1f) * jitterAmt;
 				float jy  = ((float)rng.NextDouble() * 2f - 1f) * jitterAmt;
@@ -306,6 +311,7 @@ public class DetailsSpawner : BaseSpawner
 			return;
 
 		int resolution = MaskResolution;
+		var storage = cachedTerrain.Storage;
 		
 
 		// Skip samples for performance
@@ -327,6 +333,11 @@ public class DetailsSpawner : BaseSpawner
 
 				float worldX = _cachedmaskField.WorldOffset.x + (u * _cachedmaskField.WorldSize);
 				float worldY = _cachedmaskField.WorldOffset.y + (v * _cachedmaskField.WorldSize);
+
+				// Skip if outside terrain bounds
+				if ( worldX < 0 || worldX > storage.TerrainSize ||
+					 worldY < 0 || worldY > storage.TerrainSize )
+					continue;
 
 				var worldPos = new Vector3(
 					worldX - WorldPosition.x,
@@ -352,7 +363,7 @@ public class DetailsSpawner : BaseSpawner
 					Color.White,
 					value
 				);
-
+			
 				Gizmo.Draw.SolidSphere(
 					worldPos,
 					GizmoSphereSize

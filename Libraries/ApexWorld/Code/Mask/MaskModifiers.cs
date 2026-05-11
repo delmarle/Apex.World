@@ -231,19 +231,19 @@ public class SlopeMask : MaskModifier
 public class NoiseMask : MaskModifier
 {
 	[Property]
-	[Range( 2f, 2000f, 1f )]
+	[Range( 2f, 2000f )]
 	public float Scale { get; set; } = 55;
 
 	[Property]
-	[Range( 0.25f, 8f, 0.01f )]
+	[Range( 0.25f, 8f )]
 	public float Contrast { get; set; } = 2f;
 
 	[Property]
-	[Range( 0f, 1f, 0.001f )]
+	[Range( 0f, 1f)]
 	public float Threshold { get; set; } = 0.58f;
 
 	[Property]
-	[Range( 0.001f, 0.5f, 0.001f )]
+	[Range( 0.001f, 0.5f )]
 	public float Blend { get; set; } = 0.05f;
 
 	[Property]
