@@ -22,9 +22,13 @@ public class ApexWorldManager : Component, Component.ExecuteInEditor
 	public ApexWorldCache GetWorldCache() => _worldCache;
 	#endregion
 
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		RegisterSpawners();
+	}
 
-	
-[Button]
+	[Button]
 	public void RegisterSpawners()
 	{
 		_worldCache.RegisterSpawners( Spawners );
