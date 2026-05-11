@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections.Generic;
+using Sandbox.Utility;
 
 namespace Sandbox.Mask;
 using System.Linq;
@@ -230,173 +231,95 @@ public class SlopeMask : MaskModifier
 public class NoiseMask : MaskModifier
 {
 	[Property]
-	public float Scale { get; set; } = 80f;
+	[Range( 2f, 2000f, 1f )]
+	public float Scale { get; set; } = 55;
 
 	[Property]
-	public int Octaves { get; set; } = 4;
-
-	[Property, Range( 0f, 1f )]
-	public float Persistence { get; set; } = 0.5f;
+	[Range( 0.25f, 8f, 0.01f )]
+	public float Contrast { get; set; } = 2f;
 
 	[Property]
-	public float Lacunarity { get; set; } = 2f;
+	[Range( 0f, 1f, 0.001f )]
+	public float Threshold { get; set; } = 0.58f;
 
 	[Property]
-	public int Seed { get; set; } = 0;
+	[Range( 0.001f, 0.5f, 0.001f )]
+	public float Blend { get; set; } = 0.05f;
 
 	[Property]
-	public Vector2 Offset { get; set; } = Vector2.Zero;
+	public int Seed { get; set; } = 12345;
 
-	[Property, Range( 0f, 1f )]
-	public float Threshold { get; set; } = 0.5f;
-
-	[Property, Range( 0f, 1f )]
-	public float Falloff { get; set; } = 0.1f;
+	[Property]
+	public bool Invert { get; set; }
 
 	public override void Apply( MaskField field )
 	{
-		var rng = new Random( Seed );
+		int resolution = field.Resolution;
 
-		float offX = (float)rng.NextDouble() * 10000f + Offset.x;
-		float offY = (float)rng.NextDouble() * 10000f + Offset.y;
+		float invScale = 1.0f / MathF.Max( Scale, 0.001f );
 
-		for ( int y = 0; y < field.Resolution; y++ )
+		for ( int x = 0; x < resolution; x++ )
 		{
-			for ( int x = 0; x < field.Resolution; x++ )
+			for ( int y = 0; y < resolution; y++ )
 			{
-				var world = field.TexelToWorld( x, y );
+				float u = x / (float)(resolution - 1);
+				float v = y / (float)(resolution - 1);
 
-				float nx = (world.x + offX) / Scale;
-				float ny = (world.y + offY) / Scale;
+				float worldX = field.WorldOffset.x + (u * field.WorldSize);
+				float worldY = field.WorldOffset.y + (v * field.WorldSize);
 
-				float value = 0f;
+				float nx = (worldX + Seed * 17.13f) * invScale;
+				float ny = (worldY + Seed * 9.37f) * invScale;
+
+				float noise = 0f;
 
 				float amplitude = 1f;
 				float frequency = 1f;
-				float total = 0f;
+				float totalAmplitude = 0f;
 
-				for ( int o = 0; o < Octaves; o++ )
+				for ( int i = 0; i < 4; i++ )
 				{
-					float n = Perlin(
+					float n = Noise.Simplex(
 						nx * frequency,
 						ny * frequency
 					);
 
-					value += n * amplitude;
-					total += amplitude;
+					// remap -1..1 to 0..1
+					n = (n * 0.5f) + 0.5f;
 
-					amplitude *= Persistence;
-					frequency *= Lacunarity;
+					noise += n * amplitude;
+
+					totalAmplitude += amplitude;
+
+					amplitude *= 0.5f;
+					frequency *= 2f;
 				}
 
-				float noise = value / total;
+				noise /= totalAmplitude;
 
-				// Convert smooth noise into biome blobs
-				float filtered = SmoothStep(
-					Threshold - Falloff,
-					Threshold + Falloff,
-					noise
+				noise = MathF.Pow(
+					Math.Clamp( noise, 0f, 1f ),
+					Contrast
 				);
+
+				float value = Math.Clamp(
+					(noise - (Threshold - Blend)) / ((Threshold + Blend) - (Threshold - Blend)),
+					0f,
+					1f
+				);
+
+				if ( Invert )
+					value = 1f - value;
 
 				float current = field.Get( x, y );
 
 				field.Set(
 					x,
 					y,
-					current * filtered
+					current * value
 				);
 			}
 		}
-	}
-
-	private static float SmoothStep( float edge0, float edge1, float x )
-	{
-		x = Math.Clamp(
-			(x - edge0) / (edge1 - edge0),
-			0f,
-			1f
-		);
-
-		return x * x * (3f - 2f * x);
-	}
-
-	private static float Perlin( float x, float y )
-	{
-		int xi = (int)MathF.Floor( x ) & 255;
-		int yi = (int)MathF.Floor( y ) & 255;
-
-		float xf = x - MathF.Floor( x );
-		float yf = y - MathF.Floor( y );
-
-		float u = Fade( xf );
-		float v = Fade( yf );
-
-		int aa = _p[_p[xi] + yi];
-		int ab = _p[_p[xi] + yi + 1];
-		int ba = _p[_p[xi + 1] + yi];
-		int bb = _p[_p[xi + 1] + yi + 1];
-
-		float res = Lerp(
-			Lerp(
-				Grad( aa, xf, yf ),
-				Grad( ba, xf - 1f, yf ),
-				u
-			),
-			Lerp(
-				Grad( ab, xf, yf - 1f ),
-				Grad( bb, xf - 1f, yf - 1f ),
-				u
-			),
-			v
-		);
-
-		return (res + 1f) * 0.5f;
-	}
-
-	private static float Fade( float t )
-	{
-		return t * t * t * (t * (t * 6f - 15f) + 10f);
-	}
-
-	private static float Lerp( float a, float b, float t )
-	{
-		return a + t * (b - a);
-	}
-
-	private static float Grad( int hash, float x, float y )
-	{
-		int h = hash & 3;
-
-		float u = h < 2 ? x : y;
-		float v = h < 2 ? y : x;
-
-		return
-			((h & 1) == 0 ? u : -u) +
-			((h & 2) == 0 ? v : -v);
-	}
-
-	private static readonly int[] _p;
-
-	static NoiseMask()
-	{
-		_p = new int[512];
-
-		int[] perm = new int[256];
-
-		for ( int i = 0; i < 256; i++ )
-			perm[i] = i;
-
-		var rng = new Random( 42 );
-
-		for ( int i = 255; i > 0; i-- )
-		{
-			int j = rng.Next( i + 1 );
-
-			(perm[i], perm[j]) = (perm[j], perm[i]);
-		}
-
-		for ( int i = 0; i < 512; i++ )
-			_p[i] = perm[i & 255];
 	}
 }
 

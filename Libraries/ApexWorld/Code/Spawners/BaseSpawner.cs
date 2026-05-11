@@ -6,7 +6,7 @@ public abstract class BaseSpawner: Component
 {
 	#region FIELDS
 	[Property] public string SpawnerName { get; set; }
-	[Property, Range(0, 4096)] public float Range { get; set; }
+	[Property, Range(1, 10000)] public float Range { get; set; }
 
 	
 	#endregion
