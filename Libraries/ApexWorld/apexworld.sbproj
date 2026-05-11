@@ -1,7 +1,14 @@
 {
   "Title": "Apex World",
   "Type": "library",
-  "Org": "local",
+  "Org": "damiendev",
   "Ident": "apexworld",
-  "Schema": 1
+  "Schema": 1,
+  "IncludeSourceFiles": false,
+  "Resources": null,
+  "PackageReferences": [],
+  "EditorReferences": null,
+  "Mounts": null,
+  "IsStandaloneOnly": false,
+  "Metadata": {}
 }
