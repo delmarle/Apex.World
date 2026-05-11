@@ -13,12 +13,7 @@ public class SpawnRule
 	[Property] public SpawnDefinition Definition { get; set; }
 
 	// Per-rule masks, multiplied on top of the spawner-level mask
-	[Property] public List<MaskModifier> Masks { get; set; } = new();
-	[Button]
-	public void AssignSpline()
-	{
-		Masks.Add( new SplineMask() );
-	}
+	[Property] [Editor( "MaskListPropertyEditor" )]public List<MaskModifier> Masks { get; set; } = new();
 
 	[Property, Group( "Spawn" ), Range( 0f, 100f  )] public float SpawnProbabilityRate { get; set; } = 100f;
 	[Property, Group( "Spawn" ), Range( 0.1f, 500f)] public float LocationIncrement    { get; set; } = 3f;

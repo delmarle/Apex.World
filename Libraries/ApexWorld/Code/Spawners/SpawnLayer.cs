@@ -11,37 +11,14 @@ public class SpawnLayer
 	[Property, Range(0, 64)] public int TextureId { get; set; }
 
 	[Property]
+	[Editor( "MaskListPropertyEditor" )]
 	public List<MaskModifier> Masks { get; set; } = new();
 	
 	public override string ToString()
 	{
 		return LayerName+" - TextureId: " + TextureId;
 	}
-
-	[Button]
-	public void AssignSlope()
-	{
-		Masks.Add( new SlopeMask() );
-	}
 	
-	[Button]
-	public void AssignSpline()
-	{
-		Masks.Add( new SplineMask() );
-	}
-	
-	[Button]
-	public void AssignHeight()
-	{
-		Masks.Add( new HeightMask() );
-	}
-	
-	[Button]
-	public void AssignNoise()
-	{
-		Masks.Add( new NoiseMask() );
-	}
-
 	public MaskField GenerateMask( Terrain terrain, int resolution )
 	{
 		var field = new MaskField(

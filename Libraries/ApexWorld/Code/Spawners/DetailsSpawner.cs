@@ -17,6 +17,7 @@ public class DetailsSpawner : BaseSpawner
 
 	// Spawner-level masks applied globally before any rule mask
 	[Property, Group( "Spawner Masks" )]
+	[Editor( "MaskListPropertyEditor" )]
 	public List<MaskModifier> SpawnerMasks { get; set; } = new();
 
 	// Individual spawn rules
