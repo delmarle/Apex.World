@@ -11,10 +11,8 @@ public class DetailsSpawner : BaseSpawner
 {
 	
 	// ── Settings ────────────────────────────────────────────────────────────
-
-	[Property, Group( "Settings" ), Range( 64, 1024 )]
-	public int MaskResolution { get; set; } = 256;
-
+	[Property, Group( "Spawn Rules" )]
+	public bool ShowGizmos { get; set; } = true;
 	// Spawner-level masks applied globally before any rule mask
 	[Property, Group( "Spawner Masks" )]
 	[Editor( "MaskListPropertyEditor" )]
@@ -102,7 +100,7 @@ public class DetailsSpawner : BaseSpawner
 		float worldSize      = Range;
 
 		// Build spawner-level fitness mask (1.0 everywhere if no masks set)
-		var spawnerMask = BuildMask( SpawnerMasks, terrain, worldOffset, worldSize );
+		var spawnerMask = SpawnUtils.BuildCombinedMask( SpawnerMasks, terrain, this );//BuildMask( SpawnerMasks, terrain, worldOffset, worldSize );
 
 		foreach ( var rule in SpawnRules )
 		{
@@ -299,12 +297,14 @@ public class DetailsSpawner : BaseSpawner
 
 		// Build spawner-level fitness mask (1.0 everywhere if no masks set)
 		_cachedmaskField = BuildMask( SpawnerMasks, cachedTerrain, worldOffset, worldSize );
+		
+		Log.Info( $"{this}: snapshot taken for gizmo visualization" );
 
 	
 	}
 	protected override void DrawGizmos()
 	{
-		if ( !Game.IsEditor || cachedTerrain == null || _cachedmaskField == null )
+		if (ShowGizmos == false || !Game.IsEditor || cachedTerrain == null || _cachedmaskField == null )
 			return;
 
 		if ( SpawnerMasks == null || SpawnerMasks.Count == 0 )
@@ -356,7 +356,7 @@ public class DetailsSpawner : BaseSpawner
 					heightSamplePos
 				);
 				
-				worldPos.z -= 150;
+				worldPos.z += 100;
 				// Black -> White based on mask value
 				Gizmo.Draw.Color = Color.Lerp(
 					Color.Black,

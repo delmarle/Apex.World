@@ -2,22 +2,6 @@
 
 public static class ApexWorldUtils
 {
-	public enum TerrainResolution
-	{
-		R64 = 64,
-		R128 = 128,
-		R256 = 256,
-		R512 = 512,
-		R1024 = 1024,
-		R2048 = 2048,
-		R4096 = 4096
-	}
-
-	public static float GetTexelize(TerrainStorage storage)
-	{
-		return storage.TerrainSize / storage.Resolution;
-	}
-	
 	public static Rect GetTerrainRectFromBounds( BBox bounds, Terrain terrain )
 	{
 		var storage = terrain.Storage;

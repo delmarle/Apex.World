@@ -8,7 +8,6 @@ public class TextureSpawner: BaseSpawner
 {
 	
 	[Property] public List<SpawnLayer> TextureLayers { get; set; } = new();
-	[Property] public ApexWorldUtils.TerrainResolution Resolution { get; set; } = ApexWorldUtils.TerrainResolution.R512;
 
 	public override void OnBeforeGenerate()
 	{
@@ -20,29 +19,6 @@ public class TextureSpawner: BaseSpawner
 	{
 		base.Generate();
 		GenerateTextureLayers();
-	}
-
-	[Button]
-	public void UpdateResolution()
-	{
-		var terrainInBounds = Manager.GetWorldCache().GetTerrainsInBounds( GenerateSpawnerBounds() );
-		foreach ( var currentTerrain in terrainInBounds )
-		{	
-			if ( currentTerrain?.Storage == null )
-				return;
-
-			var storage = currentTerrain.Storage;
-			int resolution =(int)Resolution;
-		
-			storage.SetResolution( resolution );
-		
-			float metersPerPixel = storage.TerrainSize / storage.Resolution;
-			Log.Info( $"Resolution = {resolution}" );
-			Log.Info( $"TerrainSize = {storage.TerrainSize}" );
-			Log.Info( $"Meters per pixel = {metersPerPixel}" );
-			
-		}
-	
 	}
 	
 	[Button]
@@ -66,7 +42,7 @@ public class TextureSpawner: BaseSpawner
 			{
 				var mask = layer.GenerateMask(
 					terrain,
-					resolution
+					resolution	//dont use MaskResolution here
 				);
 
 				generated.Add( (layer, mask) );
@@ -84,7 +60,7 @@ public class TextureSpawner: BaseSpawner
 			{
 				for ( int x = (int)rect.Left; x <= (int)rect.Right; x++ )
 				{
-					int index = y * resolution + x;
+					int index = y * resolution + x;//dont use MaskResolution here
 
 					int baseTex = 0;
 					int overlayTex = 0;

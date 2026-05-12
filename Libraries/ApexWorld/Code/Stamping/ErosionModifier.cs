@@ -14,10 +14,7 @@ using System;
 public class ErosionModifier : BaseSpawner
 {
 	// ── Mask ────────────────────────────────────────────────────────────────
-
-	[Property, Group( "Masks" ), Range( 64, 1024 )]
-	public int MaskResolution { get; set; } = 256;
-
+	
 	[Property, Group( "Masks" )]
 	public List<MaskModifier> Masks { get; set; } = new();
 

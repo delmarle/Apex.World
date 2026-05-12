@@ -15,8 +15,8 @@ public class SpawnRule
 	// Per-rule masks, multiplied on top of the spawner-level mask
 	[Property] [Editor( "MaskListPropertyEditor" )]public List<MaskModifier> Masks { get; set; } = new();
 
-	[Property, Group( "Spawn" ), Range( 0f, 100f  )] public float SpawnProbabilityRate { get; set; } = 100f;
-	[Property, Group( "Spawn" ), Range( 0.1f, 500f)] public float LocationIncrement    { get; set; } = 3f;
+	[Property, Group( "Spawn" ), Range( 0f, 100f  )] public float SpawnProbabilityRate { get; set; } = 70;
+	[Property, Group( "Spawn" ), Range( 20f, 500f)] public float LocationIncrement    { get; set; } = 100f;
 	[Property, Group( "Spawn" ), Range( 0f, 100f  )] public float Jitter               { get; set; } = 50f;
 	[Property, Group( "Spawn" ), Range( 0f, 1f    )] public float MinFitness           { get; set; } = 0.1f;
 	[Property, Group( "Spawn" )] public float BoundRadius        { get; set; } = 1f;

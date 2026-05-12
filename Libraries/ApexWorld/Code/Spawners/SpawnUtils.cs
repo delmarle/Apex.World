@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sandbox.Mask;
 using Sandbox.Spawns;
 
@@ -6,6 +7,40 @@ namespace Sandbox.Spawners;
 
 public static class SpawnUtils
 {
+	public static MaskField BuildCombinedMask(
+		List<MaskModifier> masks,
+		Terrain terrain,
+		BaseSpawner spawner
+		
+	)
+	{
+		
+		if ( terrain == null )
+		{
+			Log.Error( "Cannot build mask: terrain is null" );
+			return null;
+		}
+
+		var resolution = spawner.MaskResolution;
+		var bounds = spawner.GenerateSpawnerBounds();
+		var terrainLocalMins = terrain.WorldTransform.PointToLocal( bounds.Mins );
+		var worldOffset      = new Vector2( terrainLocalMins.x, terrainLocalMins.y );
+		var field = new MaskField( resolution, spawner.Range ) { WorldOffset = worldOffset };
+		
+		field.Fill( 1f );
+
+		foreach ( var mask in masks )
+		{
+			mask.Terrain = terrain;
+			var temp = new MaskField( resolution, spawner.Range ) { WorldOffset = worldOffset };
+			temp.Fill( 1f );
+			mask.Apply( temp );
+			field = field.Multiply( temp );
+		}
+
+		return field;
+	}
+	
 	/// <summary>Bilinear-sampled terrain world height at a world XY position.</summary>
 	public static float GetTerrainHeightAt( Terrain terrain, Vector3 worldPos )
 	{

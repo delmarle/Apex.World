@@ -7,7 +7,7 @@ public abstract class BaseSpawner: Component
 	#region FIELDS
 	[Property] public string SpawnerName { get; set; }
 	[Property, Range( 1, 10000 )] public float Range { get; set; } = 256f;
-
+	[Property, Range( 64, 1024 )] public int MaskResolution { get; set; } = 256;
 	
 	#endregion
 
