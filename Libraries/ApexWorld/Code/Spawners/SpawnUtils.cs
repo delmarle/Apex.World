@@ -10,23 +10,20 @@ public static class SpawnUtils
 	public static MaskField BuildCombinedMask(
 		List<MaskModifier> masks,
 		Terrain terrain,
-		BaseSpawner spawner
-		
-	)
+		BaseSpawner spawner )
 	{
-		
 		if ( terrain == null )
 		{
 			Log.Error( "Cannot build mask: terrain is null" );
 			return null;
 		}
 
-		var resolution = spawner.MaskResolution;
-		var bounds = spawner.GenerateSpawnerBounds();
+		var resolution       = spawner.MaskResolution;
+		var bounds           = spawner.GenerateSpawnerBounds();
 		var terrainLocalMins = terrain.WorldTransform.PointToLocal( bounds.Mins );
 		var worldOffset      = new Vector2( terrainLocalMins.x, terrainLocalMins.y );
-		var field = new MaskField( resolution, spawner.Range ) { WorldOffset = worldOffset };
-		
+		var field            = new MaskField( resolution, spawner.Range ) { WorldOffset = worldOffset };
+
 		field.Fill( 1f );
 
 		foreach ( var mask in masks )
@@ -40,7 +37,7 @@ public static class SpawnUtils
 
 		return field;
 	}
-	
+
 	/// <summary>Bilinear-sampled terrain world height at a world XY position.</summary>
 	public static float GetTerrainHeightAt( Terrain terrain, Vector3 worldPos )
 	{
@@ -51,15 +48,15 @@ public static class SpawnUtils
 		float fx = Math.Clamp( local.x / storage.TerrainSize, 0f, 1f ) * (storage.Resolution - 1);
 		float fy = Math.Clamp( local.y / storage.TerrainSize, 0f, 1f ) * (storage.Resolution - 1);
 
-		int x0 = Math.Clamp( (int)fx, 0, storage.Resolution - 2 );
-		int y0 = Math.Clamp( (int)fy, 0, storage.Resolution - 2 );
+		int   x0 = Math.Clamp( (int)fx, 0, storage.Resolution - 2 );
+		int   y0 = Math.Clamp( (int)fy, 0, storage.Resolution - 2 );
 		float tx = fx - x0, ty = fy - y0;
 
 		float hScale = storage.TerrainHeight / (float)ushort.MaxValue;
-		float h00 = storage.HeightMap[ y0      * storage.Resolution + x0     ] * hScale;
-		float h10 = storage.HeightMap[ y0      * storage.Resolution + x0 + 1 ] * hScale;
-		float h01 = storage.HeightMap[(y0 + 1) * storage.Resolution + x0     ] * hScale;
-		float h11 = storage.HeightMap[(y0 + 1) * storage.Resolution + x0 + 1 ] * hScale;
+		float h00    = storage.HeightMap[ y0      * storage.Resolution + x0     ] * hScale;
+		float h10    = storage.HeightMap[ y0      * storage.Resolution + x0 + 1 ] * hScale;
+		float h01    = storage.HeightMap[(y0 + 1) * storage.Resolution + x0     ] * hScale;
+		float h11    = storage.HeightMap[(y0 + 1) * storage.Resolution + x0 + 1 ] * hScale;
 
 		return terrain.WorldPosition.z
 		       + MathX.Lerp( MathX.Lerp( h00, h10, tx ), MathX.Lerp( h01, h11, tx ), ty );
@@ -82,17 +79,13 @@ public static class SpawnUtils
 		float r = storage.HeightMap[ y      * storage.Resolution + x + 1 ] * hScale;
 		float f = storage.HeightMap[(y + 1) * storage.Resolution + x     ] * hScale;
 
-		// tangentX goes along +X, tangentY along +Y, Z is height
 		var tangentX = new Vector3( sScale, 0,      r - c ).Normal;
 		var tangentY = new Vector3( 0,      sScale, f - c ).Normal;
 
-		// Cross(X, Y) gives upward-facing normal
 		return Vector3.Cross( tangentX, tangentY ).Normal;
 	}
 
-	/// <summary>
-	/// Slope direction = direction water would flow (downhill), projected on XY plane.
-	/// </summary>
+	/// <summary>Slope direction = downhill, projected on XY plane.</summary>
 	public static Vector3 GetTerrainSlopeDirectionAt( Terrain terrain, Vector3 worldPos )
 	{
 		if ( terrain?.Storage == null ) return Vector3.Forward;
@@ -108,7 +101,6 @@ public static class SpawnUtils
 		float r = storage.HeightMap[ y      * storage.Resolution + x + 1 ] * hScale;
 		float f = storage.HeightMap[(y + 1) * storage.Resolution + x     ] * hScale;
 
-		// Gradient points uphill, negate for downhill
 		var gradient = new Vector3( r - c, f - c, 0f );
 		return gradient.IsNearZeroLength ? Vector3.Forward : (-gradient).Normal;
 	}
@@ -118,11 +110,12 @@ public static class SpawnUtils
 	{
 		var local     = terrain.WorldTransform.PointToLocal( worldPos );
 		var maskLocal = new Vector2( local.x, local.y ) - mask.WorldOffset;
-		
 		return mask.Sample( maskLocal );
 	}
 
-	/// <summary>Build a rotation for a spawned object based on SpawnDefinition alignment settings.</summary>
+	/// <summary>
+	/// Rotation for a spawned GameObject. Supports non-uniform axis alignment.
+	/// </summary>
 	public static Rotation GetSpawnRotation( SpawnDefinition def, Terrain terrain, Vector3 worldPos, Random rng )
 	{
 		var rot = Rotation.Identity;
@@ -136,16 +129,13 @@ public static class SpawnUtils
 		if ( def.ForwardToSlope )
 		{
 			var slopeDir = GetTerrainSlopeDirectionAt( terrain, worldPos );
-			// Build a yaw-only rotation toward slope direction, preserving existing tilt
 			if ( !slopeDir.IsNearZeroLength )
 			{
-				float yaw      = MathF.Atan2( slopeDir.y, slopeDir.x ) * (180f / MathF.PI);
-				var   yawRot   = Rotation.FromYaw( yaw );
-				rot = rot * yawRot;
+				float yaw  = MathF.Atan2( slopeDir.y, slopeDir.x ) * (180f / MathF.PI);
+				rot        = Rotation.FromYaw( yaw ) * rot;
 			}
 		}
 
-		// Random offset on top
 		var offsets = new Angles(
 			MathX.Lerp( def.MinRotationOffset.pitch, def.MaxRotationOffset.pitch, (float)rng.NextDouble() ),
 			MathX.Lerp( def.MinRotationOffset.yaw,   def.MaxRotationOffset.yaw,   (float)rng.NextDouble() ),
@@ -155,7 +145,10 @@ public static class SpawnUtils
 		return rot * offsets.ToRotation();
 	}
 
-	/// <summary>Compute spawn scale from SpawnDefinition scale mode.</summary>
+	/// <summary>
+	/// Scale for a spawned GameObject (non-uniform Vector3 — width, height, depth).
+	/// Use this when setting go.WorldScale.
+	/// </summary>
 	public static Vector3 GetSpawnScale( SpawnDefinition def, float fitness, Random rng )
 	{
 		float t = (float)rng.NextDouble();
@@ -181,5 +174,23 @@ public static class SpawnUtils
 		}
 
 		return new Vector3( w, h, w );
+	}
+
+	/// <summary>
+	/// Uniform float scale for clutter instances (Transform.Scale is float — no non-uniform support).
+	/// FitnessRandom: fitness drives the lerp so high-fitness areas get larger instances.
+	/// </summary>
+	public static float GetClutterScale( SpawnDefinition def, float fitness, Random rng )
+	{
+		float t = (float)rng.NextDouble();
+
+		return def.SpawnScale switch
+		{
+			ScaleMode.Fixed         => def.WidthMinScale,
+			ScaleMode.Random        => MathX.Lerp( def.WidthMinScale, def.WidthMaxScale, t ),
+			// fitness acts as the lerp weight so sparse areas get small instances, dense get large
+			ScaleMode.FitnessRandom => MathX.Lerp( def.WidthMinScale, def.WidthMaxScale, t * fitness ),
+			_                       => 1f
+		};
 	}
 }

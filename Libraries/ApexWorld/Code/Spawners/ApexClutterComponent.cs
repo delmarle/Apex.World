@@ -148,34 +148,34 @@ public sealed class ApexClutterComponent : Component, Component.ExecuteInEditor
 	#endregion
 
 	#region Public API
-public void BuildFromTransforms( List<Transform> transforms )
-{
-	Clear();
-	SerializedTransforms.Clear();
-	SerializedTransforms.AddRange( transforms );
-	if ( Model == null )
+	public void BuildFromTransforms( List<Transform> transforms )
 	{
-		Log.Warning( "[ApexClutter] No model assigned" );
-		return;
-	}
+		Clear();
+		SerializedTransforms.Clear();
+		SerializedTransforms.AddRange( transforms );
 
-	foreach ( var transform in transforms )
-	{
-		var coord = WorldToChunk( transform.Position );
-
-		if ( !_chunks.TryGetValue( coord, out var chunk ) )
+		if ( Model == null )
 		{
-			chunk = new ChunkData
-			{
-				Bounds = GetChunkBounds( coord )
-			};
-
-			_chunks[coord] = chunk;
+			Log.Warning( "[ApexClutter] No model assigned" );
+			return;
 		}
 
-		chunk.Transforms.Add( transform );
+		foreach ( var transform in transforms )
+		{
+			var coord = WorldToChunk( transform.Position );
+
+			if ( !_chunks.TryGetValue( coord, out var chunk ) )
+			{
+				chunk = new ChunkData { Bounds = GetChunkBounds( coord ) };
+				_chunks[coord] = chunk;
+			}
+
+			chunk.Transforms.Add( transform );
+		}
+
+		RebuildSceneObjects(); // ← this was missing
 	}
-}
+	
 	[Button]
 	public void Spawn()
 	{
@@ -201,10 +201,12 @@ public void BuildFromTransforms( List<Transform> transforms )
 					_chunks[coord] = chunk;
 				}
 
+				float scale = Game.Random.Float( ScaleRange.x, ScaleRange.y );
+
 				chunk.Transforms.Add( new Transform(
 					pos,
 					Rotation.FromYaw( Game.Random.Float( 0f, 360f ) ),
-					Game.Random.Float( ScaleRange.x, ScaleRange.y )
+					scale
 				) );
 			}
 		}
