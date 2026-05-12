@@ -91,7 +91,61 @@
       "Children": []
     },
     {
-      "__guid": "040cd0dd-745e-49a4-b8ee-9d3f41a5833c",
+      "__guid": "ecf86491-9b03-4982-acd6-7ead52c62f88",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Terrain",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.Terrain",
+          "__guid": "1393e359-10d2-4ff6-8f25-9dc592d83f03",
+          "__enabled": true,
+          "Flags": 0,
+          "__version": 1,
+          "ClipMapLodExtentTexels": 256,
+          "ClipMapLodLevels": 6,
+          "ColliderFlags": 0,
+          "Elasticity": null,
+          "EnableCollision": true,
+          "Friction": null,
+          "IsTrigger": false,
+          "MaterialOverride": null,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "OnObjectTriggerEnter": null,
+          "OnObjectTriggerExit": null,
+          "OnTriggerEnter": null,
+          "OnTriggerExit": null,
+          "RenderType": "Off",
+          "RollingResistance": null,
+          "Static": true,
+          "Storage": "scenes/untitled.terrain",
+          "SubdivisionFactor": 1,
+          "SubdivisionLodCount": 3,
+          "Surface": null,
+          "SurfaceVelocity": "0,0,0",
+          "TerrainHeight": 2200,
+          "TerrainSize": 19968
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "a11fdfa7-7bc7-4523-b2cd-cb848732c483",
       "__version": 2,
       "Flags": 0,
       "Name": "ApexWorldManager",
@@ -108,7 +162,7 @@
       "Components": [
         {
           "__type": "ApexWorldManager",
-          "__guid": "55b0de85-fed5-4277-91ad-cddab334fa6a",
+          "__guid": "b449fc58-b852-475d-a1bd-2a5b3fedebbd",
           "__enabled": true,
           "Flags": 0,
           "OnComponentDestroy": null,
@@ -117,25 +171,25 @@
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
-          "SmartRebuild": false,
+          "SmartRebuild": true,
           "Spawners": [
             {
               "_type": "component",
-              "component_id": "75fb9b2e-587e-4d2e-8768-9d371ac11efc",
-              "go": "10672758-ee14-434c-8e14-ab50b4120ef8",
+              "component_id": "66b06283-1fd1-4eb4-a308-9cb5e2e47c36",
+              "go": "2a20c049-386b-40e2-a821-91f5d8aa83a1",
               "component_type": "TextureSpawner"
             },
             {
               "_type": "component",
-              "component_id": "e2f71c7d-5718-40ca-a6eb-53a35cf68b17",
-              "go": "90f29587-9875-4744-b7ec-7286b8b7e8ff",
+              "component_id": "22f58d74-7b85-405a-8340-625c9aad0331",
+              "go": "c473bd8f-50e6-4cd0-bd51-64d8ab5e52c9",
               "component_type": "DetailsSpawner"
             }
           ]
         },
         {
           "__type": "Sandbox.Core.ApexWorldCache",
-          "__guid": "d2a057c3-9ec6-492c-8691-570a11dc635b",
+          "__guid": "e3c2b9d7-f586-422d-b8cf-6c7c613476bb",
           "__enabled": true,
           "Flags": 0,
           "OnComponentDestroy": null,
@@ -148,11 +202,11 @@
       ],
       "Children": [
         {
-          "__guid": "10672758-ee14-434c-8e14-ab50b4120ef8",
+          "__guid": "2a20c049-386b-40e2-a821-91f5d8aa83a1",
           "__version": 2,
           "Flags": 0,
           "Name": "TextureSpawner",
-          "Position": "0,0,0",
+          "Position": "2666.99878,7259.58496,0",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -165,29 +219,74 @@
           "Components": [
             {
               "__type": "Sandbox.Spawners.TextureSpawner",
-              "__guid": "75fb9b2e-587e-4d2e-8768-9d371ac11efc",
+              "__guid": "66b06283-1fd1-4eb4-a308-9cb5e2e47c36",
               "__enabled": true,
               "Flags": 0,
+              "MaskResolution": 256,
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
               "OnComponentEnabled": null,
               "OnComponentFixedUpdate": null,
               "OnComponentStart": null,
               "OnComponentUpdate": null,
-              "Range": 256,
-              "Resolution": "R512",
+              "Range": 5261.7354,
               "SpawnerName": null,
-              "TextureLayers": []
+              "TextureLayers": [
+                {
+                  "LayerName": null,
+                  "TextureId": 0,
+                  "Masks": []
+                },
+                {
+                  "LayerName": null,
+                  "TextureId": 1,
+                  "Masks": [
+                    {
+                      "$type": "noise",
+                      "Scale": 41.695366,
+                      "Contrast": 2,
+                      "Threshold": 0.5298013,
+                      "Blend": 0.05,
+                      "Seed": 12345,
+                      "Invert": false,
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "1393e359-10d2-4ff6-8f25-9dc592d83f03",
+                        "go": "ecf86491-9b03-4982-acd6-7ead52c62f88",
+                        "component_type": "Terrain"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "LayerName": null,
+                  "TextureId": 2,
+                  "Masks": [
+                    {
+                      "$type": "slope",
+                      "MinAngle": 29.801325,
+                      "MaxAngle": 90,
+                      "Softness": 0.26490065,
+                      "Terrain": {
+                        "_type": "component",
+                        "component_id": "1393e359-10d2-4ff6-8f25-9dc592d83f03",
+                        "go": "ecf86491-9b03-4982-acd6-7ead52c62f88",
+                        "component_type": "Terrain"
+                      }
+                    }
+                  ]
+                }
+              ]
             }
           ],
           "Children": []
         },
         {
-          "__guid": "90f29587-9875-4744-b7ec-7286b8b7e8ff",
+          "__guid": "c473bd8f-50e6-4cd0-bd51-64d8ab5e52c9",
           "__version": 2,
           "Flags": 0,
           "Name": "DetailSpawner",
-          "Position": "0,0,0",
+          "Position": "3675.22656,7254.93311,0",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -200,75 +299,2900 @@
           "Components": [
             {
               "__type": "Sandbox.Spawners.DetailsSpawner",
-              "__guid": "e2f71c7d-5718-40ca-a6eb-53a35cf68b17",
+              "__guid": "22f58d74-7b85-405a-8340-625c9aad0331",
               "__enabled": true,
               "Flags": 0,
-              "MaskResolution": 256,
+              "MaskResolution": 844,
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
               "OnComponentEnabled": null,
               "OnComponentFixedUpdate": null,
               "OnComponentStart": null,
               "OnComponentUpdate": null,
-              "Range": 256,
+              "Range": 2433.1892,
+              "ShowGizmos": false,
               "SpawnerMasks": [
                 {
-                  "$type": "height",
-                  "MinHeight": 0,
-                  "MaxHeight": 500,
-                  "Softness": 0.1,
-                  "Terrain": null
-                },
-                {
-                  "$type": "slope",
-                  "MinAngle": 0,
-                  "MaxAngle": 30,
-                  "Softness": 0.1,
-                  "Terrain": null
-                },
-                {
-                  "$type": "noise",
-                  "Scale": 55,
-                  "Contrast": 2,
-                  "Threshold": 0.58,
-                  "Blend": 0.05,
-                  "Seed": 12345,
-                  "Invert": false,
-                  "Terrain": null
+                  "$type": "curvature",
+                  "Radius": 117.073166,
+                  "Strength": 2.601626,
+                  "RidgesOnly": false,
+                  "ValleysOnly": true,
+                  "Terrain": {
+                    "_type": "component",
+                    "component_id": "1393e359-10d2-4ff6-8f25-9dc592d83f03",
+                    "go": "ecf86491-9b03-4982-acd6-7ead52c62f88",
+                    "component_type": "Terrain"
+                  }
                 },
                 {
                   "$type": "distance",
-                  "InnerRadius": 200,
-                  "OuterRadius": 1000,
+                  "InnerRadius": 600,
+                  "OuterRadius": 1500,
                   "Invert": false,
-                  "Terrain": null
-                },
-                {
-                  "$type": "curvature",
-                  "Radius": 256,
-                  "Strength": 8,
-                  "RidgesOnly": false,
-                  "ValleysOnly": false,
-                  "Terrain": null
-                },
-                {
-                  "$type": "flow",
-                  "Iterations": 32,
-                  "Strength": 8,
-                  "Terrain": null
-                },
-                {
-                  "$type": "spline",
-                  "Spline": null,
-                  "EdgeSoftness": 0,
-                  "Terrain": null
+                  "Terrain": {
+                    "_type": "component",
+                    "component_id": "1393e359-10d2-4ff6-8f25-9dc592d83f03",
+                    "go": "ecf86491-9b03-4982-acd6-7ead52c62f88",
+                    "component_type": "Terrain"
+                  }
                 }
               ],
               "SpawnerName": null,
-              "SpawnRules": []
+              "SpawnRules": [
+                {
+                  "RuleName": "New Rule",
+                  "Enabled": true,
+                  "Definition": "scenes/new spawndefinition.sd",
+                  "Masks": [],
+                  "SpawnProbabilityRate": 100,
+                  "LocationIncrement": 100,
+                  "Jitter": 12.624584,
+                  "MinFitness": 0.58471763,
+                  "BoundRadius": 1,
+                  "SelfCollisionCheck": true
+                }
+              ]
             }
           ],
-          "Children": []
+          "Children": [
+            {
+              "__guid": "8be6b030-bb4c-4350-ac2e-63776b46398e",
+              "__version": 2,
+              "Flags": 0,
+              "Name": "SpawnRoot",
+              "Position": "0,0,0",
+              "Rotation": "0,0,0,1",
+              "Scale": "1,1,1",
+              "Tags": "",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "NetworkFlags": 0,
+              "NetworkOrphaned": 0,
+              "NetworkTransmit": true,
+              "OwnerTransfer": 1,
+              "Components": [],
+              "Children": [
+                {
+                  "__guid": "e1c6fbb1-1f45-436c-bbc2-ea8d86260447",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-116.643311,-917.912109,262.152222"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.224759996,0.203826085,0.77455467,-0.55498004"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.853329599,1.29955399,0.853329599"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "e1c6fbb1-1f45-436c-bbc2-ea8d86260447",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "c4427c10-58aa-43ca-869e-9cc990967c59"
+                  }
+                },
+                {
+                  "__guid": "c76a9f13-516f-41c7-bca5-ced3472b65b7",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "86.5095215,-918.92041,398.706848"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.199525908,-0.22082071,0.59014827,0.750435054"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.303185076,0.410456717,0.303185076"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "c76a9f13-516f-41c7-bca5-ced3472b65b7",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "6fd4b2c9-d34a-46b2-9186-62df90a64510"
+                  }
+                },
+                {
+                  "__guid": "f80bdbbe-5c68-47dd-b3ff-c2fa008a9610",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-519.005371,-809.556641,118.035637"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.147592798,0.0819456354,0.44667694,-0.878624499"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.65536648,0.97749728,0.65536648"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "f80bdbbe-5c68-47dd-b3ff-c2fa008a9610",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "e2ba1287-691e-464f-8c41-c0f79447dccd"
+                  }
+                },
+                {
+                  "__guid": "7d1420ae-8d4e-4bf8-9da3-4ae60d123980",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-225.901611,-805.624023,194.057404"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.230717927,-0.0105585661,0.960460126,0.155479938"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.25588262,1.96079671,1.25588262"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "7d1420ae-8d4e-4bf8-9da3-4ae60d123980",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "cad3a664-b8be-4398-8fe4-3a830d13cc4f"
+                  }
+                },
+                {
+                  "__guid": "895e9f52-888c-4fbf-90a8-cb18677f7f66",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "171.457275,-816.116699,478.628052"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.241309792,0.311097413,0.494700491,-0.774764061"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.492253602,0.719667792,0.492253602"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "895e9f52-888c-4fbf-90a8-cb18677f7f66",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "bafd1e94-fa82-4dce-a94b-37b9e828b0bd"
+                  }
+                },
+                {
+                  "__guid": "a369ebe0-bb2b-4132-9074-e5d6174afc63",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-616.545898,-706.336914,82.4356155"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.136137053,0.0530444793,0.335094333,-0.930787146"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.670352638,1.0030961,0.670352638"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "a369ebe0-bb2b-4132-9074-e5d6174afc63",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "e1ba4c11-78bf-47cb-a6cb-3f0100cb6f14"
+                  }
+                },
+                {
+                  "__guid": "caf5a204-e113-4c3b-a1ab-0648f77ccddf",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-15.1340332,-728.035156,327.516144"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.0585241131,-0.284509599,0.243570745,0.925366163"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.34251976,0.478801012,0.34251976"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "caf5a204-e113-4c3b-a1ab-0648f77ccddf",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "957f7e34-0b83-4f04-88f3-c3482e601eef"
+                  }
+                },
+                {
+                  "__guid": "643c55e3-773d-434f-8ab0-3c11a18861c0",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-625.055908,-617.410156,59.0646286"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.077685371,0.0730409995,0.787086487,0.607556522"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.21411657,1.88808215,1.21411657"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "643c55e3-773d-434f-8ab0-3c11a18861c0",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "66257a62-c65a-4d5e-b31e-3fcf0617c7ff"
+                  }
+                },
+                {
+                  "__guid": "de3b506b-b5df-4c4d-b5f6-b8c581364525",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-511.86377,-616.626953,73.2299347"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.118704274,0.0344156921,0.977046311,0.17350924"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.622181118,0.932630241,0.622181118"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "de3b506b-b5df-4c4d-b5f6-b8c581364525",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "80a33be9-0e3e-4c79-ab50-e358cf25a34e"
+                  }
+                },
+                {
+                  "__guid": "dc0806bc-6d71-4514-bbee-ded11b2fd0cc",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-216.95874,-617.28125,204.755554"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.249010339,-0.0758266076,0.933732092,0.245740741"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.20576596,1.89982808,1.20576596"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "dc0806bc-6d71-4514-bbee-ded11b2fd0cc",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "73f8b6cf-8189-41ac-9735-58b8a0b25693"
+                  }
+                },
+                {
+                  "__guid": "c1c66974-6e3f-4d08-96be-112287752d2c",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-18.1943359,-608.958984,331.029541"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.117502667,-0.241875514,0.553298116,0.788384855"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.22248815,0.283724725,0.22248815"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "c1c66974-6e3f-4d08-96be-112287752d2c",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "3b7b9d67-425a-44b5-92ee-e128a05daf7b"
+                  }
+                },
+                {
+                  "__guid": "06d45e76-5a69-4921-b875-1d09bb9aa57a",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "75.2229004,-612.491699,397.160034"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.336962223,0.195555538,0.760825455,-0.518998027"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.12486589,1.77062428,1.12486589"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "06d45e76-5a69-4921-b875-1d09bb9aa57a",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "95be26c9-e69c-43d2-bd59-949a5a93590f"
+                  }
+                },
+                {
+                  "__guid": "549d69df-9410-49be-b345-05982952ea95",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-818.259033,-512.491699,34.4980545"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.0772893205,0.070290789,0.780222476,-0.616715908"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.25861263,1.94968605,1.25861263"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "549d69df-9410-49be-b345-05982952ea95",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "85e489fb-524d-4419-a89b-af96142018b7"
+                  }
+                },
+                {
+                  "__guid": "46ec1c03-7062-4086-aa57-89044f707cb0",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-621.756592,-513.104004,42.8801804"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.0525830686,0.0948253796,0.840685129,-0.53055793"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.98277998,1.51965272,0.98277998"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "46ec1c03-7062-4086-aa57-89044f707cb0",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "131b5154-3c8b-430e-bd41-0e6c08504a4b"
+                  }
+                },
+                {
+                  "__guid": "30cd897a-a2ba-45f0-b7c0-19edade6b8bc",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-418.027832,-504.407715,105.887741"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.222937435,0.0830473751,0.793947041,-0.559508741"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.21368778,1.91276181,1.21368778"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "30cd897a-a2ba-45f0-b7c0-19edade6b8bc",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "8f6b0bfd-b81a-4f67-9d12-92536847d2ee"
+                  }
+                },
+                {
+                  "__guid": "c3468a4f-fc6e-4d58-b268-0f3e2d64ea08",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-125.169922,-518.90918,271.295593"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.041130811,-0.28253898,0.357463837,0.889212847"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.50609529,0.751659155,0.50609529"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "c3468a4f-fc6e-4d58-b268-0f3e2d64ea08",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "5ac23757-95a5-4ffe-a7e9-cc6b4e44a443"
+                  }
+                },
+                {
+                  "__guid": "9f887f5e-c89a-4212-8533-d2f4da50ff50",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-20.0031738,-513.261719,338.91983"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.0832312852,-0.255381227,0.529851198,0.804431856"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.31800628,2.09096384,1.31800628"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "9f887f5e-c89a-4212-8533-d2f4da50ff50",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "59a70b2b-6dbf-4e0c-8227-a8e54d60365d"
+                  }
+                },
+                {
+                  "__guid": "0bdbb7be-a836-474e-91ed-14c743fbe9bd",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "89.9262695,-507.066406,427.175354"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.263740838,0.295042515,0.465504557,-0.791641474"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.622614622,0.943866074,0.622614622"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "0bdbb7be-a836-474e-91ed-14c743fbe9bd",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "7bd67b5f-cec9-4dde-9671-1295187936d1"
+                  }
+                },
+                {
+                  "__guid": "767773eb-a58e-4320-937d-8ff77d644ef0",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-823.204834,-406.893555,22.4703999"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.0065175849,0.0203329138,0.988035142,-0.152743518"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.22191858,1.89609194,1.22191858"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "767773eb-a58e-4320-937d-8ff77d644ef0",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "54600ec6-8dd4-40e6-9bd4-7f2c44c67ba2"
+                  }
+                },
+                {
+                  "__guid": "4bd47c12-23d1-493f-b9a1-ea7bfe46c69f",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-722.107666,-426.413574,25.6522541"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.0375484228,-0.0100948205,0.928797841,0.368541449"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.2015903,1.87232971,1.2015903"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "4bd47c12-23d1-493f-b9a1-ea7bfe46c69f",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "ff61aa30-ed8b-46ac-8edb-c60d4a525a13"
+                  }
+                },
+                {
+                  "__guid": "907b78db-f311-408a-924f-afacb885384b",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-612.912842,-406.115234,46.9235382"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.0574583039,-0.149433553,0.16654776,0.972949147"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.939507127,1.45523655,0.939507127"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "907b78db-f311-408a-924f-afacb885384b",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "3027fb39-4af8-42f4-a224-977622d76d50"
+                  }
+                },
+                {
+                  "__guid": "f90d60d8-978d-4275-850c-fc3bc53a2f44",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-415.191406,-427.237305,119.316864"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.248428047,-0.0208192989,0.926837385,-0.280753404"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.978146136,1.53034055,0.978146136"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "f90d60d8-978d-4275-850c-fc3bc53a2f44",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "df9e0fcf-d6fa-4d12-b53f-04f31cb85dd2"
+                  }
+                },
+                {
+                  "__guid": "928936dd-5bf3-4ba5-8399-29b1143ea68d",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-126.149902,-424.478516,288.428497"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.216038853,0.225305006,0.339748979,-0.887206614"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.27665365,1.97976542,1.27665365"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "928936dd-5bf3-4ba5-8399-29b1143ea68d",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "a6b74749-5b53-4bed-876b-00318f69200b"
+                  }
+                },
+                {
+                  "__guid": "72947d5c-4d6f-4722-bc28-c594602ae09c",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "78.796875,-427.565918,430.524719"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.366524696,-0.0775526389,0.927082419,0.0127846412"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.04446733,1.63974202,1.04446733"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "72947d5c-4d6f-4722-bc28-c594602ae09c",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "8879d147-71d4-4344-abc8-5a243795a977"
+                  }
+                },
+                {
+                  "__guid": "14a26251-ecef-4e18-a11d-cdb3edbedb3b",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-617.77124,-311.70752,66.2533112"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.152491271,-0.0936561003,0.983592212,-0.0228355061"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.369832546,0.524466395,0.369832546"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "14a26251-ecef-4e18-a11d-cdb3edbedb3b",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "8f9d4125-ac57-4c06-9c41-6dc474cd7361"
+                  }
+                },
+                {
+                  "__guid": "6703ea79-2f27-46a4-bd1c-467e0493a6cf",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-516.049561,-308.413086,105.066765"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.236869574,0.0926903635,0.554974914,-0.792025447"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.251927763,0.332374543,0.251927763"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "6703ea79-2f27-46a4-bd1c-467e0493a6cf",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "6d99dc3f-d53f-4b72-b01f-1d0e8763a2be"
+                  }
+                },
+                {
+                  "__guid": "144e8ebc-5300-4504-9da2-1b29d1315f46",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-325.431641,-322.092285,195.85965"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.284294635,-0.0195823684,0.870289147,-0.401733696"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.00998962,1.58286858,1.00998962"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "144e8ebc-5300-4504-9da2-1b29d1315f46",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "f7bfe450-8314-418a-9107-3893b3c11f0b"
+                  }
+                },
+                {
+                  "__guid": "bfa0f85b-b295-4d83-b97c-27554fac0a4e",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-222.243652,-305.386719,262.676636"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.233090982,-0.16101709,0.945870757,0.158337429"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.04518592,1.61953509,1.04518592"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "bfa0f85b-b295-4d83-b97c-27554fac0a4e",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "e3c4ee9a-82b8-4948-92f2-9aca6e606d2a"
+                  }
+                },
+                {
+                  "__guid": "0cf4408e-a15a-4794-a091-bc4be537426c",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "90.9013672,-307.238281,474.802856"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.357883632,0.101957828,0.793866754,-0.480935991"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.943551958,1.47327507,0.943551958"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "0cf4408e-a15a-4794-a091-bc4be537426c",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "aab9f733-6498-4a7d-81ba-dd37f877b113"
+                  }
+                },
+                {
+                  "__guid": "af290281-bb8b-4097-830f-c9341220b6a9",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-923.487305,-212.200684,45.8381233"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.106918402,-0.0705343038,0.666113079,0.734769821"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.19563222,1.85023022,1.19563222"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "af290281-bb8b-4097-830f-c9341220b6a9",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "ae2ab1f0-e429-452e-99ce-d1b93bd354e9"
+                  }
+                },
+                {
+                  "__guid": "a7b4dd8e-340f-4f6a-a674-64ee937b573a",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-713.335938,-204.520996,72.6567459"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.104102515,-0.197932139,0.618958116,0.752911925"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.295552582,0.401667684,0.295552582"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "a7b4dd8e-340f-4f6a-a674-64ee937b573a",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "53996519-140b-4f03-ae81-5e817e28eb06"
+                  }
+                },
+                {
+                  "__guid": "4fac9b3b-b68f-4521-9fd3-22ea58ee97f7",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-623.618896,-219.575684,90.4869919"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.227046058,-0.0699782148,0.838563144,-0.490270346"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.548632801,0.819125056,0.548632801"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "4fac9b3b-b68f-4521-9fd3-22ea58ee97f7",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "c7c52ab0-b924-49de-8e5d-9b6da312195d"
+                  }
+                },
+                {
+                  "__guid": "55df1388-7d18-4d3e-820f-96aff0109def",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-529.046143,-223.902832,126.137184"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.065330416,-0.247320592,0.462411433,0.848964095"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.10958803,1.7471633,1.10958803"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "55df1388-7d18-4d3e-820f-96aff0109def",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "2afa2685-724b-4921-9e73-ef40d568be91"
+                  }
+                },
+                {
+                  "__guid": "968aebc1-122f-4cfb-b7b6-0f723924a3d5",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-325.674316,-220.493652,230.490555"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.249606609,-0.158258379,0.95518744,-0.0163601413"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.779150307,1.20208275,0.779150307"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "968aebc1-122f-4cfb-b7b6-0f723924a3d5",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "997422a9-e4fa-450c-9c24-bd7375e91b02"
+                  }
+                },
+                {
+                  "__guid": "56b8a5ff-bedc-40ac-8bae-8e694ccf5703",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-213.126953,-207.972656,301.96225"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.189797774,0.245983377,0.0460693762,-0.949392855"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.581741869,0.876443684,0.581741869"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "56b8a5ff-bedc-40ac-8bae-8e694ccf5703",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "2478a6ec-b9fd-4299-bc4d-f85d8581acc9"
+                  }
+                },
+                {
+                  "__guid": "7e894ab2-7a3f-4285-99ab-3f4e1ccb529b",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-923.713867,-108.912598,82.432518"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.244754851,-0.104888208,0.16552794,0.949575782"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.999071181,1.53464937,0.999071181"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "7e894ab2-7a3f-4285-99ab-3f4e1ccb529b",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "51cfb6eb-aaed-42eb-8152-487c16441803"
+                  }
+                },
+                {
+                  "__guid": "702f75ac-1b06-43ca-b01d-d4153692e35f",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-822.650146,-105.760254,103.022522"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.308519244,0.0749887824,0.0646924525,-0.94604826"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.382340848,0.541107833,0.382340848"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "702f75ac-1b06-43ca-b01d-d4153692e35f",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "a6b48a2d-9196-4c2f-9315-468da61c2ec5"
+                  }
+                },
+                {
+                  "__guid": "cd218f97-c16d-48e2-886c-7894a119f99c",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-724.095459,-106.182129,127.431747"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.246303707,-0.218057781,0.366902471,0.870153964"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.32102478,2.07977915,1.32102478"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "cd218f97-c16d-48e2-886c-7894a119f99c",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "ee3dfae1-f2cf-4862-b590-abb7141e54b3"
+                  }
+                },
+                {
+                  "__guid": "a95fedac-e68f-4d74-a872-9c43d3cdc55d",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-416.040771,-122.480469,223.971863"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.202970624,-0.232910395,0.0895504728,0.946856081"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.784412742,1.21076369,0.784412742"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "a95fedac-e68f-4d74-a872-9c43d3cdc55d",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "d00f04f6-e89f-4af0-b86b-c1e8d14eb68d"
+                  }
+                },
+                {
+                  "__guid": "d882905b-c4c9-49c1-b8ac-8a319bfb194a",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-106.496338,-105.457031,399.97522"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.0870761648,-0.263884336,0.304440111,0.911097705"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.28382039,2.00194216,1.28382039"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "d882905b-c4c9-49c1-b8ac-8a319bfb194a",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "d66c8580-9e40-4f6e-ba98-a1259955c4bc"
+                  }
+                },
+                {
+                  "__guid": "0be2b879-238c-4c59-8ec7-475c7fc78746",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-907.416992,-7.75292969,150.581024"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.298687339,-0.130594462,0.692488074,-0.64357686"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.244799003,0.316306472,0.244799003"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "0be2b879-238c-4c59-8ec7-475c7fc78746",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "a31e0a8e-4bce-42dc-825a-865441bc3621"
+                  }
+                },
+                {
+                  "__guid": "d6fc767a-3514-4dc2-9f09-33d8b2faf522",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-628.765869,-21.3901367,222.739395"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.343831569,-0.149745345,0.613775909,-0.694719672"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.460561305,0.675521255,0.460561305"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "d6fc767a-3514-4dc2-9f09-33d8b2faf522",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "4b20632b-1cb1-4d94-8630-209f98966f59"
+                  }
+                },
+                {
+                  "__guid": "03273eb6-f8e3-4188-8f63-85d5f8ab3192",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-404.333496,-25.0341797,282.899017"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.22991541,-0.230647445,0.290064037,0.89989084"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.903771937,1.407655,0.903771937"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "03273eb6-f8e3-4188-8f63-85d5f8ab3192",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "2a0e2550-1060-451b-aed0-53912ca87ee9"
+                  }
+                },
+                {
+                  "__guid": "f5324897-3f79-471b-912e-8feedb2c2718",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-213.950439,-8.59765625,378.214294"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.101455562,-0.261033595,0.829773843,0.482746005"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.00218689,1.56999755,1.00218689"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "f5324897-3f79-471b-912e-8feedb2c2718",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "dadf2e49-b391-4cdf-82a5-9d1ebf255f73"
+                  }
+                },
+                {
+                  "__guid": "b08cd7e4-ede7-4b93-bf04-ced1ecca49a4",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-28.9658203,-26.4018555,465.03183"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.158886418,-0.223009318,0.875838816,0.397402108"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.784998655,1.21173012,0.784998655"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "b08cd7e4-ede7-4b93-bf04-ced1ecca49a4",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "b2e853f0-b61e-4fda-bed0-3c5282eda322"
+                  }
+                },
+                {
+                  "__guid": "cb1cb082-ddd5-45e8-a219-e9e5a24b937f",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-324.809326,84.28125,379.622681"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.261746407,-0.169403911,0.235096157,0.920609057"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.21343939,0.268902451,0.21343939"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "cb1cb082-ddd5-45e8-a219-e9e5a24b937f",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "676c739b-029d-48d4-963e-5c2e7be3f9c9"
+                  }
+                },
+                {
+                  "__guid": "50f463be-c625-4e14-876b-f879f80c8176",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-225.11377,87.3134766,412.973938"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.167297915,-0.196599424,0.965586901,0.0316540711"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.380430579,0.5443663,0.380430579"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "50f463be-c625-4e14-876b-f879f80c8176",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "93cf5150-d0dc-4763-874e-279450c4e00c"
+                  }
+                },
+                {
+                  "__guid": "f9faa0d4-f712-49ee-aaa5-ab761e108498",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-116.072998,83.862793,460.966888"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.00861231238,-0.2461932,0.628091812,0.738116205"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.40336692,2.23177242,1.40336692"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "f9faa0d4-f712-49ee-aaa5-ab761e108498",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "14258ef5-64b2-46dc-9f92-ddb088618236"
+                  }
+                },
+                {
+                  "__guid": "b15676cd-74ba-4300-ab9b-d16186a25eed",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-326.671875,183.005859,451.809296"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.336479187,-0.21139434,0.558716297,-0.72796315"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.09355164,1.72071004,1.09355164"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "b15676cd-74ba-4300-ab9b-d16186a25eed",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "0a158a27-7c74-4bb1-956f-ed85ab659d65"
+                  }
+                },
+                {
+                  "__guid": "32355335-c90c-44d5-a8f5-9ea0a6a20020",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-227.843018,190.311035,467.819397"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.331526607,-0.0102564916,0.239506513,-0.91248095"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.745049596,1.14583135,0.745049596"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "32355335-c90c-44d5-a8f5-9ea0a6a20020",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "f4def90c-3ef3-4b1e-80aa-7a7b61ad8e00"
+                  }
+                },
+                {
+                  "__guid": "04b8927a-0d81-4953-a1d4-dbe80153b6d7",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-224.639404,276.266602,544.38501"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.438225895,0.0185291283,0.1228282,0.890240312"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.252796799,0.33382532,0.252796799"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "04b8927a-0d81-4953-a1d4-dbe80153b6d7",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "480abac0-c1bb-42f5-a6ef-b4f8f15a973c"
+                  }
+                },
+                {
+                  "__guid": "b8b71a0b-8e9c-41e8-8b47-748579d39b5c",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-123.808594,281.890625,537.220459"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.239619076,-0.17796424,0.630278826,-0.716700792"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.296340883,0.405654341,0.296340883"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "b8b71a0b-8e9c-41e8-8b47-748579d39b5c",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "6aedaa89-dde2-4d54-a744-8bab98cf50c1"
+                  }
+                },
+                {
+                  "__guid": "0814ff25-f844-4fa9-92a6-ae5b81da60d0",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-116.303467,373.064941,606.983948"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.251048148,-0.271478057,0.888645649,0.271262765"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.362746686,0.515195429,0.362746686"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "0814ff25-f844-4fa9-92a6-ae5b81da60d0",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "e9fefc0b-17b9-4d9c-9262-329f3adae015"
+                  }
+                },
+                {
+                  "__guid": "e3939c3b-2789-45ea-b0ba-6fba61dbfe67",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "86.3713379,377.415527,620.604126"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.0688828304,-0.136852428,0.0386401974,0.987437785"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.83861053,1.30016673,0.83861053"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "e3939c3b-2789-45ea-b0ba-6fba61dbfe67",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "1d2aa6dc-0aea-44eb-b8fc-131dfccf387c"
+                  }
+                },
+                {
+                  "__guid": "b7891c1b-0de9-447e-bb19-a21f5ec58ea2",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-25.4648438,484.637207,646.8172"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.257995695,0.0398352668,0.407321334,0.875180423"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.953733206,1.49006987,0.953733206"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "b7891c1b-0de9-447e-bb19-a21f5ec58ea2",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "fe07dac3-4d54-4a0d-a368-5db7c16fe921"
+                  }
+                },
+                {
+                  "__guid": "006c1d8b-9cca-4b3c-9d58-64d630f327a2",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "774.962891,478.603027,504.901093"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.158212349,0.191337585,0.0722538382,0.965990841"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.487059981,0.708167315,0.487059981"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "006c1d8b-9cca-4b3c-9d58-64d630f327a2",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "9bb63633-29ac-4401-8f0f-855a91ebd199"
+                  }
+                },
+                {
+                  "__guid": "3075ae57-3f56-4dcf-aa50-ccc92962212e",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-24.4262695,582.556152,679.849243"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.224215209,-0.122290835,0.938188851,-0.233611092"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.401492357,0.57005775,0.401492357"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "3075ae57-3f56-4dcf-aa50-ccc92962212e",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "d6b032e2-d93f-4343-ada9-5d628575d975"
+                  }
+                },
+                {
+                  "__guid": "2643e4f8-2bff-40ce-a489-dfcc7b415107",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "85.4868164,574.864258,629.998474"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.0156488009,-0.0864348039,0.358518541,-0.929380655"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.36676788,2.17139983,1.36676788"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "2643e4f8-2bff-40ce-a489-dfcc7b415107",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "69ea66e9-7924-4334-9081-7b1652059f5e"
+                  }
+                },
+                {
+                  "__guid": "e5079aa9-5942-4189-aafd-4e6112b3dad0",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "94.8435059,679.449219,617.002197"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.0482260212,0.133506685,0.356303304,0.923524737"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.05921364,1.65582752,1.05921364"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "e5079aa9-5942-4189-aafd-4e6112b3dad0",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "1909b658-8a7b-4bd6-8cd9-1ec8f4fdd887"
+                  }
+                },
+                {
+                  "__guid": "4e26db15-4e9f-489d-a63b-41b6b8f18718",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-121.520264,893.958496,596.952881"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.275005996,0.300537556,0.4012447,0.820397198"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.32584286,2.06618977,1.32584286"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "4e26db15-4e9f-489d-a63b-41b6b8f18718",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "d77bd507-588f-41dd-b012-b11a9d6f2365"
+                  }
+                },
+                {
+                  "__guid": "3df50c67-7e0b-4522-82a1-96bb9a64b626",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "76.8295898,875.280762,555.727905"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "0.0346827246,0.231792212,0.971760392,0.0274052694"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "1.25744438,1.95831144,1.25744438"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "3df50c67-7e0b-4522-82a1-96bb9a64b626",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "1f9b32a3-e898-4237-8e17-7bda49edfb24"
+                  }
+                },
+                {
+                  "__guid": "cec06df8-af88-416a-a83b-c0489e17885d",
+                  "__version": 2,
+                  "__Prefab": "templates/gameobject/3d object - cube.prefab",
+                  "__PrefabInstancePatch": {
+                    "AddedObjects": [],
+                    "RemovedObjects": [],
+                    "PropertyOverrides": [
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Position",
+                        "Value": "-13.465332,972.040527,508.823669"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Rotation",
+                        "Value": "-0.204623133,0.204563677,0.630544484,0.720206082"
+                      },
+                      {
+                        "Target": {
+                          "Type": "GameObject",
+                          "IdValue": "57a890d9-7f84-4ba8-9320-e5d7fe0a4938"
+                        },
+                        "Property": "Scale",
+                        "Value": "0.831727266,1.26105022,0.831727266"
+                      }
+                    ],
+                    "MovedObjects": []
+                  },
+                  "__PrefabIdToInstanceId": {
+                    "57a890d9-7f84-4ba8-9320-e5d7fe0a4938": "cec06df8-af88-416a-a83b-c0489e17885d",
+                    "49d0563b-4a66-46c0-9ab7-c1e72a906b7b": "c17e3186-0780-44ac-af07-e73e3c49230c"
+                  }
+                },
+                {
+                  "__guid": "89e59e3e-210f-45da-aaad-8cf8a38f42ae",
+                  "__version": 2,
+                  "Flags": 0,
+                  "Name": "Clutter_New Rule_grasssimplerhe_b_afstree_xlp",
+                  "Position": "0,0,0",
+                  "Rotation": "0,0,0,1",
+                  "Scale": "1,1,1",
+                  "Tags": "",
+                  "Enabled": true,
+                  "NetworkMode": 2,
+                  "NetworkFlags": 0,
+                  "NetworkOrphaned": 0,
+                  "NetworkTransmit": true,
+                  "OwnerTransfer": 1,
+                  "Components": [
+                    {
+                      "__type": "ApexWorld.ApexClutterComponent",
+                      "__guid": "36686539-4b71-4627-a118-ab1876900be9",
+                      "__enabled": true,
+                      "Flags": 0,
+                      "BoundsPadding": 256,
+                      "ChunkWorldSize": 1024,
+                      "GridSize": 128,
+                      "Jitter": 25,
+                      "Model": "scenes/test stuff/grasssimplerhe_b_afstree_xlp.vmdl",
+                      "OnComponentDestroy": null,
+                      "OnComponentDisabled": null,
+                      "OnComponentEnabled": null,
+                      "OnComponentFixedUpdate": null,
+                      "OnComponentStart": null,
+                      "OnComponentUpdate": null,
+                      "ScaleRange": "0.800000012,1.20000005",
+                      "SerializedTransforms": [
+                        {
+                          "Position": "3365.76221,6346.0293,173.51767",
+                          "Scale": "0.62765336,0.62765336,0.62765336",
+                          "Rotation": "-0.0933652371,0.154700696,0.920293093,-0.347003222"
+                        },
+                        {
+                          "Position": "3458.31177,6336.64062,205.946899",
+                          "Scale": "0.274107695,0.274107695,0.274107695",
+                          "Rotation": "-0.210234225,0.0142424591,0.941472411,0.263113052"
+                        },
+                        {
+                          "Position": "3670.96191,6348.71191,336.338806",
+                          "Scale": "0.639841676,0.639841676,0.639841676",
+                          "Rotation": "-0.11611709,0.279956549,0.405802518,-0.862244427"
+                        },
+                        {
+                          "Position": "3253.95459,6429.2876,130.531342",
+                          "Scale": "0.823959708,0.823959708,0.823959708",
+                          "Rotation": "0.0641931966,0.134809703,0.515217423,-0.843952894"
+                        },
+                        {
+                          "Position": "3351.84009,6436.30566,154.518478",
+                          "Scale": "0.456913561,0.456913561,0.456913561",
+                          "Rotation": "-0.100992411,-0.142399311,0.196380138,0.964861512"
+                        },
+                        {
+                          "Position": "3553.17505,6431.29004,255.142227",
+                          "Scale": "0.756450295,0.756450295,0.756450295",
+                          "Rotation": "-0.239850298,-0.134070933,0.826786637,0.490836859"
+                        },
+                        {
+                          "Position": "3651.61743,6437.01367,318.877014",
+                          "Scale": "0.741088271,0.741088271,0.741088271",
+                          "Rotation": "-0.269847274,0.117259547,0.88041842,-0.371881634"
+                        },
+                        {
+                          "Position": "3760.72729,6450.51025,396.897644",
+                          "Scale": "0.29127416,0.29127416,0.29127416",
+                          "Rotation": "-0.273371875,-0.143006802,0.828678608,0.46702081"
+                        },
+                        {
+                          "Position": "3161.74097,6527.05908,92.1217804",
+                          "Scale": "0.228599891,0.228599891,0.228599891",
+                          "Rotation": "-0.100271903,0.099880144,0.881456673,0.450559318"
+                        },
+                        {
+                          "Position": "3266.13745,6546.49023,110.726616",
+                          "Scale": "0.693967819,0.693967819,0.693967819",
+                          "Rotation": "-0.129749626,-0.0774075463,0.565387249,0.810870171"
+                        },
+                        {
+                          "Position": "3365.94653,6541.89893,151.067551",
+                          "Scale": "0.462619066,0.462619066,0.462619066",
+                          "Rotation": "-0.0117778089,0.221333906,0.0799749419,-0.971841872"
+                        },
+                        {
+                          "Position": "3467.28271,6532.97363,204.555252",
+                          "Scale": "1.02719641,1.02719641,1.02719641",
+                          "Rotation": "-0.224214017,0.146031678,0.781588733,-0.563490808"
+                        },
+                        {
+                          "Position": "3561.00562,6540.74316,262.344482",
+                          "Scale": "0.551184952,0.551184952,0.551184952",
+                          "Rotation": "-0.253996551,-0.0754367337,0.923799217,0.276387513"
+                        },
+                        {
+                          "Position": "3754.4165,6532.08789,393.226593",
+                          "Scale": "0.548853874,0.548853874,0.548853874",
+                          "Rotation": "-0.348030835,0.0289853774,0.933153927,-0.0851944983"
+                        },
+                        {
+                          "Position": "2968.24243,6644.64746,55.3771324",
+                          "Scale": "0.467050403,0.467050403,0.467050403",
+                          "Rotation": "-0.0784853697,0.10723269,0.784519255,0.605698705"
+                        },
+                        {
+                          "Position": "3255.85962,6637.64062,99.0394135",
+                          "Scale": "0.374008417,0.374008417,0.374008417",
+                          "Rotation": "-0.16115056,-0.0502903797,0.89824146,0.405787677"
+                        },
+                        {
+                          "Position": "3358.97925,6636.05273,145.880478",
+                          "Scale": "0.608669579,0.608669579,0.608669579",
+                          "Rotation": "-0.248398706,0.00910427142,0.964184225,-0.0925424248"
+                        },
+                        {
+                          "Position": "3553.34985,6632.95312,264.890442",
+                          "Scale": "0.865639925,0.865639925,0.865639925",
+                          "Rotation": "0.0135072581,-0.278307021,0.147012427,0.9490785"
+                        },
+                        {
+                          "Position": "2964.47095,6730.03125,36.3898392",
+                          "Scale": "0.740577102,0.740577102,0.740577102",
+                          "Rotation": "-0.0163849667,0.0833316669,0.966792285,-0.2410395"
+                        },
+                        {
+                          "Position": "3147.80396,6741.83398,65.0549164",
+                          "Scale": "0.684273362,0.684273362,0.684273362",
+                          "Rotation": "-0.0888282061,0.133616939,0.414813578,-0.895648241"
+                        },
+                        {
+                          "Position": "3363.76123,6726.94775,157.338989",
+                          "Scale": "1.12751615,1.12751615,1.12751615",
+                          "Rotation": "-0.240581751,-0.0849976987,0.958588541,0.126506552"
+                        },
+                        {
+                          "Position": "3452.46753,6738.60693,209.703003",
+                          "Scale": "0.200650051,0.200650051,0.200650051",
+                          "Rotation": "-0.190410733,0.222572982,0.409876287,-0.863832414"
+                        },
+                        {
+                          "Position": "3155.79736,6844.34961,77.7779541",
+                          "Scale": "0.295301914,0.295301914,0.295301914",
+                          "Rotation": "-0.182466641,-0.0634776056,0.9791857,-0.0622251593"
+                        },
+                        {
+                          "Position": "3360.93481,6831.00195,174.310333",
+                          "Scale": "0.851474762,0.851474762,0.851474762",
+                          "Rotation": "-0.145574912,0.237642065,0.12212535,-0.952585697"
+                        },
+                        {
+                          "Position": "3465.5127,6843.88281,240.224274",
+                          "Scale": "0.224080905,0.224080905,0.224080905",
+                          "Rotation": "0.00751764327,-0.286979139,0.347796649,0.892537892"
+                        },
+                        {
+                          "Position": "3659.43628,6849.09424,363.907013",
+                          "Scale": "1.32101023,1.32101023,1.32101023",
+                          "Rotation": "-0.128049687,-0.25123331,0.711690068,0.643414617"
+                        },
+                        {
+                          "Position": "2760.26123,6927.04492,29.8339119",
+                          "Scale": "0.508530676,0.508530676,0.508530676",
+                          "Rotation": "0.0476701148,-0.0266473033,0.998427749,0.012629956"
+                        },
+                        {
+                          "Position": "2868.625,6933.896,27.1172962",
+                          "Scale": "0.324123859,0.324123859,0.324123859",
+                          "Rotation": "0.0288067479,-0.067919977,0.782336831,0.618470907"
+                        },
+                        {
+                          "Position": "2951.51489,6941.51611,38.921608",
+                          "Scale": "1.00365663,1.00365663,1.00365663",
+                          "Rotation": "-0.123967722,-0.040875189,0.908551693,-0.396856338"
+                        },
+                        {
+                          "Position": "3251.84253,6929.34863,141.882553",
+                          "Scale": "0.741693735,0.741693735,0.741693735",
+                          "Rotation": "-0.230426669,-0.11255537,0.966072738,-0.0306324139"
+                        },
+                        {
+                          "Position": "3547.8811,6941.55029,317.659912",
+                          "Scale": "0.456079572,0.456079572,0.456079572",
+                          "Rotation": "-0.284152955,0.111156836,0.655712605,-0.690610051"
+                        },
+                        {
+                          "Position": "3659.30396,6928.49463,381.851074",
+                          "Scale": "0.929205298,0.929205298,0.929205298",
+                          "Rotation": "-0.267949253,-0.112180933,0.956666231,0.020208938"
+                        },
+                        {
+                          "Position": "2864.32739,7031.15332,45.789959",
+                          "Scale": "0.898533463,0.898533463,0.898533463",
+                          "Rotation": "-0.138858736,-0.0782846361,0.787913561,-0.594795704"
+                        },
+                        {
+                          "Position": "3246.53442,7034.14062,174.308334",
+                          "Scale": "1.27738714,1.27738714,1.27738714",
+                          "Rotation": "0.0897433087,-0.266046315,0.28700316,0.915857315"
+                        },
+                        {
+                          "Position": "3654.07031,7049.87549,412.50708",
+                          "Scale": "0.397589117,0.397589117,0.397589117",
+                          "Rotation": "-0.211726397,-0.189609662,0.915314734,0.285340339"
+                        },
+                        {
+                          "Position": "3062.48462,7131.99023,145.479584",
+                          "Scale": "1.16427386,1.16427386,1.16427386",
+                          "Rotation": "-0.250660002,-0.19188264,0.86588192,-0.38807115"
+                        },
+                        {
+                          "Position": "3149.83765,7146.36914,185.129379",
+                          "Scale": "1.11022472,1.11022472,1.11022472",
+                          "Rotation": "-0.322243243,-0.0562340468,0.588059068,-0.739718556"
+                        },
+                        {
+                          "Position": "3347.31519,7137.26807,271.276337",
+                          "Scale": "0.782148004,0.782148004,0.782148004",
+                          "Rotation": "-0.133144468,-0.261363059,0.873807847,0.387842566"
+                        },
+                        {
+                          "Position": "3453.87451,7148.82275,336.359283",
+                          "Scale": "1.10572386,1.10572386,1.10572386",
+                          "Rotation": "-0.221033752,-0.175543368,0.953508615,0.105593048"
+                        },
+                        {
+                          "Position": "3669.08521,7146.66064,452.277405",
+                          "Scale": "0.322577357,0.322577357,0.322577357",
+                          "Rotation": "-0.333193749,-0.00825648755,0.888337374,-0.315864682"
+                        },
+                        {
+                          "Position": "2854.43066,7226.37305,159.6353",
+                          "Scale": "0.606201768,0.606201768,0.606201768",
+                          "Rotation": "-0.0915666521,-0.319383264,0.940068364,0.0766908452"
+                        },
+                        {
+                          "Position": "2948.20459,7234.35596,196.622345",
+                          "Scale": "0.35062027,0.35062027,0.35062027",
+                          "Rotation": "-0.254676729,-0.263427407,0.848632574,-0.381534427"
+                        },
+                        {
+                          "Position": "3148.86475,7231.6416,248.83197",
+                          "Scale": "0.790630102,0.790630102,0.790630102",
+                          "Rotation": "-0.030228816,-0.337408066,0.919434786,0.199703574"
+                        },
+                        {
+                          "Position": "3356.42749,7238.80029,322.341522",
+                          "Scale": "1.07056534,1.07056534,1.07056534",
+                          "Rotation": "-0.231553689,-0.180964917,0.944694936,-0.145554543"
+                        },
+                        {
+                          "Position": "2759.25781,7342.65137,220.706909",
+                          "Scale": "0.874796271,0.874796271,0.874796271",
+                          "Rotation": "-0.0743049607,-0.333954245,0.892638803,0.293511808"
+                        },
+                        {
+                          "Position": "3164.61182,7335.771,346.942474",
+                          "Scale": "0.285945445,0.285945445,0.285945445",
+                          "Rotation": "-0.15447098,-0.320467412,0.901252329,-0.24735333"
+                        },
+                        {
+                          "Position": "3252.10156,7339.57617,361.225006",
+                          "Scale": "0.792695284,0.792695284,0.792695284",
+                          "Rotation": "0.324107558,-0.119230561,0.16635415,0.923615038"
+                        },
+                        {
+                          "Position": "3667.31982,7335.75098,510.237274",
+                          "Scale": "0.225210443,0.225210443,0.225210443",
+                          "Rotation": "-0.226404667,0.233550459,0.320913672,-0.889499664"
+                        },
+                        {
+                          "Position": "3248.38916,7438.69727,451.483521",
+                          "Scale": "0.643414676,0.643414676,0.643414676",
+                          "Rotation": "0.225167423,-0.340626389,0.772987723,0.485554576"
+                        },
+                        {
+                          "Position": "3550.70239,7447.4585,493.887115",
+                          "Scale": "0.277203888,0.277203888,0.277203888",
+                          "Rotation": "0.113172591,-0.199041963,0.299383998,0.926252425"
+                        },
+                        {
+                          "Position": "3670.94434,7429.63965,542.543701",
+                          "Scale": "0.359045148,0.359045148,0.359045148",
+                          "Rotation": "-0.260898411,-0.117043987,0.955327034,0.0747202933"
+                        },
+                        {
+                          "Position": "3354.56689,7538.7998,574.582703",
+                          "Scale": "1.11805737,1.11805737,1.11805737",
+                          "Rotation": "-0.13449055,-0.442053825,0.803879082,-0.374538451"
+                        },
+                        {
+                          "Position": "3664.27002,7541.45557,567.798218",
+                          "Scale": "0.425913215,0.425913215,0.425913215",
+                          "Rotation": "0.101753466,-0.248846516,0.26531738,0.925920308"
+                        },
+                        {
+                          "Position": "3470.14014,7632.79248,654.88031",
+                          "Scale": "0.520792961,0.520792961,0.520792961",
+                          "Rotation": "-0.359451234,-0.28866753,0.246573865,-0.852447748"
+                        },
+                        {
+                          "Position": "3667.09717,7650.9126,605.246826",
+                          "Scale": "0.71151197,0.71151197,0.71151197",
+                          "Rotation": "0.0990782529,-0.168125018,0.746212363,0.636462569"
+                        },
+                        {
+                          "Position": "3753.32153,7739.04688,626.642944",
+                          "Scale": "1.0252254,1.0252254,1.0252254",
+                          "Rotation": "0.00475484319,-0.0536025688,0.91746217,0.394166529"
+                        },
+                        {
+                          "Position": "3669.05054,7935.90283,667.732422",
+                          "Scale": "0.60019207,0.60019207,0.60019207",
+                          "Rotation": "0.168689698,0.250733614,0.730702639,0.612168312"
+                        },
+                        {
+                          "Position": "3746.30396,8030.24512,599.309937",
+                          "Scale": "0.846972704,0.846972704,0.846972704",
+                          "Rotation": "0.119609974,0.179727674,0.976405263,0.00493023312"
+                        },
+                        {
+                          "Position": "3659.09912,8136.22021,571.251404",
+                          "Scale": "0.830917478,0.830917478,0.830917478",
+                          "Rotation": "0.304592699,0.112115279,0.623161972,-0.711563408"
+                        }
+                      ],
+                      "Spacing": 100,
+                      "Tint": "1,1,1,1",
+                      "VerticalBoundsPadding": 5000
+                    }
+                  ],
+                  "Children": []
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -296,14 +3220,14 @@
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
       },
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "3839e096-ae61-41c1-81c7-704250c7d7fc"
-        }
-      },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
+        }
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "3839e096-ae61-41c1-81c7-704250c7d7fc"
         }
       }
     }

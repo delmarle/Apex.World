@@ -104,138 +104,107 @@ public class DetailsSpawner : BaseSpawner
 
 		foreach ( var rule in SpawnRules )
 		{
-			if ( !rule.Enabled || rule.Definition?.Prefab == null ) continue;
+			if ( !rule.Enabled) continue;
 			ProcessRule( rule, terrain, bounds, spawnerMask, worldOffset, worldSize );
 		}
 	}
 
-	private void ProcessRule(
-		SpawnRule  rule,
-		Terrain    terrain,
-		BBox       bounds,
-		MaskField  spawnerMask,
-		Vector2    worldOffset,
-		float      worldSize )
-	{
-		// Combined fitness = spawner mask * rule mask
-		var ruleMask = rule.GenerateMask( terrain, MaskResolution, worldOffset, worldSize );
-		var fitness  = spawnerMask.Multiply( ruleMask );
-		
-		var rng       = new Random( HashCode.Combine( SpawnerName, rule.RuleName ) );
-		var placed    = new List<Vector3>(); // for self-collision
-		List<Transform> clutterTransforms = null;
+private void ProcessRule(
+    SpawnRule  rule,
+    Terrain    terrain,
+    BBox       bounds,
+    MaskField  spawnerMask,
+    Vector2    worldOffset,
+    float      worldSize )
+{
+    var ruleMask = rule.GenerateMask( terrain, MaskResolution, worldOffset, worldSize );
+    var fitness  = spawnerMask.Multiply( ruleMask );
 
-		if ( rule.Definition.ObjectType == SpawnObjectType.Clutter )
-		{
-			clutterTransforms = new List<Transform>();
-		}
-		float step      = rule.LocationIncrement;
-		float jitterAmt = step * (rule.Jitter / 100f);
+    var rng       = new Random( HashCode.Combine( SpawnerName, rule.RuleName ) );
+    var placed    = new List<Vector3>();
 
-		for ( float wy = bounds.Mins.y; wy <= bounds.Maxs.y; wy += step )
-		{
-			for ( float wx = bounds.Mins.x; wx <= bounds.Maxs.x; wx += step )
-			{
-				
-				// Skip if outside terrain bounds
-				if ( wx < 0 || wx > terrain.Storage.TerrainSize ||
-				     wy < 0 || wy > terrain.Storage.TerrainSize )
-					continue;
-				// ── Jitter ────────────────────────────────────────────────
-				float jx  = ((float)rng.NextDouble() * 2f - 1f) * jitterAmt;
-				float jy  = ((float)rng.NextDouble() * 2f - 1f) * jitterAmt;
-				var   pos = new Vector3( wx + jx, wy + jy, 0f );
+    // One batch list per model — supports mixed clutter models within one rule
+    var clutterBatches = new Dictionary<Model, List<Transform>>();
 
-				// Keep within spawner bounds
-				if ( pos.x < bounds.Mins.x || pos.x > bounds.Maxs.x ||
-				     pos.y < bounds.Mins.y || pos.y > bounds.Maxs.y )
-					continue;
+    float step      = rule.LocationIncrement;
+    float jitterAmt = step * (rule.Jitter / 100f);
 
-				// ── Fitness check ─────────────────────────────────────────
-				float fit = SpawnUtils.SampleMaskAt( fitness, terrain, pos );
-				if ( fit < rule.MinFitness ) continue;
+    for ( float wy = bounds.Mins.y; wy <= bounds.Maxs.y; wy += step )
+    {
+        for ( float wx = bounds.Mins.x; wx <= bounds.Maxs.x; wx += step )
+        {
+            if ( wx < 0 || wx > terrain.Storage.TerrainSize ||
+                 wy < 0 || wy > terrain.Storage.TerrainSize )
+                continue;
 
-				// ── Spawn probability ─────────────────────────────────────
-				if ( (float)rng.NextDouble() * 100f > rule.SpawnProbabilityRate ) continue;
+            float jx  = ((float)rng.NextDouble() * 2f - 1f) * jitterAmt;
+            float jy  = ((float)rng.NextDouble() * 2f - 1f) * jitterAmt;
+            var   pos = new Vector3( wx + jx, wy + jy, 0f );
 
-				// ── Self-collision check ───────────────────────────────────
-				if ( rule.SelfCollisionCheck && HasCollision( placed, pos, rule.BoundRadius ) )
-					continue;
+            if ( pos.x < bounds.Mins.x || pos.x > bounds.Maxs.x ||
+                 pos.y < bounds.Mins.y || pos.y > bounds.Maxs.y )
+                continue;
 
-				// ── Resolve world height ──────────────────────────────────
-				float h        = SpawnUtils.GetTerrainHeightAt( terrain, pos );
-				float yOffset  = MathX.Lerp( rule.Definition.MinYOffset, rule.Definition.MaxYOffset, (float)rng.NextDouble() );
-				var spawnPos   = new Vector3( pos.x, pos.y, h + yOffset );
+            float fit = SpawnUtils.SampleMaskAt( fitness, terrain, pos );
+            if ( fit < rule.MinFitness ) continue;
 
-				// ── Transform ─────────────────────────────────────────────
-				var rot   = SpawnUtils.GetSpawnRotation( rule.Definition, terrain, spawnPos, rng );
-				var scale = SpawnUtils.GetSpawnScale( rule.Definition, fit, rng );
+            if ( (float)rng.NextDouble() * 100f > rule.SpawnProbabilityRate ) continue;
 
-				// ── Spawn ─────────────────────────────────────────────────
-				var transform = new Transform(
-					spawnPos,
-					rot,
-					scale
-				);
+            if ( rule.SelfCollisionCheck && HasCollision( placed, pos, rule.BoundRadius ) )
+                continue;
 
-				if ( rule.Definition.ObjectType == SpawnObjectType.Clutter )
-				{
-					clutterTransforms.Add( transform );
-				}
-				else
-				{
-					var go           = rule.Definition.Prefab.Clone();
-					go.Parent        = SpawnRoot;
-					go.WorldPosition = spawnPos;
-					go.WorldRotation = rot;
-					go.WorldScale    = scale;
-					go.Enabled       = true;
-				}
+            var entry = rule.Definition.PickEntry( rng );
+            if ( entry == null ) continue;
 
-				placed.Add( pos );
-			}
-		}
-		
-		
-		if ( rule.Definition.ObjectType == SpawnObjectType.Clutter
-		     && clutterTransforms != null
-		     && clutterTransforms.Count > 0 )
-		{
-			var clutterObject = Scene.CreateObject();
-			clutterObject.Name = $"Clutter_{rule.RuleName}";
-			clutterObject.Parent = SpawnRoot;
+            float h       = SpawnUtils.GetTerrainHeightAt( terrain, pos );
+            float yOffset = MathX.Lerp( rule.Definition.MinYOffset, rule.Definition.MaxYOffset, (float)rng.NextDouble() );
+            var spawnPos  = new Vector3( pos.x, pos.y, h + yOffset );
+            var rot       = SpawnUtils.GetSpawnRotation( rule.Definition, terrain, spawnPos, rng );
 
-			var clutter = clutterObject.Components.Create<ApexClutterComponent>();
+            if ( entry.ObjectType == SpawnObjectType.Clutter )
+            {
+                if ( entry.ClutterModel == null ) continue;
 
-			var modelRenderer = rule.Definition.ClutterModel;
+                float clutterScale = SpawnUtils.GetClutterScale( rule.Definition, fit, rng );
 
-			if ( modelRenderer == null )
-			{
-				Log.Warning( $"{rule.RuleName}: clutter prefab missing ModelRenderer" );
-				return;
-			}
+                if ( !clutterBatches.TryGetValue( entry.ClutterModel, out var batch ) )
+                {
+                    batch = new List<Transform>();
+                    clutterBatches[entry.ClutterModel] = batch;
+                }
 
-			clutter.Model = modelRenderer;
+                batch.Add( new Transform( spawnPos, rot, clutterScale ) );
+            }
+            else
+            {
+                if ( entry.Prefab == null ) continue;
 
-			clutter.BuildFromTransforms( clutterTransforms );
-			
-		}
-		
-		int sampledAboveThreshold = 0;
-		int totalSampled = 0;
+                var goScale      = SpawnUtils.GetSpawnScale( rule.Definition, fit, rng );
+                var go           = entry.Prefab.Clone();
+                go.Parent        = SpawnRoot;
+                go.WorldPosition = spawnPos;
+                go.WorldRotation = rot;
+                go.WorldScale    = goScale;
+                go.Enabled       = true;
+            }
 
-		for ( float wy = bounds.Mins.y; wy <= bounds.Maxs.y; wy += step )
-		{
-			for ( float wx = bounds.Mins.x; wx <= bounds.Maxs.x; wx += step )
-			{
-				var pos = new Vector3( wx, wy, 0f );
-				float fit = SpawnUtils.SampleMaskAt( fitness, terrain, pos );
-				totalSampled++;
-				if ( fit >= rule.MinFitness ) sampledAboveThreshold++;
-			}
-		}
-		
-	}
+            placed.Add( pos );
+        }
+    }
+
+    foreach ( var (model, transforms) in clutterBatches )
+    {
+        if ( transforms.Count == 0 ) continue;
+
+        var clutterObject  = Scene.CreateObject();
+        clutterObject.Name = $"Clutter_{rule.RuleName}_{model.ResourceName}";
+        clutterObject.Parent = SpawnRoot;
+
+        var clutter   = clutterObject.Components.Create<ApexClutterComponent>();
+        clutter.Model = model;
+        clutter.BuildFromTransforms( transforms );
+    }
+}
 
 	// ── Helpers ─────────────────────────────────────────────────────────────
 

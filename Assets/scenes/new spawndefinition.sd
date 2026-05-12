@@ -1,18 +1,29 @@
 {
-  "ObjectType": "GameObject",
-  "Prefab": {
-    "_type": "gameobject",
-    "prefab": "scenes/tree.prefab"
-  },
-  "UseInstancing": true,
-  "MinYOffset": -50.125946,
+  "Entries": [
+    {
+      "ObjectType": "Clutter",
+      "Prefab": null,
+      "ClutterModel": "scenes/test stuff/grasssimplerhe_b_afstree_xlp.vmdl",
+      "Weight": 1
+    },
+    {
+      "ObjectType": "GameObject",
+      "Prefab": {
+        "_type": "gameobject",
+        "prefab": "templates/gameobject/3d object - cube.prefab"
+      },
+      "ClutterModel": null,
+      "Weight": 1
+    }
+  ],
+  "MinYOffset": -3.061226,
   "MaxYOffset": 0,
   "SpawnScale": "FitnessRandom",
   "WidthRandomPercent": 6.887755,
-  "WidthMinScale": 0.7397959,
+  "WidthMinScale": 0.17857143,
   "WidthMaxScale": 1.377551,
   "HeightRandomPercent": 13.520408,
-  "HeightMinScale": 0.71428573,
+  "HeightMinScale": 0.20408162,
   "HeightMaxScale": 2.0663266,
   "AlignToSlope": true,
   "ForwardToSlope": false,
