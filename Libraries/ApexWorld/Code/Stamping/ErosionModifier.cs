@@ -23,38 +23,43 @@ public class ErosionModifier : BaseSpawner
 
 	// ── Erosion Settings ────────────────────────────────────────────────────
 
-	[Property, Group( "Erosion" ), Range( 1f, 100f )]
-	public float ErosionStrength { get; set; } = 50f;
+	// Controls overall depth of erosion — kept small, world units are large
+	[Property, Group( "Erosion" ), Range( 0.01f, 5f )]
+	public float ErosionStrength { get; set; } = 0.5f;
 
 	[Property, Group( "Erosion" ), Range( 1, 600000 )]
-	public int DropletCount { get; set; } = 100000;
+	public int DropletCount { get; set; } = 50000;
 
+	// Longer lifetime = longer channels, more natural flow
 	[Property, Group( "Erosion" ), Range( 1, 256 )]
-	public int MaxLifetime { get; set; } = 64;
+	public int MaxLifetime { get; set; } = 48;
 
+	// Higher inertia = smoother, more flowing channels (less vertical cuts)
 	[Property, Group( "Erosion" ), Range( 0f, 1f )]
-	public float Inertia { get; set; } = 0.02f;
+	public float Inertia { get; set; } = 0.3f;
 
 	[Property, Group( "Erosion" ), Range( 0f, 32f )]
-	public float SedimentCapacityFactor { get; set; } = 16f;
+	public float SedimentCapacityFactor { get; set; } = 4f;
 
 	[Property, Group( "Erosion" ), Range( 0f, 1f )]
 	public float MinSedimentCapacity { get; set; } = 0.01f;
 
-	[Property, Group( "Erosion" ), Range( 0f, 2f )]
-	public float ErodeSpeed { get; set; } = 0.8f;
+	[Property, Group( "Erosion" ), Range( 0f, 1f )]
+	public float ErodeSpeed { get; set; } = 0.3f;
+
+	// Higher deposit = material fills back in, softer channels
+	[Property, Group( "Erosion" ), Range( 0f, 1f )]
+	public float DepositSpeed { get; set; } = 0.3f;
 
 	[Property, Group( "Erosion" ), Range( 0f, 1f )]
-	public float DepositSpeed { get; set; } = 0.05f;
-
-	[Property, Group( "Erosion" ), Range( 0f, 1f )]
-	public float EvaporateSpeed { get; set; } = 0.01f;
+	public float EvaporateSpeed { get; set; } = 0.02f;
 
 	[Property, Group( "Erosion" ), Range( 1f, 20f )]
-	public float Gravity { get; set; } = 10f;
+	public float Gravity { get; set; } = 4f;
 
+	// Larger radius = softer, more spread erosion brush
 	[Property, Group( "Erosion" ), Range( 1, 8 )]
-	public int ErosionRadius { get; set; } = 3;
+	public int ErosionRadius { get; set; } = 4;
 
 	[Property, Group( "Erosion" )]
 	public int Seed { get; set; } = 42;
